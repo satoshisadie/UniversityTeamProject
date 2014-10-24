@@ -5,6 +5,10 @@
     <title></title>
 </head>
 <body>
-    This is template
+    <#if data??>
+        Data is present: ${data}
+    <#else>
+        No data
+    </#if>
 </body>
 </html>
