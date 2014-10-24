@@ -5,6 +5,7 @@
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/java/com/university/config/WebConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/university/config/RenderConfig.java</file>
         </fileset>
       </configuration>
     </facet>
@@ -49,6 +50,8 @@
     <orderEntry type="library" exported="" name="Gradle: javax.servlet-api-3.1.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-webmvc-4.1.1.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-web-4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: freemarker-2.3.20" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: spring-context-support-4.1.1.RELEASE" level="project" />
   </component>
 </module>
 

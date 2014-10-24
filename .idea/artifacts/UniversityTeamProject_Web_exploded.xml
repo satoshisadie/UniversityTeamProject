@@ -17,6 +17,8 @@
           <element id="library" level="project" name="Gradle: aopalliance-1.0" />
           <element id="library" level="project" name="Gradle: spring-webmvc-4.1.1.RELEASE" />
           <element id="library" level="project" name="Gradle: spring-web-4.1.1.RELEASE" />
+          <element id="library" level="project" name="Gradle: freemarker-2.3.20" />
+          <element id="library" level="project" name="Gradle: spring-context-support-4.1.1.RELEASE" />
         </element>
       </element>
     </root>

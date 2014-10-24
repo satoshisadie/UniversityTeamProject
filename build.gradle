@@ -14,5 +14,7 @@ dependencies {
 
     compile "org.springframework:spring-context:4.1.1.RELEASE"
     compile "org.springframework:spring-webmvc:4.1.1.RELEASE"
+    compile "org.springframework:spring-context-support:4.1.1.RELEASE"
+
     compile "org.freemarker:freemarker:2.3.20"
 }
