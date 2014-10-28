@@ -15,4 +15,13 @@ public class AdminController {
 
         return modelAndView;
     }
+
+    @RequestMapping("/login")
+    public ModelAndView login() {
+        final ModelAndView modelAndView = new ModelAndView("test2");
+
+        modelAndView.addObject("data", "some data");
+
+        return modelAndView;
+    }
 }

@@ -6,6 +6,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.ui.freemarker.FreeMarkerConfigurationFactory;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
@@ -16,10 +18,15 @@ import java.io.IOException;
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.university.controllers" })
 public class WebConfig extends WebMvcConfigurerAdapter {
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        super.addResourceHandlers(registry);
-//    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/public/");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login");
+    }
 
     @Bean FreeMarkerConfigurer freeMarkerConfigurer() {
         final FreeMarkerConfigurationFactory factory = new FreeMarkerConfigurationFactory();
