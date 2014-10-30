@@ -11,7 +11,7 @@ public class AdminController {
     public ModelAndView home() {
         final ModelAndView modelAndView = new ModelAndView("test");
 
-        modelAndView.addObject("data", "some data");
+        modelAndView.addObject("data", 0);
 
         return modelAndView;
     }
@@ -21,6 +21,13 @@ public class AdminController {
         final ModelAndView modelAndView = new ModelAndView("test2");
 
         modelAndView.addObject("data", "some data");
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/dashboard")
+    public ModelAndView dashboard() {
+        final ModelAndView modelAndView = new ModelAndView("UserDashboard");
 
         return modelAndView;
     }
