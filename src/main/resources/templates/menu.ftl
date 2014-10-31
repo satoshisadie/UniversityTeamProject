@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
-                <img alt="Coursera" src="../public/img/download.png">
+                CourseUp
+                <#--<img alt="Coursera" src="../img/coursera.png">-->
             </a>
         </div>
         <div class="collapse navbar-collapse">
@@ -16,6 +17,8 @@
                         <li><a href="#">About us</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Contacts</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Help</a></li>
                     </ul>
                 </li>
             </ul>
