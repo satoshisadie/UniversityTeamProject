@@ -29,6 +29,8 @@ public class AdminController {
     public ModelAndView dashboard() {
         final ModelAndView modelAndView = new ModelAndView("UserDashboard");
 
+//        modelAndView.addObject("userName", "User name");
+
         return modelAndView;
     }
 }

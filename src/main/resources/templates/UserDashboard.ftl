@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <#include "*/menu.ftl">
-            <div class="col-md-4"><H4>YOUR COURSES</H4></div>
+            <div class="col-md-4"><H5>YOUR COURSES</H5></div>
             <#--I don't know is it right-->
             <div class="col-md-4"></div>
             <ul class="nav nav-tabs">
