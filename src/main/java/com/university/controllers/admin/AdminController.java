@@ -33,7 +33,7 @@ public class AdminController {
     public ModelAndView dashboard() {
         final ModelAndView modelAndView = new ModelAndView("UserDashboard");
 
-//        modelAndView.addObject("userName", "User name");
+        modelAndView.addObject("userName", "User name");
         List<Pair<String, String>> cources = new ArrayList<Pair<String, String>>();
         cources.add(new Pair<String, String>("Information technology", "ololo ololo sjdvh dskvj sdjvn sdjbgv sdjhv s"));
         cources.add(new Pair<String, String>("Math", "ololo adf eraosfg rgf rgflolo sjdvh dskvj sdjvn sdjbgv sdjhv s"));

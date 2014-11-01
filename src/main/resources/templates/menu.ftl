@@ -26,7 +26,7 @@
 
             <ul class="nav navbar-nav navbar-right">
             <#if userName?has_content>
-                <li><a href="#">${userName}</a></li>
+                <li class="active"><a href="#">${userName}</a></li>
             <#else>
                 <li><a href="#">Sign in</a></li>
                 <li><a href="#">Sign up</a></li>
