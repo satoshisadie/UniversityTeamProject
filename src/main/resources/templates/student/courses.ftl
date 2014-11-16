@@ -16,11 +16,20 @@
     <div class="col-md-8 col-md-offset-2">
         <blockquote>
             <div class="row">
-                <div class="col-md-6"><H4>YOUR COURSES</H4></div>
+                <div class="col-md-6">
+                    <h4>YOUR COURSES</h4>
+                </div>
+
                 <ul class="nav nav-tabs navbar-right">
-                    <li role="presentation" class="active"><a href="#">Current</a></li>
-                    <li role="presentation"><a href="#">Past</a></li>
-                    <li role="presentation"><a href="#">Upcoming</a></li>
+                    <li role="presentation" class="active">
+                        <a href="#current">Current</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#past">Past</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#upcoming">Upcoming</a>
+                    </li>
                 </ul>
             </div>
         </blockquote>

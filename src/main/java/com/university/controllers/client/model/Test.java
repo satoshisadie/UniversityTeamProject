@@ -3,15 +3,15 @@ package com.university.controllers.client.model;
 import java.util.List;
 
 public class Test {
-    private String testTitle;
+    private String title;
     private List<Question> questions;
 
-    public String getTestTitle() {
-        return testTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTestTitle(String testTitle) {
-        this.testTitle = testTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<Question> getQuestions() {

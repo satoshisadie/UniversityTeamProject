@@ -1,12 +1,21 @@
 package com.university.controllers.client.model;
 
 public class Course {
+    private int id;
     private String name;
     private String description;
     private String img;
     private String teacher;
     private String startDate;
     private String endDate;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

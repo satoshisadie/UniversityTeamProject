@@ -3,6 +3,7 @@ package com.university.controllers.client;
 import com.university.controllers.client.model.Question;
 import com.university.controllers.client.model.Test;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,8 +14,8 @@ import java.util.List;
 @RequestMapping(value = "/student")
 public class StudentController {
 
-    @RequestMapping(value = "/course/")
-    public ModelAndView course() {
+    @RequestMapping(value = "/course/{id}")
+    public ModelAndView course(@PathVariable int courseId) {
         final ModelAndView modelAndView = new ModelAndView("/student/course");
 
         return modelAndView;
@@ -25,7 +26,7 @@ public class StudentController {
         final ModelAndView modelAndView = new ModelAndView("/student/test");
 
         Test newTest = new Test();
-        newTest.setTestTitle("Information technology test 1");
+        newTest.setTitle("Information technology test 1");
 
         List<String> ans = new ArrayList<>();
         ans.add("sdjb sdf sdfm");
@@ -54,7 +55,7 @@ public class StudentController {
 
         newTest.setQuestions(questions);
 
-        modelAndView.addObject("questions", newTest);
+        modelAndView.addObject("test", newTest);
 
         return modelAndView;
     }
