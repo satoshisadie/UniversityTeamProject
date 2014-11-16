@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-8 col-md-2">
+    <div class="col-md-8 col-md-offset-2">
         <ul class="nav navbar-nav">
             <li><a href="#">CourseUp &copy 2014</a></li>
         </ul>
@@ -11,7 +11,3 @@
         </ul>
     </div>
 </div>
-
-
-
-
