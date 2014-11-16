@@ -1,9 +1,20 @@
 package com.university.controllers.client.model;
 
 public class Course {
-    private String title;
+    private String name;
     private String description;
     private String img;
+    private String teacher;
+    private String startDate;
+    private String endDate;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getDescription() {
         return description;
@@ -21,11 +32,27 @@ public class Course {
         this.img = img;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTeacher() {
+        return teacher;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

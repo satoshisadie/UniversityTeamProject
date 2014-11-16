@@ -3,16 +3,18 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.css">
+
+    <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
 <#--<link type="text/css" rel="stylesheet" href="/css/bootstrap-theme.css">-->
-    <script type="application/javascript" src="/js/lib/jquery-2.1.1.js"></script>
-    <script type="application/javascript" src="/js/lib/bootstrap.js"></script>
+
+    <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
+    <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
 </head>
 <body>
 <div class="container">
-    <div class="col-md-8 col-md-offset-2">
     <#include "*/menu.ftl">
 
+    <div class="col-md-8 col-md-offset-2">
         <blockquote>
             <div class="row">
                 <div class="col-md-6"><H4>${questions.getTestTitle()}</H4></div>
