@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <#include "*/menu.ftl">
+        <#include "*/../menu.ftl">
 
         <div class="col-md-8 col-md-offset-2">
             <div class="row">
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <#include "*/footer.ftl">
+        <#include "*/../footer.ftl">
     </div>
 </body>
 </html>

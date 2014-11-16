@@ -10,10 +10,10 @@
     <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+<div class="container">
+<#include "*/../menu.ftl">
 
-        <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2">
 
         <div class="row">
             <div class="col-sm-4">
@@ -61,44 +61,44 @@
             </div>
         </div>
         <br>
-            <div class="row">
-                <div class="col-sm-3">
-                    <p class="text-right">Birthday</p>
-                </div>
-                <div class="col-sm-3">
-                    <select class="form-control input-sm">
-                        <option>Month</option>
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    <select class="form-control input-sm">
-                        <option>Day</option>
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    <select class="form-control input-sm">
-                        <option>Year</option>
-                    </select>
-                </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <p class="text-right">Birthday</p>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-sm-3">
-                    <p class="text-right">About Me</p>
-                </div>
-                <div class="col-sm-7">
-                    <textarea class="form-control input-sm" rows="3">${user.getUserInfo()}</textarea>
-                </div>
+            <div class="col-sm-3">
+                <select class="form-control input-sm">
+                    <option>Month</option>
+                </select>
             </div>
+            <div class="col-sm-2">
+                <select class="form-control input-sm">
+                    <option>Day</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control input-sm">
+                    <option>Year</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-3">
+                <p class="text-right">About Me</p>
+            </div>
+            <div class="col-sm-7">
+                <textarea class="form-control input-sm" rows="3">${user.getUserInfo()}</textarea>
+            </div>
+        </div>
         <hr>
-            <div class="row">
-                <div class="col-sm-3 col-sm-offset-3">
-                    <button type="button" class="btn btn-default" >Save Changes</button>
-                </div>
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-3">
+                <button type="button" class="btn btn-default" >Save Changes</button>
             </div>
-
-            <#include "*/footer.ftl">
         </div>
     </div>
+
+<#include "*/../footer.ftl">
+</div>
 </body>
 </html>
