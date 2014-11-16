@@ -1,75 +1,69 @@
 package com.university.controllers.client.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-/**
- * Created by T on 01.11.2014.
- */
 public class User {
-    private String userName;
-    private LocalDate userBirthday;
-    private String userGender;
-    private String userLocation;
-    private String userPhoto;
-    private String userInfo;
-    private int userAge;
+    private String name;
+    private LocalDate birthday;
+    private String gender;
+    private String location;
+    private String photo;
+    private String info;
+    private int age;
 
-    public int getUserAge() {
-        return userAge;
+    public String getName() {
+        return name;
     }
 
-    public void setUserAge(int userAge) {
-        this.userAge = userAge;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
-    public LocalDate getUserBirthday() {
-        return userBirthday;
+    public String getGender() {
+        return gender;
     }
 
-    public void setUserBirthday(LocalDate userBirthday) {
-        this.userBirthday = userBirthday;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getUserGender() {
-        return userGender;
+    public String getLocation() {
+        return location;
     }
 
-    public void setUserGender(String userGender) {
-        this.userGender = userGender;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getUserLocation() {
-        return userLocation;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setUserLocation(String userLocation) {
-        this.userLocation = userLocation;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public String getUserPhoto() {
-        return userPhoto;
+    public String getInfo() {
+        return info;
     }
 
-    public void setUserPhoto(String userPhoto) {
-        this.userPhoto = userPhoto;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
-    public String getUserInfo() {
-        return userInfo;
+    public int getAge() {
+        return age;
     }
 
-    public void setUserInfo(String userInfo) {
-        this.userInfo = userInfo;
+    public void setAge(int age) {
+        this.age = age;
     }
-
-
 }

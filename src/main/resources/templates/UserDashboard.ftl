@@ -5,7 +5,6 @@
     <title></title>
 
     <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
-<#--<link type="text/css" rel="stylesheet" href="/css/libs/bootstrap-theme.css">-->
 
     <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
     <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
@@ -37,7 +36,7 @@
                         <img src="${course.img}">
 
                         <div class="caption">
-                            <H4>${course.title}</H4>
+                            <H4>${course.name}</H4>
 
                             <p>${course.description}</p>
 
