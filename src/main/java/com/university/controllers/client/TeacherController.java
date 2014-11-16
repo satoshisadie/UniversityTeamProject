@@ -29,7 +29,7 @@ public class TeacherController {
     public ModelAndView editCourse(@PathVariable int id) {
         final ModelAndView modelAndView = new ModelAndView("/teacher/editCourse");
 
-        final List<Course> course = courseDao.getCourse(id);
+        final Course course = courseDao.getCourse(id);
         modelAndView.addObject("course", course);
 
         return modelAndView;
