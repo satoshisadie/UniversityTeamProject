@@ -26,7 +26,7 @@
             <#if userName?has_content>
                 <li class="active"><a href="#">${userName}</a></li>
             <#else>
-                <li><a href="#">Sign in</a></li>
+                <li><a href="login">Sign in</a></li>
                 <li><a href="#">Sign up</a></li>
             </#if>
 
