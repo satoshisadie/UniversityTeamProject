@@ -22,8 +22,6 @@
                     </ul>
                 </li>
             </ul>
-
-
             <ul class="nav navbar-nav navbar-right">
             <#if userName?has_content>
                 <li class="active"><a href="#">${userName}</a></li>
