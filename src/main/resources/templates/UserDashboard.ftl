@@ -34,12 +34,12 @@
             <div class="col-md-4">
             <#--wrong to set height!!! do it later-->
                 <div class="thumbnail" style="height: 350px">
-                    <img src="../img/download.png">
+                    <img src="${c.getImg()}">
 
                     <div class="caption">
-                        <H4>${c.getKey()}</H4>
+                        <H4>${c.getTitle()}</H4>
 
-                        <p>${c.getValue()}</p>
+                        <p>${c.getDescription()}</p>
 
                         <p>
                             <a href="#" class="btn btn-primary" role="button">Button</a>
