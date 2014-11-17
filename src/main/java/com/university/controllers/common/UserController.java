@@ -71,11 +71,10 @@ public class UserController {
         final ModelAndView modelAndView = new ModelAndView("/user/profile");
 
         User user = new User();
-        user.setAge(20);
         user.setGender("Male");
         user.setInfo("lalalalalalalalalalalalalala");
         user.setLocation("Cherkasy, Ukraine");
-        user.setName("Anton Salenkov");
+        user.setLogin("Anton Salenkov");
         user.setPhoto("../img/avatar.jpg");
 
         modelAndView.addObject("user", user);
@@ -88,11 +87,10 @@ public class UserController {
         final ModelAndView modelAndView = new ModelAndView("/user/editProfile");
 
         User user = new User();
-        user.setAge(20);
         user.setGender("Male");
         user.setInfo("lalalalalalalalalalalalalala");
         user.setLocation("Cherkasy, Ukraine");
-        user.setName("Anton Salenkov");
+        user.setLogin("Anton Salenkov");
         user.setPhoto("../img/avatar.jpg");
 
         modelAndView.addObject("user", user);

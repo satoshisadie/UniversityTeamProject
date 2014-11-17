@@ -45,7 +45,7 @@
                         <img src="${course.img}">
 
                         <div class="caption">
-                            <H4>${course.name}</H4>
+                            <H4>${course.login}</H4>
 
                             <p>${course.description}</p>
 

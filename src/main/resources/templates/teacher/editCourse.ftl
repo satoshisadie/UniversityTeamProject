@@ -16,7 +16,7 @@
         <#include "*/menu.ftl">
 
         <div class="row">
-            ${course.name}
+            ${course.login}
         </div>
     </div>
 </body>

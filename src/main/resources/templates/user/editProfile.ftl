@@ -53,10 +53,10 @@
                 </div>
                 <div class="col-sm-9">
                     <label class="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> Female
+                        <input type="radio" login="inlineRadioOptions" id="inlineRadio1" value="option1" checked> Female
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Male
+                        <input type="radio" login="inlineRadioOptions" id="inlineRadio2" value="option2"> Male
                     </label>
                 </div>
             </div>

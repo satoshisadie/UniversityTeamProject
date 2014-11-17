@@ -4,7 +4,7 @@
     </div>
 
     <div class="info">
-        <span class="title">${course.name}</span>
+        <span class="title">${course.login}</span>
         <input class="edit-course btn btn-primary" type="button" value="edit course">
     </div>
 

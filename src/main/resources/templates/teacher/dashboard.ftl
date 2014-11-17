@@ -33,8 +33,8 @@
                 <div class="new-course-content">
                     <form>
                         <div class="form-group">
-                            <label for="course-name">Name</label>
-                            <input id="course-name" class="form-control" type="text">
+                            <label for="course-login">Name</label>
+                            <input id="course-login" class="form-control" type="text">
                         </div>
 
                         <div class="form-group">

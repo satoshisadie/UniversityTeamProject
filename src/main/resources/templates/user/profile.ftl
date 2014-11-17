@@ -21,7 +21,7 @@
 
                 <div class="col-sm-7">
                     <p class="text-center">
-                        <h3>${user.name}</h3>
+                        <h3>${user.login}</h3>
                     </p>
 
                     <div class="row">
@@ -29,7 +29,7 @@
                             ${user.gender}
                         </div>
                         <div class="col-xs-4">
-                            ${user.age} years old
+                             years old
                         </div>
                         <div class="col-xs-5">
                             ${user.location}
