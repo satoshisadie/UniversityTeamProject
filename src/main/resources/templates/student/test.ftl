@@ -10,58 +10,54 @@
     <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+<div class="container">
+<#include "*/menu.ftl">
 
-        <div class="col-md-8 col-md-offset-2">
-            <blockquote>
+    <div class="col-md-8 col-md-offset-2">
+        <blockquote>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>${test.title}</h4>
+                </div>
+            </div>
+        </blockquote>
+
+        <form method="post" action="#">
+        <#list test.questions as question>
+            <div class="well">
                 <div class="row">
                     <div class="col-md-6">
-                        <h4>${test.title}</h4>
-                    </div>
-                </div>
-            </blockquote>
-
-            <form method="post" action="#">
-            <#list test.questions as question>
-                <div class="well">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5>${question.title}</h5>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-10">${question.description!}</div>
-                    </div>
-
-                    <div class="row">
-                        <img src="${question.picture!}">
+                        <h4>${question.title}</h4>
                     </div>
                 </div>
 
                 <div class="row">
-                <#--<div class="col-md-2"></div>-->
-                    <div class="col-md-offset-1">
-                        <div class="btn-group-vertical" data-toggle="buttons">
-                            <#list q.getAnswers() as ans>
-
-                                <label class="btn btn-primary">
-                                    <input type="checkbox" autocomplete="off">${ans}
-                                </label>
-                            </#list>
-                        </div>
-                    </div>
+                    <div class="col-md-10">${question.description!}</div>
                 </div>
 
-                <hr>
-            </#list>
+                <div class="row text-center">
+                    <img src="${question.picture!}">
+                </div>
+            </div>
 
-                <input class="btn btn-default" type="submit" value="Send">
-            </form>
-        </div>
+            <div class="row">
+                <div class="col-md-offset-1">
+                    <#list question.answers as ans>
+                        <label class="radio">
+                            <input type="radio" name="${question.title}" id="${ans}">${ans}
+                        </label>
+                    </#list>
+                </div>
+            </div>
 
-        <#include "*/footer.ftl">
+            <hr>
+        </#list>
+
+            <input class="btn btn-default" type="submit" value="Send">
+        </form>
     </div>
+
+<#include "*/footer.ftl">
+</div>
 </body>
 </html>

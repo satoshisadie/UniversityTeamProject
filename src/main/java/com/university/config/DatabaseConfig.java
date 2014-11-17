@@ -1,6 +1,7 @@
 package com.university.config;
 
 import com.university.dao.CourseDao;
+import com.university.dao.UserDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,8 +17,8 @@ public class DatabaseConfig {
 
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/educationalWebsite");
-        dataSource.setUsername("root");
-        dataSource.setPassword("06061988");
+        dataSource.setUsername("Ivan");
+        dataSource.setPassword("password");
 
         return dataSource;
     }
@@ -28,5 +29,9 @@ public class DatabaseConfig {
 
     @Bean public CourseDao courseDao(JdbcTemplate jdbcTemplate) {
         return new CourseDao(jdbcTemplate);
+    }
+
+    @Bean public UserDao userDao(JdbcTemplate jdbcTemplate) {
+        return new UserDao(jdbcTemplate);
     }
 }

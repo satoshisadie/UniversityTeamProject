@@ -2,8 +2,12 @@ package com.university.controllers.common;
 
 import com.university.controllers.client.model.Course;
 import com.university.controllers.client.model.User;
+import com.university.dao.CourseDao;
+import com.university.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -11,12 +15,29 @@ import java.util.List;
 
 @Controller
 public class UserController {
+    @Autowired
+    private UserDao userDao;
 
     @RequestMapping("/login")
     public ModelAndView login() {
         final ModelAndView modelAndView = new ModelAndView("/user/login");
 
         return modelAndView;
+    }
+
+    @RequestMapping("/registration/")
+    public ModelAndView register() {
+        final ModelAndView modelAndView = new ModelAndView("/user/registration");
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/new-user/")
+    @ResponseBody
+    public String newUser(User user) {
+        userDao.insertNewUser(user);
+
+        return "success";
     }
 
     @RequestMapping("/courses")

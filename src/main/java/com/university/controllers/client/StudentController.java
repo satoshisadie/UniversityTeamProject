@@ -78,7 +78,7 @@ public class StudentController {
 
         Question question = new Question();
         question.setTitle("WTF?");
-        question.setPicture("../img/download.png");
+        question.setPicture("/img/download.png");
         question.setAnswers(ans);
 
         List<Question> questions = new ArrayList<>();
