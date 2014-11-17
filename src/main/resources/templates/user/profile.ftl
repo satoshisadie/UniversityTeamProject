@@ -28,7 +28,7 @@
                         <div class="col-xs-2">
                             ${user.gender}
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-4">
                             ${user.age} years old
                         </div>
                         <div class="col-xs-5">
@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    <a class="btn btn-default" href="user/profile" role="button">Edit Profile</a>
+                    <a class="btn btn-default" href="profile/edit" role="button">Edit Profile</a>
                 </div>
             </div>
             <br>

@@ -1,9 +1,10 @@
 package com.university.controllers.client;
 
+import com.university.controllers.client.model.Course;
+import com.university.controllers.client.model.Lesson;
 import com.university.controllers.client.model.Question;
 import com.university.controllers.client.model.Test;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,9 +15,51 @@ import java.util.List;
 @RequestMapping(value = "/student")
 public class StudentController {
 
-    @RequestMapping(value = "/course/{id}")
-    public ModelAndView course(@PathVariable int courseId) {
-        final ModelAndView modelAndView = new ModelAndView("/student/course");
+//    @RequestMapping(value = "/course/{id}")
+//    public ModelAndView course(@PathVariable int courseId) {
+//        final ModelAndView modelAndView = new ModelAndView("/student/course");
+//
+//        return modelAndView;
+//    }
+
+    @RequestMapping("/course")
+    public ModelAndView course() {
+        final ModelAndView modelAndView = new ModelAndView("/student/learnCourse");
+
+        Course c = new Course();
+        c.setName("Information technology");
+        c.setDescription("ololo ololo sjdvh dskvj sdjvn sdjbgv sdjhv s");
+        c.setImg("../img/download.png");
+        c.setTeacher("Vasya Pupkin");
+        modelAndView.addObject("course", c);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/course/lessons")
+    public ModelAndView lessons() {
+        final ModelAndView modelAndView = new ModelAndView("/student/lessons");
+
+        Course c = new Course();
+        c.setName("Information technology");
+        c.setImg("../img/download.png");
+
+        modelAndView.addObject("course", c);
+
+        List<Lesson> lessons = new ArrayList<Lesson>();
+        Lesson l = new Lesson();
+        l.setName("OverView");
+        l.setDescription("ololo ololo sjdvh dskvj sdjvn sdjbgv sdjhv s");
+        l.setTime("30m");
+        lessons.add(l);
+
+        l = new Lesson();
+        l.setName("Studying");
+        l.setDescription("ololo adf eraosfg rgf rgflolo sjdvh dskvj sdjvn sdjbgv sdjhv s");
+        l.setTime("1h30m");
+        lessons.add(l);
+
+        modelAndView.addObject("lessons", lessons);
 
         return modelAndView;
     }
@@ -59,4 +102,5 @@ public class StudentController {
 
         return modelAndView;
     }
+
 }

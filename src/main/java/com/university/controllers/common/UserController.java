@@ -1,6 +1,7 @@
 package com.university.controllers.common;
 
 import com.university.controllers.client.model.Course;
+import com.university.controllers.client.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,6 +62,40 @@ public class UserController {
 //        courses.add(c);
 
         modelAndView.addObject("courses", courses);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/profile")
+    public ModelAndView user() {
+        final ModelAndView modelAndView = new ModelAndView("/user/profile");
+
+        User user = new User();
+        user.setAge(20);
+        user.setGender("Male");
+        user.setInfo("lalalalalalalalalalalalalala");
+        user.setLocation("Cherkasy, Ukraine");
+        user.setName("Anton Salenkov");
+        user.setPhoto("../img/avatar.jpg");
+
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/profile/edit")
+    public ModelAndView edit() {
+        final ModelAndView modelAndView = new ModelAndView("/user/editProfile");
+
+        User user = new User();
+        user.setAge(20);
+        user.setGender("Male");
+        user.setInfo("lalalalalalalalalalalalalala");
+        user.setLocation("Cherkasy, Ukraine");
+        user.setName("Anton Salenkov");
+        user.setPhoto("../img/avatar.jpg");
+
+        modelAndView.addObject("user", user);
 
         return modelAndView;
     }

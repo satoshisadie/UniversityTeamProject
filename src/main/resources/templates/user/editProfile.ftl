@@ -20,7 +20,7 @@
                     <h3>My Profile</h3>
                 </div>
                 <div class="col-sm-2 col-sm-offset-5">
-                    <a class="btn btn-default" href="\user" role="button">View Profile</a>
+                    <a class="btn btn-default" href="\profile" role="button">View Profile</a>
                 </div>
             </div>
             <hr>
@@ -29,7 +29,7 @@
                     <p class="text-right">Photo</p>
                 </div>
                 <div class="col-sm-2">
-                    <img src="${user.getUserPhoto()}" width="100" height="100">
+                    <img src="${user.photo}" width="100" height="100">
                 </div>
                 <div class="col-sm-2">
                     <button type="button" class="btn btn-default">Upload File</button>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-sm-5">
                     <form role="form">
-                        <input class="form-control input-sm" type="text" value="${user.getUserLocation()}"></input>
+                        <input class="form-control input-sm" type="text" value="${user.location}"></input>
                     </form>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <p class="text-right">About Me</p>
                 </div>
                 <div class="col-sm-7">
-                    <textarea class="form-control input-sm" rows="3">${user.getUserInfo()}</textarea>
+                    <textarea class="form-control input-sm" rows="3">${user.info}</textarea>
                 </div>
             </div>
             <hr>
