@@ -1,24 +1,15 @@
 package com.university.controllers.client.model;
 
-public class Lesson {
-    private Long id;
-    private Long courseId;
+public class LessonSaveForm {
+    private String courseId;
     private String description;
     private String videos;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 

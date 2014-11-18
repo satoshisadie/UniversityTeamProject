@@ -48,15 +48,11 @@ public class StudentController {
 
         List<Lesson> lessons = new ArrayList<Lesson>();
         Lesson l = new Lesson();
-        l.setName("OverView");
         l.setDescription("ololo ololo sjdvh dskvj sdjvn sdjbgv sdjhv s");
-        l.setTime("30m");
         lessons.add(l);
 
         l = new Lesson();
-        l.setName("Studying");
         l.setDescription("ololo adf eraosfg rgf rgflolo sjdvh dskvj sdjvn sdjbgv sdjhv s");
-        l.setTime("1h30m");
         lessons.add(l);
 
         modelAndView.addObject("lessons", lessons);
