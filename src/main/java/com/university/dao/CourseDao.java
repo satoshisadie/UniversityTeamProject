@@ -3,12 +3,14 @@ package com.university.dao;
 import com.university.controllers.client.model.Course;
 import com.university.controllers.client.model.CourseSaveForm;
 import com.university.controllers.client.model.Lesson;
+import com.university.utils.CommonUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CourseDao {
     private JdbcTemplate jdbcTemplate;
@@ -61,6 +63,31 @@ public class CourseDao {
                 "WHERE l.lessonId = ?";
 
         return selectOne(jdbcTemplate, sql, new LessonRowMapper(), id);
+    }
+
+    public void saveLessons(List<Lesson> lessons) {
+        final List<Lesson> preparedLessons = lessons.stream()
+                .map(lesson -> {
+                    if (lesson.getId() == null) {
+                        lesson.setId(CommonUtils.generateId());
+                    }
+                    return lesson;
+                })
+                .collect(Collectors.toList());
+
+        final String sql =
+                "INSERT INTO lesson(lessonId, courseId, content) " +
+                "VALUES " + preparedLessonsValues(preparedLessons) + " " +
+                "ON DUPLICATE KEY UPDATE " +
+                    "content = VALUES(content);";
+
+        jdbcTemplate.update(sql);
+    }
+
+    private String preparedLessonsValues(List<Lesson> lessons) {
+        return lessons.stream()
+                .map(lesson -> "(" + lesson.getId() + "," + lesson.getCourseId() + ",'" + lesson.getContent() + "')")
+                .collect(Collectors.joining(","));
     }
 
     public static <T> Optional<T> selectOne(JdbcTemplate jdbc, String sql, RowMapper<T> rowMapper, Object... params) {

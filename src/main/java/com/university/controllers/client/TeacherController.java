@@ -1,5 +1,6 @@
 package com.university.controllers.client;
 
+import com.google.gson.*;
 import com.university.controllers.client.model.Course;
 import com.university.controllers.client.model.CourseSaveForm;
 import com.university.controllers.client.model.Lesson;
@@ -7,12 +8,10 @@ import com.university.dao.CourseDao;
 import com.university.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +19,8 @@ import java.util.Optional;
 @RequestMapping(value = "/teacher")
 public class TeacherController {
     @Autowired private CourseDao courseDao;
+    final Gson serializer = new Gson();
+    final JsonParser jsonParser = new JsonParser();
 
     @RequestMapping(value = "/courses/")
     public ModelAndView courses() {
@@ -64,24 +65,32 @@ public class TeacherController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/courses/{courseId}/lessons/{lessonId}")
-    public ModelAndView lesson(@PathVariable long courseId,
-                               @PathVariable long lessonId)
-    {
-        final ModelAndView modelAndView = new ModelAndView("/teacher/lesson");
+    @RequestMapping(value = "/lessons/save", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveLessons(@RequestParam(value = "lessons") String lessonsJson) {
+        final JsonArray lessonsArray = jsonParser.parse(lessonsJson).getAsJsonArray();
 
-        final Lesson lesson = getLesson(lessonId);
-        if (lesson.getCourseId() == null) {
-            lesson.setCourseId(courseId);
-        }
-        modelAndView.addObject("lesson", lesson);
+        final List<Lesson> lessons = new ArrayList<>();
 
-        return modelAndView;
-    }
+        lessonsArray.forEach(lessonJsonElement -> {
+            final JsonObject lessonObject = lessonJsonElement.getAsJsonObject();
 
-    @RequestMapping(value = "/lessons/new")
-    public String newLesson() {
-        return "redirect:./" + CommonUtils.generateId();
+            final Lesson lesson = new Lesson();
+
+            final JsonElement id = lessonObject.get("id");
+            if (id != null) {
+                lesson.setId(id.getAsLong());
+            }
+
+            lesson.setCourseId(lessonObject.get("courseId").getAsLong());
+            lesson.setContent(lessonObject.get("content").getAsString());
+
+            lessons.add(lesson);
+        });
+
+        courseDao.saveLessons(lessons);
+
+        return "success";
     }
 
     private Course getCourse(long id) {
@@ -91,16 +100,6 @@ public class TeacherController {
             final Course course = new Course();
             course.setId(id);
             return course;
-        });
-    }
-
-    private Lesson getLesson(long id) {
-        final Optional<Lesson> lessonOptional = courseDao.getLesson(id);
-
-        return lessonOptional.orElseGet(() -> {
-            final Lesson lesson = new Lesson();
-            lesson.setId(id);
-            return lesson;
         });
     }
 }

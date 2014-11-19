@@ -4,28 +4,6 @@
     padding-bottom: 10px;
 }
 
-.teacher-course .title {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.teacher-course .image {
-    max-width: 100px;
-    max-height: 100px;
-}
-
-.teacher-course .image-container {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-}
-
-.teacher-course .info {
-    display: inline-block;
-    width: calc(100% - 110px);
-    vertical-align: top;
-}
-
 .new-course-content {
     display: none;
 }

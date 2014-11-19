@@ -10,6 +10,9 @@
     <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
     <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
     <script type="application/javascript" src="/js/libs/underscore.js"></script>
+    <script type="application/javascript" src="/js/libs/tinymce/tinymce.min.js"></script>
+
+    <script type="application/javascript" src="/js/main.js"></script>
     <script type="application/javascript" src="/js/teacher/lessons.js"></script>
 </head>
 <body>
@@ -19,20 +22,25 @@
     <div class="row">
         <div class="col-md-2 col-md-offset-2">
             <ul class="nav nav-pills nav-stacked">
-                <li><a class="new-lesson" href="#new-lesson">New lesson</a></li>
                 <#list lessons as lesson>
-                    <li><a href="#lesson-${lesson_index + 1}">Lesson ${lesson_index + 1}</a></li>
+                    <li role="presentation"><a href="#lesson-${lesson_index + 1}">Lesson ${lesson_index + 1}</a></li>
                 </#list>
             </ul>
+            <br>
+            <input class="new-lesson btn btn-primary" type="button" value="New lesson">
+            <br>
+            <br>
+            <input class="save-changes btn btn-primary" type="button" value="Save changes">
         </div>
 
         <div class="col-md-6">
             <div class="lessons">
                 <#list lessons as lesson>
-                    <div class="teacher-lesson routable" style="display: none;" data-hash="#lesson-${lesson_index + 1}">
-                        <textarea class="form-control" name="" id="" rows="4">${lesson.description}</textarea>
+                    <div class="teacher-lesson routable" data-hash="#lesson-${lesson_index + 1}">
+                        <label for="content">Lesson content</label>
+                        <textarea id="content" class="content" rows="4">${lesson.content!}</textarea>
 
-                        <input name="id" type="hidden" value="${lesson.id}"/>
+                        <input class="id" type="hidden" value="${lesson.id}"/>
                     </div>
                 </#list>
             </div>
@@ -43,7 +51,7 @@
         </div>
     </div>
 
-    <input name="courseId" type="hidden" value="${courseId}"/>
+    <input class="course-id" type="hidden" value="${courseId}"/>
 </div>
 </body>
 </html>

@@ -3,8 +3,7 @@ package com.university.controllers.client.model;
 public class Lesson {
     private Long id;
     private Long courseId;
-    private String description;
-    private String videos;
+    private String content;
 
     public Long getId() {
         return id;
@@ -22,19 +21,11 @@ public class Lesson {
         this.courseId = courseId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getVideos() {
-        return videos;
-    }
-
-    public void setVideos(String videos) {
-        this.videos = videos;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

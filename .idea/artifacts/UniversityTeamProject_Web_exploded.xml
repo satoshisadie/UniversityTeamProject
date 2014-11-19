@@ -24,6 +24,7 @@
           <element id="library" level="project" name="Gradle: spring-tx-4.1.2.RELEASE" />
           <element id="library" level="project" name="Gradle: spring-beans-4.1.2.RELEASE" />
           <element id="library" level="project" name="Gradle: spring-core-4.1.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: gson-2.2.4" />
         </element>
       </element>
     </root>
