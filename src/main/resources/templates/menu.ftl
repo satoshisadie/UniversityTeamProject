@@ -35,8 +35,8 @@
                         <#if userName??>
                             <li class="active"><a href="#">${userName}</a></li>
                         <#else>
-                            <li><a href="login">Sign in</a></li>
-                            <li><a href="#">Sign up</a></li>
+                            <li><a href="/login/">Sign in</a></li>
+                            <li><a href="/registration/">Sign up</a></li>
                         </#if>
                     </ul>
                 </div>

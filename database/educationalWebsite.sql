@@ -16,6 +16,23 @@ CREATE DATABASE IF NOT EXISTS `educationalwebsite` /*!40100 DEFAULT CHARACTER SE
 USE `educationalwebsite`;
 
 
+-- Dumping structure for table educationalwebsite.admin
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `adminId` bigint(20) unsigned NOT NULL,
+  KEY `FK__user` (`adminId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table educationalwebsite.admin: ~3 rows (approximately)
+DELETE FROM `admin`;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` (`adminId`) VALUES
+	(2),
+	(3),
+	(4);
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+
+
 -- Dumping structure for table educationalwebsite.course
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
@@ -75,6 +92,24 @@ INSERT INTO `lesson` (`lessonId`, `courseId`, `content`) VALUES
 	(2, 1, '<h2>Test content 2</h2>'),
 	(3, 1, '<h2>Lecture 1</h2>\n<p>Text text text text text text text text text text text text text</p>\n<p>text text text text text text text text text text text text text</p>\n<p>text text text text text text text text text text text text text</p>\n<p>text text text text text text text text text text text text text.</p>\n<p><iframe src="http://www.youtube.com/embed/M7lc1UVf-VE" frameborder="0" width="324" height="198"></iframe></p>');
 /*!40000 ALTER TABLE `lesson` ENABLE KEYS */;
+
+
+-- Dumping structure for table educationalwebsite.student
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE IF NOT EXISTS `student` (
+  `studentId` bigint(20) unsigned NOT NULL,
+  KEY `FK_student_user` (`studentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table educationalwebsite.student: ~4 rows (approximately)
+DELETE FROM `student`;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` (`studentId`) VALUES
+	(10),
+	(11),
+	(12),
+	(16);
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
 
 
 -- Dumping structure for table educationalwebsite.student_course
@@ -158,6 +193,25 @@ INSERT INTO `tag` (`tagId`, `tag`) VALUES
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 
 
+-- Dumping structure for table educationalwebsite.teacher
+DROP TABLE IF EXISTS `teacher`;
+CREATE TABLE IF NOT EXISTS `teacher` (
+  `teacherId` bigint(20) unsigned NOT NULL,
+  `educationalEstablishment` varchar(100) DEFAULT NULL,
+  `academicStatus` varchar(100) DEFAULT NULL,
+  KEY `FK__user` (`teacherId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table educationalwebsite.teacher: ~2 rows (approximately)
+DELETE FROM `teacher`;
+/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
+INSERT INTO `teacher` (`teacherId`, `educationalEstablishment`, `academicStatus`) VALUES
+	(5, 'dsdv', 'sdv'),
+	(6, 'sdv', NULL),
+	(17, 'cfgyu', 'cghj');
+/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
+
+
 -- Dumping structure for table educationalwebsite.test
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE IF NOT EXISTS `test` (
@@ -176,50 +230,29 @@ DELETE FROM `test`;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `userId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL,
   `login` varchar(50) NOT NULL,
-  `birthday` date DEFAULT NULL,
-  `gender` bit(1) DEFAULT NULL COMMENT '0 - female; 1 - male',
-  `location` varchar(100) DEFAULT NULL,
+  `password` text NOT NULL,
   `photo` varchar(100) DEFAULT '/img/avatar.jpg',
   `info` text,
-  `email` varchar(50) NOT NULL,
-  `password` text NOT NULL,
-  `type` smallint(5) unsigned NOT NULL,
-  PRIMARY KEY (`userId`),
-  KEY `FK_user_user_type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.user: ~8 rows (approximately)
+-- Dumping data for table educationalwebsite.user: ~10 rows (approximately)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`userId`, `login`, `birthday`, `gender`, `location`, `photo`, `info`, `email`, `password`, `type`) VALUES
-	(2, 'satoshisadie', NULL, NULL, NULL, '/img/avatar.jpg', NULL, 'satoshisadie@gmail.com', '12345', 1),
-	(3, 'Sicha', NULL, NULL, NULL, '/img/avatar.jpg', NULL, 'SichaUA@gmail.com', '12345', 1),
-	(4, 'toxan56', NULL, NULL, NULL, '/img/avatar.jpg', NULL, 'toxan56@ukr.net', '12345', 1),
-	(5, 'teacher1', NULL, NULL, NULL, '/img/avatar.jpg', NULL, 'teacher1@gmail.com', '123', 2),
-	(6, 'teacher2', NULL, NULL, NULL, '/img/avatar.jpg', NULL, 'teacher2@gmail.com', '123', 2),
-	(10, 'student1', NULL, NULL, NULL, '/img/avatar.jpg', NULL, 'student1@gmail.com', '12', 3),
-	(11, 'student2', NULL, NULL, NULL, '/img/avatar.jpg', NULL, 'student2@gmail.com', '12', 3),
-	(12, 'student3', '2014-11-19', NULL, NULL, '/img/avatar.jpg', NULL, 'student3@gmail.com', '12', 3);
+INSERT INTO `user` (`userId`, `email`, `login`, `password`, `photo`, `info`) VALUES
+	(2, 'satoshisadie@gmail.com', 'satoshisadie', '12345', '/img/avatar.jpg', NULL),
+	(3, 'SichaUA@gmail.com', 'Sicha', '12345', '/img/avatar.jpg', NULL),
+	(4, 'toxan56@ukr.net', 'toxan56', '12345', '/img/avatar.jpg', NULL),
+	(5, 'teacher1@gmail.com', 'teacher1', '123', '/img/avatar.jpg', NULL),
+	(6, 'teacher2@gmail.com', 'teacher2', '123', '/img/avatar.jpg', NULL),
+	(10, 'student1@gmail.com', 'student1', '12', '/img/avatar.jpg', NULL),
+	(11, 'student2@gmail.com', 'student2', '12', '/img/avatar.jpg', NULL),
+	(12, 'student3@gmail.com', 'student3', '12', '/img/avatar.jpg', NULL),
+	(16, 'qwe', 'qwe', 'qwe', '/img/avatar.jpg', NULL),
+	(17, 'ghj', 'ghj', '123', '/img/avatar.jpg', NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
-
-
--- Dumping structure for table educationalwebsite.user_type
-DROP TABLE IF EXISTS `user_type`;
-CREATE TABLE IF NOT EXISTS `user_type` (
-  `typeId` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`typeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- Dumping data for table educationalwebsite.user_type: ~3 rows (approximately)
-DELETE FROM `user_type`;
-/*!40000 ALTER TABLE `user_type` DISABLE KEYS */;
-INSERT INTO `user_type` (`typeId`, `type`) VALUES
-	(1, 'admin'),
-	(2, 'teacher'),
-	(3, 'student');
-/*!40000 ALTER TABLE `user_type` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

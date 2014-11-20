@@ -1,8 +1,15 @@
 package com.university.dao;
 
+import com.university.controllers.client.model.Teacher;
 import com.university.controllers.client.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Types;
 
 public class UserDao {
@@ -13,23 +20,54 @@ public class UserDao {
     }
 
 
-    public int insertNewUser(User user) {
+    public long insertNewStudent(User user) {
+        long id = insertNewUser(user);
+
+        final String sql =
+                "INSERT INTO student (studentId) VALUES (?)";
+        jdbcTemplate.update(sql, id);
+
+        return id;
+    }
+
+    public long insertNewTeacher(Teacher teacher) {
+        User user = new User();
+        user.setPassword(teacher.getPassword());
+        user.setLogin(teacher.getLogin());
+        user.setEmail(teacher.getEmail());
+
+        long id = insertNewUser(user);
+
+        final String sql =
+                "INSERT INTO teacher " +
+                "( teacherId, " +
+                " educationalEstablishment, " +
+                " academicStatus ) " +
+                "VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, id, teacher.getEducationalEstablishment(), teacher.getAcademicStatus());
+
+        return id;
+    }
+
+    private long insertNewUser(User user) {
         final String sql =
                 "INSERT INTO user (" +
-                " login, " +
-                " birthday, " +
-                " gender, " +
-                " location, " +
-                " photo, " +
-                " info, " +
-                " email, " +
-                " password) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                        " login, " +
+                        " email, " +
+                        " password ) " +
+                        "VALUES (?, ?, ?)";
 
-        int[] types = new int[] {Types.VARCHAR, Types.DATE, Types.VARCHAR, Types.VARCHAR,
-                            Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR};
+        KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        int id = jdbcTemplate.update(sql, user, types);
-        return id;
+        jdbcTemplate.update(con -> {
+                    PreparedStatement ps = con.prepareStatement(sql, new String[] {"userId"});
+                    ps.setString(1, user.getLogin());
+                    ps.setString(2, user.getEmail());
+                    ps.setString(3, user.getPassword());
+                    return ps;
+                },
+                keyHolder);
+
+        return (long) keyHolder.getKey();
     }
 }
