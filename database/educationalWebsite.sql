@@ -36,6 +36,28 @@ INSERT INTO `course` (`courseId`, `name`, `description`) VALUES
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 
 
+-- Dumping structure for table educationalwebsite.course_tag
+DROP TABLE IF EXISTS `course_tag`;
+CREATE TABLE IF NOT EXISTS `course_tag` (
+  `courseTagId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `course` bigint(20) NOT NULL,
+  `tag` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`courseTagId`),
+  KEY `FK_course_tag_course` (`course`),
+  KEY `FK_course_tag_tag` (`tag`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table educationalwebsite.course_tag: ~4 rows (approximately)
+DELETE FROM `course_tag`;
+/*!40000 ALTER TABLE `course_tag` DISABLE KEYS */;
+INSERT INTO `course_tag` (`courseTagId`, `course`, `tag`) VALUES
+	(1, 43136064333301185, 1),
+	(2, 2, 2),
+	(3, 3, 2),
+	(4, 1, 2);
+/*!40000 ALTER TABLE `course_tag` ENABLE KEYS */;
+
+
 -- Dumping structure for table educationalwebsite.lesson
 DROP TABLE IF EXISTS `lesson`;
 CREATE TABLE IF NOT EXISTS `lesson` (
@@ -66,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `student_course` (
   KEY `FK_student_course_course` (`course`),
   KEY `FK_student_course_student_course_status` (`status`),
   KEY `FK_student_course_user` (`student`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table educationalwebsite.student_course: ~8 rows (approximately)
 DELETE FROM `student_course`;
@@ -90,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `student_course_status` (
   PRIMARY KEY (`statusId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.student_course_status: ~3 rows (approximately)
+-- Dumping data for table educationalwebsite.student_course_status: ~2 rows (approximately)
 DELETE FROM `student_course_status`;
 /*!40000 ALTER TABLE `student_course_status` DISABLE KEYS */;
 INSERT INTO `student_course_status` (`statusId`, `status`) VALUES
@@ -117,6 +139,23 @@ CREATE TABLE IF NOT EXISTS `student_test_passing` (
 DELETE FROM `student_test_passing`;
 /*!40000 ALTER TABLE `student_test_passing` DISABLE KEYS */;
 /*!40000 ALTER TABLE `student_test_passing` ENABLE KEYS */;
+
+
+-- Dumping structure for table educationalwebsite.tag
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE IF NOT EXISTS `tag` (
+  `tagId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tag` varchar(50) NOT NULL,
+  PRIMARY KEY (`tagId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table educationalwebsite.tag: ~2 rows (approximately)
+DELETE FROM `tag`;
+/*!40000 ALTER TABLE `tag` DISABLE KEYS */;
+INSERT INTO `tag` (`tagId`, `tag`) VALUES
+	(1, 'math'),
+	(2, 'programming');
+/*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 
 
 -- Dumping structure for table educationalwebsite.test
