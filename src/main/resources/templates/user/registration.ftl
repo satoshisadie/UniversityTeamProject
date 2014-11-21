@@ -5,6 +5,7 @@
     <title></title>
 
     <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/css/registration.css">
 
     <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
     <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
@@ -18,6 +19,17 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
+
+            <div class="form-group">
+                <label for="student"> Select user type: </label>
+                <label class="radio-inline">
+                    <input type="radio" name="userType" id="student" checked> Student
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="userType" id="teacher"> Teacher
+                </label>
+            </div>
+
             <form id="registration">
                 <div class="form-group">
                     <label for="e-mail">E-mail</label>
@@ -43,11 +55,32 @@
                     <strong>Passwords do not match!</strong>
                 </div>
 
-                <div class="form-group">
-                    <input type="checkbox" name="terms"> I agry to the <a href="#">Terms of Service</a>
+                <div class="student-info">
+                    <div class="form-group">
+                        <input id="studentService" type="checkbox" name="terms"> I agry to the <a href="#">Terms of Service</a>
+                    </div>
+
+                    <input id="studentSubmit" class="btn btn-default" type="submit" value="REGISTER">
                 </div>
 
-                <input id="submit" class="btn btn-default" type="submit" value="REGISTER">
+                <div class="teacher-info">
+                    <div class="form-group">
+                        <label for="edEstablishment">Educational establishment</label>
+                        <input id="edEstablishment" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="academicStatus">Academic status</label>
+                        <input id="academicStatus" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <input id="teacherService" type="checkbox" name="terms"> I agry to the <a href="#">Terms of Service</a>
+                    </div>
+
+                    <input id="teacherSubmit" class="btn btn-default" type="submit" value="REGISTER">
+                </div>
+
             </form>
         </div>
     </div>

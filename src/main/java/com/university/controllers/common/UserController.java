@@ -1,12 +1,15 @@
 package com.university.controllers.common;
 
 import com.university.controllers.client.model.Course;
+import com.university.controllers.client.model.Teacher;
 import com.university.controllers.client.model.User;
 import com.university.dao.CourseDao;
 import com.university.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +21,7 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping("/login")
+    @RequestMapping("/login/")
     public ModelAndView login() {
         final ModelAndView modelAndView = new ModelAndView("/user/login");
 
@@ -32,12 +35,20 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("/new-user/")
+    @RequestMapping(value = "/new-student/", method = RequestMethod.POST)
     @ResponseBody
     public String newUser(User user) {
-        userDao.insertNewUser(user);
+        long id = userDao.insertNewStudent(user);
 
-        return "success";
+        return "success, id = " + id;
+    }
+
+    @RequestMapping(value = "/new-teacher/", method = RequestMethod.POST)
+    @ResponseBody
+    public String newTeacher(Teacher teacher) {
+        long id = userDao.insertNewTeacher(teacher);
+
+        return "success, id = " + id;
     }
 
     @RequestMapping("/courses")
