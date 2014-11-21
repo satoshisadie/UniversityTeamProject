@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class User {
 
-    private int id;
+    private long id;
     private String login;
     private String photo;
     private String info;
