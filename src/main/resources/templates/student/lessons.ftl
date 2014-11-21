@@ -26,11 +26,16 @@
         <div class="row">
         <#list lessons as l>
             <div class="col-sm-12">
-                <div class="thumbnail" style="height: 100px">
+                <div class="thumbnail" style="height: 120px">
                     <div class="caption">
-                        <H4>${l.name}</H4>
-                        <p>${l.description}</p>
+                        <p>${l.content}</p>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-sm-offset-10">
+                            <button type="button" class="btn btn-default">Begin</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </#list>

@@ -3,10 +3,9 @@ package com.university.controllers.client.model;
 import java.time.LocalDate;
 
 public class User {
+
+    private int id;
     private String login;
-    private LocalDate birthday;
-    private String gender;
-    private String location;
     private String photo;
     private String info;
     private String email;
@@ -18,30 +17,6 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public String getPhoto() {
@@ -74,5 +49,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -4,6 +4,7 @@ import com.university.controllers.client.model.Course;
 import com.university.controllers.client.model.Lesson;
 import com.university.controllers.client.model.Question;
 import com.university.controllers.client.model.Test;
+import com.university.dao.CourseDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,9 +49,11 @@ public class StudentController {
 
         List<Lesson> lessons = new ArrayList<Lesson>();
         Lesson l = new Lesson();
+        l.setContent("lalala");
         lessons.add(l);
 
         l = new Lesson();
+        l.setContent("atata");
         lessons.add(l);
 
         modelAndView.addObject("lessons", lessons);
