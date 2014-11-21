@@ -10,6 +10,7 @@ public class User {
     private String info;
     private String email;
     private String password;
+    private String type;
 
     public String getLogin() {
         return login;
@@ -57,5 +58,13 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

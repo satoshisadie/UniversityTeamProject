@@ -38,12 +38,13 @@ public class StudentController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/{userId}/courses/")
-    public ModelAndView course(@PathVariable int userId) {
+    @RequestMapping(value = "/{userId}/courses")
+    public ModelAndView courses(@PathVariable int userId) {
         final ModelAndView modelAndView = new ModelAndView("/student/courses");
 
         User user = removeOptionalFromUser(userDao.getUserById(userId));
-        modelAndView.addObject("userName", user.getLogin());
+        user.setType(userDao.getUserType(user.getId()));
+        modelAndView.addObject("user", user);
 
         List<Course> courses = userDao.getCurrUserCourses(user.getId());
         modelAndView.addObject("courses", courses);
@@ -73,7 +74,7 @@ public class StudentController {
         return modelAndView;
     }
 
-    @RequestMapping("/test/")
+    @RequestMapping("/test")
     public ModelAndView passTest() {
         final ModelAndView modelAndView = new ModelAndView("/student/test");
 

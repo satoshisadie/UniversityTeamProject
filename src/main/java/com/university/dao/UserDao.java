@@ -97,4 +97,25 @@ public class UserDao {
                 " WHERE login = ? ";
         return CourseDao.selectOne(jdbcTemplate, sql, new UserRowMapper(), inputUser.getLogin());
     }
+
+    public String getUserType(long id) {
+        final String teacherSql =
+                "SELECT count(*) " +
+                "FROM teacher " +
+                "WHERE teacherId = ?";
+
+        final String studentSql =
+                "SELECT count(*) " +
+                "FROM student " +
+                "WHERE studentId = ?";
+
+        if(jdbcTemplate.queryForObject(teacherSql, Integer.class, id) > 0) {
+            return "teacher";
+        }
+        if(jdbcTemplate.queryForObject(studentSql, Integer.class, id) > 0) {
+            return "student";
+        }
+
+        return "admin";
+    }
 }
