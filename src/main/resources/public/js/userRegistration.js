@@ -1,32 +1,49 @@
 $(document).ready(function () {
     $('#studentSubmit').attr('disabled', true);
     $('#teacherSubmit').attr('disabled', true);
-    $('#passDoNotMatch').hide();
+    $('#stPassDoNotMatch').hide();
+    $('#tcPassDoNotMatch').hide();
 
-    $('#password').keyup(function () {
-        checkPasswords($(this), $('#confirmPassword'))
+    $('#stPassword').keyup(function () {
+        checkPasswordsStudent($(this), $('#stConfirmPassword'))
     });
 
-    $('#confirmPassword').keyup(function () {
-        checkPasswords($('#password'), $(this))
+    $('#tcPassword').keyup(function () {
+        checkPasswordsTeacher($(this), $('#tcConfirmPassword'))
     });
 
-    function checkPasswords(first, second) {
+    $('#stConfirmPassword').keyup(function () {
+        checkPasswordsStudent($('#stPassword'), $(this))
+    });
+
+    $('#tcConfirmPassword').keyup(function () {
+        checkPasswordsTeacher($('#tcPassword'), $(this))
+    });
+
+    function checkPasswordsStudent(first, second) {
         if (first.val() != second.val()) {
-            $('#passDoNotMatch').show();
+            $('#stPassDoNotMatch').show();
         } else {
-            $('#passDoNotMatch').hide();
+            $('#stPassDoNotMatch').hide();
+        }
+    }
+
+    function checkPasswordsTeacher(first, second) {
+        if (first.val() != second.val()) {
+            $('#tcPassDoNotMatch').show();
+        } else {
+            $('#tcPassDoNotMatch').hide();
         }
     }
 
     $('#student').click(function () {
-        $('.student-info').show();
-        $('.teacher-info').hide();
+        $('.student-form').show();
+        $('.teacher-form').hide();
     });
 
     $('#teacher').click(function () {
-        $('.student-info').hide();
-        $('.teacher-info').show();
+        $('.student-form').hide();
+        $('.teacher-form').show();
     });
 
     $('#studentService').change(function () {
@@ -45,18 +62,21 @@ $(document).ready(function () {
         }
     });
 
-    $('#studentSubmit').click(function () {
+    /*$('#studentSubmit').click(function () {
         $.ajax({
             url: '/new-student/',
             type: 'POST',
             data: {login: $('#login').val(), password: $('#password').val(), email: $("#e-mail").val()}
         }).done(function (response) {
-
+            if(response == 'success') {
+//                alert('Fuck YEA!');
+                document.location.href = "http://localhost:8085/login/";
+            }
 
         });
-    });
+    });*/
 
-    $('#teacherSubmit').click(function () {
+    /*$('#teacherSubmit').click(function () {
         $.ajax({
             url: '/new-teacher/',
             type: 'POST',
@@ -71,7 +91,7 @@ $(document).ready(function () {
 
 
         });
-    });
+    });*/
 
     /*$('#registration').submit(function (event) {
      event.preventDefault();

@@ -30,57 +30,81 @@
                 </label>
             </div>
 
-            <form id="registration">
+            <form id="studentReg" class="student-form" method="POST" action="/new-student/">
                 <div class="form-group">
-                    <label for="e-mail">E-mail</label>
-                    <input id="e-mail" type="text" class="form-control" placeholder="Example@email.com">
+                    <label for="stE-mail">E-mail</label>
+                    <input id="stE-mail" name="email" type="text" class="form-control" placeholder="Example@email.com">
                 </div>
 
                 <div class="form-group">
-                    <label for="login">Login</label>
-                    <input id="login" type="text" class="form-control" placeholder="Login">
+                    <label for="stLogin">Login</label>
+                    <input id="stLogin" name="login" type="text" class="form-control" placeholder="Login">
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input id="password" type="password" class="form-control">
+                    <label for="stPassword">Password</label>
+                    <input id="stPassword" name="password" type="password" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input id="confirmPassword" type="password" class="form-control">
+                    <label for="stConfirmPassword">Confirm Password</label>
+                    <input id="stConfirmPassword" type="password" class="form-control">
                 </div>
 
-                <div id="passDoNotMatch" class="alert alert-dismissable alert-danger">
+                <div id="stPassDoNotMatch" class="alert alert-dismissable alert-danger">
                     <strong>Passwords do not match!</strong>
                 </div>
 
-                <div class="student-info">
-                    <div class="form-group">
-                        <input id="studentService" type="checkbox" name="terms"> I agry to the <a href="#">Terms of Service</a>
-                    </div>
-
-                    <input id="studentSubmit" class="btn btn-default" type="submit" value="REGISTER">
+                <div class="form-group">
+                    <input id="studentService" type="checkbox" name="terms"> I agry to the <a href="#">Terms of
+                    Service</a>
                 </div>
 
-                <div class="teacher-info">
-                    <div class="form-group">
-                        <label for="edEstablishment">Educational establishment</label>
-                        <input id="edEstablishment" type="text" class="form-control">
-                    </div>
+                <input id="studentSubmit" class="btn btn-default" type="submit" value="REGISTER">
+            </form>
 
-                    <div class="form-group">
-                        <label for="academicStatus">Academic status</label>
-                        <input id="academicStatus" type="text" class="form-control">
-                    </div>
 
-                    <div class="form-group">
-                        <input id="teacherService" type="checkbox" name="terms"> I agry to the <a href="#">Terms of Service</a>
-                    </div>
-
-                    <input id="teacherSubmit" class="btn btn-default" type="submit" value="REGISTER">
+            <form id="teacherReg" class="teacher-form" method="POST" action="/new-teacher/">
+                <div class="form-group">
+                    <label for="tcE-mail">E-mail</label>
+                    <input id="tcE-mail" name="email" type="text" class="form-control" placeholder="Example@email.com">
                 </div>
 
+                <div class="form-group">
+                    <label for="tcLogin">Login</label>
+                    <input id="tcLogin" name="login" type="text" class="form-control" placeholder="Login">
+                </div>
+
+                <div class="form-group">
+                    <label for="tcPassword">Password</label>
+                    <input id="tcPassword" name="password" type="password" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="tcConfirmPassword">Confirm Password</label>
+                    <input id="tcConfirmPassword" type="password" class="form-control">
+                </div>
+
+                <div id="tcPassDoNotMatch" class="alert alert-dismissable alert-danger">
+                    <strong>Passwords do not match!</strong>
+                </div>
+
+                <div class="form-group">
+                    <label for="edEstablishment">Educational establishment</label>
+                    <input id="edEstablishment" name="educationalEstablishment" type="text" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="academicStatus">Academic status</label>
+                    <input id="academicStatus" name="academicStatus" type="text" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <input id="teacherService" type="checkbox" name="terms"> I agry to the <a href="#">Terms of
+                    Service</a>
+                </div>
+
+                <input id="teacherSubmit" class="btn btn-default" type="submit" value="REGISTER">
             </form>
         </div>
     </div>

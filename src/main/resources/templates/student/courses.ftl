@@ -42,10 +42,10 @@
                 <div class="col-md-4">
                 <#--wrong to set height!!! do it later-->
                     <div class="thumbnail" style="height: 350px">
-                        <img src="${course.img}">
+                        <img src="${course.img!}">
 
                         <div class="caption">
-                            <H4>${course.login}</H4>
+                            <H4>${course.name}</H4>
 
                             <p>${course.description}</p>
 

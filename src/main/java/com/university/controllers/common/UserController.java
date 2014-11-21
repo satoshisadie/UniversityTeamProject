@@ -1,5 +1,6 @@
 package com.university.controllers.common;
 
+import com.university.controllers.client.StudentController;
 import com.university.controllers.client.model.Course;
 import com.university.controllers.client.model.Teacher;
 import com.university.controllers.client.model.User;
@@ -15,17 +16,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
-    @Autowired
-    private UserDao userDao;
+    @Autowired private UserDao userDao;
 
     @RequestMapping("/login/")
     public ModelAndView login() {
         final ModelAndView modelAndView = new ModelAndView("/user/login");
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/sign-in/", method = RequestMethod.POST)
+    public String SignIn(User inputUser) {
+        User user = removeOptionalFromUser(userDao.getUserByLogin(inputUser));
+
+        if(user.getPassword().equals(inputUser.getPassword())) {
+            return "redirect:/student/" + user.getId() + "/courses/";
+        }
+
+        return "";
     }
 
     @RequestMapping("/registration/")
@@ -36,24 +48,24 @@ public class UserController {
     }
 
     @RequestMapping(value = "/new-student/", method = RequestMethod.POST)
-    @ResponseBody
+//    @ResponseBody
     public String newUser(User user) {
         long id = userDao.insertNewStudent(user);
 
-        return "success, id = " + id;
+        return "redirect:/login/";
     }
 
     @RequestMapping(value = "/new-teacher/", method = RequestMethod.POST)
-    @ResponseBody
+//    @ResponseBody
     public String newTeacher(Teacher teacher) {
         long id = userDao.insertNewTeacher(teacher);
 
-        return "success, id = " + id;
+        return "redirect:/login/";
     }
 
     @RequestMapping("/courses")
     public ModelAndView dashboard() {
-        final ModelAndView modelAndView = new ModelAndView("/user/courses");
+        final ModelAndView modelAndView = new ModelAndView("/student/courses");
 
 //        modelAndView.addObject("userName", "Ololosh Ololoyev");
         List<Course> courses = new ArrayList<Course>();
@@ -103,9 +115,9 @@ public class UserController {
         final ModelAndView modelAndView = new ModelAndView("/user/profile");
 
         User user = new User();
-        user.setGender("Male");
+//        user.setGender("Male");
         user.setInfo("lalalalalalalalalalalalalala");
-        user.setLocation("Cherkasy, Ukraine");
+//        user.setLocation("Cherkasy, Ukraine");
         user.setLogin("Anton Salenkov");
         user.setPhoto("../img/avatar.jpg");
 
@@ -119,14 +131,21 @@ public class UserController {
         final ModelAndView modelAndView = new ModelAndView("/user/editProfile");
 
         User user = new User();
-        user.setGender("Male");
+//        user.setGender("Male");
         user.setInfo("lalalalalalalalalalalalalala");
-        user.setLocation("Cherkasy, Ukraine");
+//        user.setLocation("Cherkasy, Ukraine");
         user.setLogin("Anton Salenkov");
         user.setPhoto("../img/avatar.jpg");
 
         modelAndView.addObject("user", user);
 
         return modelAndView;
+    }
+
+    private static User removeOptionalFromUser(Optional<User> userOptional) {
+        return userOptional.orElseGet(() -> {
+            final User user = new User();
+            return user;
+        });
     }
 }

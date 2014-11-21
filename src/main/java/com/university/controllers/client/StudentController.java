@@ -1,20 +1,21 @@
 package com.university.controllers.client;
 
-import com.university.controllers.client.model.Course;
-import com.university.controllers.client.model.Lesson;
-import com.university.controllers.client.model.Question;
-import com.university.controllers.client.model.Test;
-import com.university.dao.CourseDao;
+import com.university.controllers.client.model.*;
+import com.university.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/student")
 public class StudentController {
+    @Autowired UserDao userDao;
 
 //    @RequestMapping(value = "/course/{id}")
 //    public ModelAndView course(@PathVariable int courseId) {
@@ -37,6 +38,19 @@ public class StudentController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/{userId}/courses/")
+    public ModelAndView course(@PathVariable int userId) {
+        final ModelAndView modelAndView = new ModelAndView("/student/courses");
+
+        User user = removeOptionalFromUser(userDao.getUserById(userId));
+        modelAndView.addObject("userName", user.getLogin());
+
+        List<Course> courses = userDao.getCurrUserCourses(user.getId());
+        modelAndView.addObject("courses", courses);
+
+        return modelAndView;
+    }
+
     @RequestMapping("/course/lessons")
     public ModelAndView lessons() {
         final ModelAndView modelAndView = new ModelAndView("/student/lessons");
@@ -49,11 +63,9 @@ public class StudentController {
 
         List<Lesson> lessons = new ArrayList<Lesson>();
         Lesson l = new Lesson();
-        l.setContent("lalala");
         lessons.add(l);
 
         l = new Lesson();
-        l.setContent("atata");
         lessons.add(l);
 
         modelAndView.addObject("lessons", lessons);
@@ -98,6 +110,13 @@ public class StudentController {
         modelAndView.addObject("test", newTest);
 
         return modelAndView;
+    }
+
+    private static User removeOptionalFromUser(Optional<User> userOptional) {
+        return userOptional.orElseGet(() -> {
+            final User user = new User();
+            return user;
+        });
     }
 
 }

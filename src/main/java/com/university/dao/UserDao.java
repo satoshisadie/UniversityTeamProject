@@ -1,5 +1,6 @@
 package com.university.dao;
 
+import com.university.controllers.client.model.Course;
 import com.university.controllers.client.model.Teacher;
 import com.university.controllers.client.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
+import java.util.Optional;
 
 public class UserDao {
     private JdbcTemplate jdbcTemplate;
@@ -69,5 +72,29 @@ public class UserDao {
                 keyHolder);
 
         return (long) keyHolder.getKey();
+    }
+
+    public Optional<User> getUserById(long id) {
+        final String sql = "SELECT * " +
+                " FROM user " +
+                " WHERE userId = ? ";
+        return CourseDao.selectOne(jdbcTemplate, sql, new UserRowMapper(), id);
+    }
+
+    public List<Course> getCurrUserCourses(long userId) {
+        final String sql =
+                "SELECT * " +
+                " FROM course c LEFT JOIN (student_course s) " +
+                " ON(c.courseId = s.course) " +
+                " WHERE s.student = ? and s.status = 2";
+
+        return jdbcTemplate.query(sql, new CourseRowMapper(), userId);
+    }
+
+    public Optional<User> getUserByLogin(User inputUser) {
+        final String sql = "SELECT * " +
+                " FROM user " +
+                " WHERE login = ? ";
+        return CourseDao.selectOne(jdbcTemplate, sql, new UserRowMapper(), inputUser.getLogin());
     }
 }

@@ -15,15 +15,15 @@
 
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <form>
+                <form method="POST" action="/sign-in/">
                     <div class="form-group">
                         <label for="login">Login</label>
-                        <input id="login" type="text" class="form-control">
+                        <input id="login" name="login" type="text" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input id="password" type="password" class="form-control">
+                        <input id="password" name="password" type="password" class="form-control">
                     </div>
 
                     <input class="btn btn-default" type="submit" value="LOGIN">
