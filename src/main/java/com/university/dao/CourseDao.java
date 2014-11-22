@@ -3,6 +3,7 @@ package com.university.dao;
 import com.university.controllers.client.model.Course;
 import com.university.controllers.client.model.CourseSaveForm;
 import com.university.controllers.client.model.Lesson;
+import com.university.controllers.client.model.Tag;
 import com.university.utils.CommonUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -15,6 +16,14 @@ public class CourseDao {
 
     public CourseDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public List<Tag> getTags() {
+        final String sql =
+                "SELECT * " +
+                "FROM tag";
+
+        return jdbcTemplate.query(sql, new TagRowMapper());
     }
 
     public List<Course> getCourses() {

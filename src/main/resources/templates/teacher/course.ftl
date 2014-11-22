@@ -7,6 +7,9 @@
     <#include "*/commonHeader.ftl">
 
     <link type="text/css" rel="stylesheet" href="/css/teacher/courses.css">
+
+    <script type="application/javascript" src="/js/teacher/tags.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -18,6 +21,11 @@
                     <div class="form-group">
                         <label for="course-name">Course name</label>
                         <input id="course-name" name="name" class="form-control" type="text" value="${course.name!}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="course-tags">Course tags</label>
+                        <select multiple id="course-tags" name="tags" class="tags"></select>
                     </div>
 
                     <div class="form-group">
