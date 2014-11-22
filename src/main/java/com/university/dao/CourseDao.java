@@ -8,6 +8,7 @@ import com.university.utils.CommonUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -52,6 +53,16 @@ public class CourseDao {
                     "description = ?;";
 
         jdbcTemplate.update(sql, id, form.getName(), form.getDescription(), form.getName(), form.getDescription());
+
+        final List<String> tags = form.getTags();
+        final Map<String, Integer> idByName = getTags().stream().collect(Collectors.toMap(Tag::getName, Tag::getId));
+        final String preparedTagsValues = tags.stream().map(tagName -> "(" + id + "," + idByName.get(tagName) + ")").collect(Collectors.joining(","));
+
+        final String sql2 =
+                "DELETE course_tag ct WHERE ct.courseId = ?;" +
+                "INSERT INTO course_tag(courseId, tagId) VALUES " + preparedTagsValues + ";";
+
+        jdbcTemplate.update(sql2);
     }
 
     public List<Lesson> getLessons(long courseId) {

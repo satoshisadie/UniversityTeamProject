@@ -1,6 +1,5 @@
 package com.university.controllers;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.university.controllers.client.model.Tag;
@@ -14,11 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-
-/**
- * Created by T on 20.11.2014.
- */
-
 
 @Controller
 public class TestController {

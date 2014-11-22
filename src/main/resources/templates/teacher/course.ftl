@@ -23,15 +23,9 @@
                         <input id="course-name" name="name" class="form-control" type="text" value="${course.name!}">
                     </div>
 
-                    <div class="form-group">
-                        <label for="course-tags">Course tags</label>
-                        <select multiple id="course-tags" name="tags" class="tags"></select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="course-subjects">Course subjects</label>
-                        <input id="course-subjects" name="subjects" class="form-control" type="text"">
-                    </div>
+                    <label for="course-tags">Course tags</label>
+                    <br>
+                    <select multiple id="course-tags" name="tags" class="tags"></select>
 
                     <div class="form-group">
                         <label for="course-start-date">Course start date</label>

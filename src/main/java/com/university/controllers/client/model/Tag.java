@@ -1,17 +1,14 @@
 package com.university.controllers.client.model;
 
-/**
- * Created by T on 20.11.2014.
- */
 public class Tag {
-    private int id;
+    private Integer id;
     private String name;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
