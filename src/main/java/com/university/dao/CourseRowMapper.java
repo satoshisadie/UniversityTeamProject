@@ -14,6 +14,10 @@ public class CourseRowMapper implements RowMapper<Course> {
         course.setId(rs.getLong("courseId"));
         course.setName(rs.getString("name"));
         course.setDescription(rs.getString("description"));
+        course.setImg(rs.getString("img"));
+        course.setStartDate(rs.getDate("startDate"));
+        course.setEndDate(rs.getDate("endDate"));
+        course.setTeacher(rs.getInt("teacher"));
 
         return course;
     }

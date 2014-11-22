@@ -3,6 +3,7 @@ package com.university.controllers.client.model;
 import java.util.Date;
 
 public class Teacher {
+    private int id;
     private String email;
     private String login;
     private String password;
@@ -10,6 +11,14 @@ public class Teacher {
     private String info;
     private String educationalEstablishment;
     private String academicStatus;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;

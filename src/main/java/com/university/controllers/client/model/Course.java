@@ -1,13 +1,15 @@
 package com.university.controllers.client.model;
 
+import java.util.Date;
+
 public class Course {
     private Long id;
     private String name;
     private String description;
     private String img;
-    private String teacher;
-    private String startDate;
-    private String endDate;
+    private int teacher;
+    private Date startDate;
+    private Date endDate;
 
     public Long getId() {
         return id;
@@ -41,27 +43,27 @@ public class Course {
         this.img = img;
     }
 
-    public String getTeacher() {
+    public int getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(String teacher) {
+    public void setTeacher(int teacher) {
         this.teacher = teacher;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 }

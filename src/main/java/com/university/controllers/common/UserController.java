@@ -82,14 +82,26 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("/course/{id}")
+    @RequestMapping("/course/{courseId}")
     public ModelAndView course(@PathVariable Long courseId,
-                               HttpServletRequest httpServletRequest)
-    {
+                               HttpServletRequest httpServletRequest) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/course");
 
         final Optional<Course> course = courseDao.getCourse(courseId);
-        modelAndView.addObject("course", course);
+
+        if(course.isPresent()) {
+            modelAndView.addObject("course", course.get());
+        }else{
+            throw new Exception("Course not found");
+        }
+
+        final Optional<Teacher> teacher = userDao.getTeacherById(course.get().getTeacher());
+
+        if(teacher.isPresent()) {
+            modelAndView.addObject("teacher", teacher.get());
+        }else{
+            throw new Exception("Teacher not found");
+        }
 
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 

@@ -106,4 +106,12 @@ public class UserDao {
 
         return CommonUtils.selectOne(jdbcTemplate, sql, new UserRowMapper(), login);
     }
+
+    public Optional<Teacher> getTeacherById(int teacherId) {
+        final String sql = "SELECT * " +
+                           "From user u INNER JOIN teacher t ON(u.userId = t.teacherId) " +
+                           "WHERE u.userId = ? ";
+
+        return CommonUtils.selectOne(jdbcTemplate, sql, new TeacherRowMapper(), teacherId);
+    }
 }
