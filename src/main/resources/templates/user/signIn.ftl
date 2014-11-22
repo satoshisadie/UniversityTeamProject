@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <title></title>
 
-    <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
-
-    <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
-    <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
+    <#include "*/commonHeader.ftl">
 </head>
 <body>
     <div class="container">
         <#include "*/menu.ftl">
 
-        <div class="row">
+        <div class="content row">
             <div class="col-md-4 col-md-offset-4">
-                <form method="POST" action="/sign-in/">
+                <form method="POST" action="/login">
                     <div class="form-group">
                         <label for="login">Login</label>
                         <input id="login" name="login" type="text" class="form-control">
@@ -26,7 +23,7 @@
                         <input id="password" name="password" type="password" class="form-control">
                     </div>
 
-                    <input class="btn btn-default" type="submit" value="LOGIN">
+                    <input class="btn btn-primary" type="submit" value="LOGIN">
                 </form>
             </div>
         </div>

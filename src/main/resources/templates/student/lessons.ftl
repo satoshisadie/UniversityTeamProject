@@ -4,45 +4,40 @@
     <meta charset="UTF-8">
     <title></title>
 
-    <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
+    <#include "*/commonHeader.ftl">
 
-    <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
-    <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/student/lessons.css">
+
+    <script type="application/javascript" src="/js/main.js"></script>
+    <script type="application/javascript" src="/js/student/lessons.js"></script>
 </head>
 <body>
 <div class="container">
-<#include "*/menu.ftl">
-    <br>
-    <div class="col-md-8 col-md-offset-2">
-        <div class="row">
-            <div class="col-sm-2 col-sm-offset-2">
-                <img src="${course.img}" width="90" height="90">
-            </div>
-            <div class="col-sm-8">
-                <h1>${course.name}</h1>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-        <#list lessons as l>
-            <div class="col-sm-12">
-                <div class="thumbnail" style="height: 120px">
-                    <div class="caption">
-                        <p>${l.content}</p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2 col-sm-offset-10">
-                            <button type="button" class="btn btn-default">Begin</button>
-                        </div>
-                    </div>
+    <#include "*/menu.ftl">
 
-                </div>
+    <div class="content row">
+        <div class="col-md-2 col-md-offset-2">
+            <ul class="nav nav-pills nav-stacked">
+                <#list lessons as lesson>
+                    <li role="presentation"><a href="#lesson-${lesson_index + 1}">Lesson ${lesson_index + 1}</a></li>
+                </#list>
+            </ul>
+        </div>
+
+        <div class="col-md-6" style="min-height: 800px;">
+            <div class="lessons">
+                <#list lessons as lesson>
+                    <div class="student-lesson routable" data-hash="#lesson-${lesson_index + 1}">
+                        ${lesson.content!}
+
+                        <input class="id" type="hidden" value="${lesson.id}"/>
+                    </div>
+                </#list>
             </div>
-        </#list>
-            <br>
         </div>
     </div>
-<#include "*/footer.ftl">
+
+    <#include "*/footer.ftl">
 </div>
 </body>
 </html>

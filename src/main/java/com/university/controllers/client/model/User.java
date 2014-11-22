@@ -1,16 +1,21 @@
 package com.university.controllers.client.model;
 
-import java.time.LocalDate;
-
 public class User {
-
-    private long id;
+    private Long id;
     private String login;
     private String photo;
     private String info;
     private String email;
     private String password;
     private String type;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;
@@ -50,14 +55,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getType() {

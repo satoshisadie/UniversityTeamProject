@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <title>Teacher Dashboard</title>
 
-    <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
-    <link type="text/css" rel="stylesheet" href="/css/teacherLessons.css">
+    <#include "*/commonHeader.ftl">
 
-    <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
-    <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
-    <script type="application/javascript" src="/js/libs/underscore.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/teacher/lessons.css">
+
     <script type="application/javascript" src="/js/libs/tinymce/tinymce.min.js"></script>
 
     <script type="application/javascript" src="/js/main.js"></script>
@@ -19,7 +17,7 @@
 <div class="container">
     <#include "*/menu.ftl">
 
-    <div class="row">
+    <div class="content row">
         <div class="col-md-2 col-md-offset-2">
             <ul class="nav nav-pills nav-stacked">
                 <#list lessons as lesson>

@@ -4,63 +4,63 @@
     <meta charset="UTF-8">
     <title></title>
 
-    <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
-
-    <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
-    <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
+    <#include "*/commonHeader.ftl">
 </head>
 <body>
-<div class="container">
-    <#include "*/menu.ftl">
+    <div class="container">
+        <#include "*/menu.ftl">
 
-    <div class="col-md-8 col-md-offset-2">
-        <blockquote>
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>YOUR COURSES</h4>
-                </div>
-
-                <ul class="nav nav-tabs navbar-right">
-                    <li role="presentation" class="active">
-                        <a href="#current">Current</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#past">Past</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#upcoming">Upcoming</a>
-                    </li>
-                </ul>
-            </div>
-        </blockquote>
-
-        <#--<br>-->
-        <#--<br>-->
-
-        <div class="row">
-            <#list courses as course>
-                <div class="col-md-4">
-                <#--wrong to set height!!! do it later-->
-                    <div class="thumbnail" style="height: 350px">
-                        <img src="${course.img!}">
-
-                        <div class="caption">
-                            <H4>${course.name}</H4>
-
-                            <p>${course.description}</p>
-
-                            <p>
-                                <a href="#" class="btn btn-primary" role="button">Button</a>
-                                <a href="#" class="btn btn-default" role="button">Button</a>
-                            </p>
+        <div class="content row">
+            <div class="col-md-8 col-md-offset-2">
+                <blockquote>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>YOUR COURSES</h4>
                         </div>
+
+                        <ul class="nav nav-tabs navbar-right">
+                            <li role="presentation" class="active">
+                                <a href="#current">Current</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#past">Past</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#upcoming">Upcoming</a>
+                            </li>
+                        </ul>
                     </div>
+                </blockquote>
+
+            <#--<br>-->
+            <#--<br>-->
+
+                <div class="student-courses">
+                    <#list courses as course>
+                        <div class="student-course media">
+                            <a class="media-left">
+                                <img src="/img/avatar.jpg">
+                            </a>
+
+                            <div class="media-body">
+                                <a href="./${course.id?c}">
+                                    <h4 class="media-heading">${course.name}</h4>
+                                </a>
+                                <span class="description">${course.description}</span>
+                                <br>
+                                <a class="course-info" href="/student/courses/${course.id?c}">course info</a>
+                                <a class="un-enroll" href="/student/courses/${course.id?c}">un-ebroll</a>
+                                <a class="go-to-class btn btn-success" href="/student/lessons/?courseId=${course.id?c}">Go to class</a>
+                            </div>
+
+                            <input class="id" type="hidden" value="${course.id?c}">
+                        </div>
+                    </#list>
                 </div>
-            </#list>
+            </div>
         </div>
 
         <#include "*/footer.ftl">
     </div>
-</div>
 </body>
 </html>

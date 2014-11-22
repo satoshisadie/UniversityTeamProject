@@ -1,81 +1,53 @@
 package com.university.controllers.client;
 
 import com.university.controllers.client.model.*;
+import com.university.dao.CourseDao;
 import com.university.dao.UserDao;
+import com.university.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/student")
 public class StudentController {
+    @Autowired CourseDao courseDao;
     @Autowired UserDao userDao;
 
-//    @RequestMapping(value = "/course/{id}")
-//    public ModelAndView course(@PathVariable int courseId) {
-//        final ModelAndView modelAndView = new ModelAndView("/student/course");
-//
-//        return modelAndView;
-//    }
-
-    @RequestMapping("/course")
-    public ModelAndView course() {
-        final ModelAndView modelAndView = new ModelAndView("/student/learnCourse");
-
-        Course c = new Course();
-        c.setName("Information technology");
-        c.setDescription("ololo ololo sjdvh dskvj sdjvn sdjbgv sdjhv s");
-        c.setImg("../img/download.png");
-        c.setTeacher("Vasya Pupkin");
-        modelAndView.addObject("course", c);
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/{userId}/courses")
-    public ModelAndView courses(@PathVariable int userId) {
-        final ModelAndView modelAndView = new ModelAndView("/student/courses");
-
-        User user = removeOptionalFromUser(userDao.getUserById(userId));
-        user.setType(userDao.getUserType(user.getId()));
-        modelAndView.addObject("user", user);
-
-        List<Course> courses = userDao.getCurrUserCourses(user.getId());
-        modelAndView.addObject("courses", courses);
-
-        return modelAndView;
-    }
-
-    @RequestMapping("/course/lessons")
-    public ModelAndView lessons() {
+    @RequestMapping("/lessons/")
+    public ModelAndView course(@RequestParam(value = "courseId") Long courseId) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/student/lessons");
 
-        Course c = new Course();
-        c.setName("Information technology");
-        c.setImg("../img/download.png");
-
-        modelAndView.addObject("course", c);
-
-        List<Lesson> lessons = new ArrayList<Lesson>();
-        Lesson l = new Lesson();
-        lessons.add(l);
-
-        l = new Lesson();
-        lessons.add(l);
-
+        final List<Lesson> lessons = courseDao.getLessons(courseId);
         modelAndView.addObject("lessons", lessons);
 
         return modelAndView;
     }
 
-    @RequestMapping("/test")
-    public ModelAndView passTest() {
+    @RequestMapping(value = "/courses")
+    public ModelAndView courses(HttpServletRequest httpServletRequest)
+    {
+        final ModelAndView modelAndView = new ModelAndView("/student/courses");
+
+        final User user = CommonUtils.getUserFromRequest(httpServletRequest);
+        modelAndView.addObject("user", user);
+
+        final List<Course> userCourses = userDao.getUserCourses(user.getId());
+        modelAndView.addObject("courses", userCourses);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/test/{id}")
+    public ModelAndView passTest(@PathVariable Long testId)
+    {
         final ModelAndView modelAndView = new ModelAndView("/student/test");
 
         Test newTest = new Test();
@@ -112,12 +84,4 @@ public class StudentController {
 
         return modelAndView;
     }
-
-    private static User removeOptionalFromUser(Optional<User> userOptional) {
-        return userOptional.orElseGet(() -> {
-            final User user = new User();
-            return user;
-        });
-    }
-
 }

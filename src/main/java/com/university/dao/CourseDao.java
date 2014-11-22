@@ -4,9 +4,7 @@ import com.university.controllers.client.model.Course;
 import com.university.controllers.client.model.CourseSaveForm;
 import com.university.controllers.client.model.Lesson;
 import com.university.utils.CommonUtils;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +31,7 @@ public class CourseDao {
                 "FROM course c " +
                 "WHERE c.courseId = ?";
 
-        return selectOne(jdbcTemplate, sql, new CourseRowMapper(), id);
+        return CommonUtils.selectOne(jdbcTemplate, sql, new CourseRowMapper(), id);
     }
 
     public void saveCourse(long id, CourseSaveForm form) {
@@ -62,7 +60,7 @@ public class CourseDao {
                 "FROM lesson l " +
                 "WHERE l.lessonId = ?";
 
-        return selectOne(jdbcTemplate, sql, new LessonRowMapper(), id);
+        return CommonUtils.selectOne(jdbcTemplate, sql, new LessonRowMapper(), id);
     }
 
     public void saveLessons(List<Lesson> lessons) {
@@ -88,13 +86,5 @@ public class CourseDao {
         return lessons.stream()
                 .map(lesson -> "(" + lesson.getId() + "," + lesson.getCourseId() + ",'" + lesson.getContent() + "')")
                 .collect(Collectors.joining(","));
-    }
-
-    public static <T> Optional<T> selectOne(JdbcTemplate jdbc, String sql, RowMapper<T> rowMapper, Object... params) {
-        try {
-            return Optional.of(jdbc.queryForObject(sql, params, rowMapper));
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
     }
 }

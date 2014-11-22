@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <title></title>
 
-    <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
+    <#include "*/commonHeader.ftl">
+
     <link type="text/css" rel="stylesheet" href="/css/registration.css">
 
-    <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
-    <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
     <script type="application/javascript" src="/js/userRegistration.js"></script>
 </head>
 <body>
 <div class="container">
-    <div class="row">
     <#include "*/menu.ftl">
-    </div>
 
-    <div class="row">
+    <div class="content row">
         <div class="col-md-4 col-md-offset-4">
 
             <div class="form-group">
@@ -30,7 +27,7 @@
                 </label>
             </div>
 
-            <form id="studentReg" class="student-form" method="POST" action="/new-student/">
+            <form id="studentReg" class="student-form" method="POST" action="/new-student">
                 <div class="form-group">
                     <label for="stE-mail">E-mail</label>
                     <input id="stE-mail" name="email" type="text" class="form-control" placeholder="Example@email.com">
@@ -60,11 +57,11 @@
                     Service</a>
                 </div>
 
-                <input id="studentSubmit" class="btn btn-default" type="submit" value="REGISTER">
+                <input id="studentSubmit" class="btn btn-primary" type="submit" value="Sign-up">
             </form>
 
 
-            <form id="teacherReg" class="teacher-form" method="POST" action="/new-teacher/">
+            <form id="teacherReg" class="teacher-form" method="POST" action="/new-teacher">
                 <div class="form-group">
                     <label for="tcE-mail">E-mail</label>
                     <input id="tcE-mail" name="email" type="text" class="form-control" placeholder="Example@email.com">
@@ -104,14 +101,12 @@
                     Service</a>
                 </div>
 
-                <input id="teacherSubmit" class="btn btn-default" type="submit" value="REGISTER">
+                <input id="teacherSubmit" class="btn btn-primary" type="submit" value="Sign-up">
             </form>
         </div>
     </div>
 
-    <div class="row">
     <#include "*/footer.ftl">
-    </div>
 </div>
 </body>
 </html>

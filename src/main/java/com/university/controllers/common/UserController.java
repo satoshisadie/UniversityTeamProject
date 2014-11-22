@@ -1,127 +1,106 @@
 package com.university.controllers.common;
 
-import com.university.controllers.client.StudentController;
 import com.university.controllers.client.model.Course;
 import com.university.controllers.client.model.Teacher;
 import com.university.controllers.client.model.User;
 import com.university.dao.CourseDao;
 import com.university.dao.UserDao;
+import com.university.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class UserController {
     @Autowired private UserDao userDao;
+    @Autowired private CourseDao courseDao;
 
-    @RequestMapping("/login/")
-    public ModelAndView login() {
-        final ModelAndView modelAndView = new ModelAndView("/user/login");
-
-        return modelAndView;
+    @RequestMapping("/sign-in")
+    public String login() {
+        return "/user/signIn";
     }
 
-    @RequestMapping(value = "/sign-in/", method = RequestMethod.POST)
-    public String SignIn(User inputUser) {
-        User user = removeOptionalFromUser(userDao.getUserByLogin(inputUser));
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String signIn(@RequestParam(value = "login") String login,
+                         @RequestParam(value = "password") String password,
+                         HttpServletRequest httpServletRequest)
+    {
+        final Optional<User> userOptional = userDao.getUserByLogin(login);
 
-        if(user.getPassword().equals(inputUser.getPassword())) {
-            return "redirect:/student/" + user.getId() + "/courses/";
+        if (userOptional.isPresent()) {
+            final User user = userOptional.get();
+
+            if (user.getPassword().equals(password)) {
+                final HttpSession session = httpServletRequest.getSession();
+                session.setAttribute("user", user);
+
+                return "redirect:";
+            }
         }
-
-        return "";
+        return "redirect:/login";
     }
 
-    @RequestMapping("/registration/")
-    public ModelAndView register() {
-        final ModelAndView modelAndView = new ModelAndView("/user/registration");
-
-        return modelAndView;
+    @RequestMapping("/sign-up")
+    public String signUp() {
+        return "/user/signUp";
     }
 
-    @RequestMapping(value = "/new-student/", method = RequestMethod.POST)
-//    @ResponseBody
+    @RequestMapping(value = "/new-student", method = RequestMethod.POST)
     public String newUser(User user) {
         long id = userDao.insertNewStudent(user);
 
-        return "redirect:/login/";
+        return "redirect:/sign-in";
     }
 
-    @RequestMapping(value = "/new-teacher/", method = RequestMethod.POST)
+    @RequestMapping(value = "/new-teacher", method = RequestMethod.POST)
 //    @ResponseBody
     public String newTeacher(Teacher teacher) {
         long id = userDao.insertNewTeacher(teacher);
 
-        return "redirect:/login/";
+        return "redirect:/sign-in";
     }
 
-    @RequestMapping("/courses")
-    public ModelAndView dashboard() {
-        final ModelAndView modelAndView = new ModelAndView("/student/courses");
+    @RequestMapping("/")
+    public ModelAndView mainPage(HttpServletRequest httpServletRequest)
+    {
+        final ModelAndView modelAndView = new ModelAndView("/mainPage");
 
-//        modelAndView.addObject("userName", "Ololosh Ololoyev");
-        List<Course> courses = new ArrayList<Course>();
-        Course c = new Course();
-        c.setName("Information technology");
-        c.setDescription("ololo ololo sjdvh dskvj sdjvn sdjbgv sdjhv s");
-        c.setImg("../img/download.png");
-        courses.add(c);
-
-        c = new Course();
-        c.setName("Math");
-        c.setDescription("ololo adf eraosfg rgf rgflolo sjdvh dskvj sdjvn sdjbgv sdjhv s");
-        c.setImg("../img/download.png");
-        courses.add(c);
-
-        c = new Course();
-        c.setName("Technical english");
-        c.setDescription("ololo ololo sjdvh dskvj sdjvn sdjbgv sdjhv ssdv e");
-        c.setImg("../img/download.png");
-        courses.add(c);
-
-        c = new Course();
-        c.setName("Speaking");
-        c.setDescription("olo sdv sdvslo ololo sjdvh dskvj sdjvn sdjbgv sdjhv ssdv e");
-        c.setImg("../img/download.png");
-        courses.add(c);
-
-        c = new Course();
-        c.setName("Swimming");
-        c.setDescription("olo dvslo ololo sjdvh dskvj sdjvn sdjbgv sdjhv ssdv e");
-        c.setImg("../img/download.png");
-        courses.add(c);
-
-//        c = new Course();
-//        c.setTitle("Modeling");
-//        c.setDescription("o sv sv sdv sdfv sfv dfv fsdf df dfv df cx df lo dvslo ololo sjdvh dskvj sdjvn sdjbgv sdjhv ssdv e");
-//        c.setImg("../img/download.png");
-//        courses.add(c);
-
+        final List<Course> courses = courseDao.getCourses();
         modelAndView.addObject("courses", courses);
+
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/course/{id}")
+    public ModelAndView course(@PathVariable Long courseId,
+                               HttpServletRequest httpServletRequest)
+    {
+        final ModelAndView modelAndView = new ModelAndView("/course");
+
+        final Optional<Course> course = courseDao.getCourse(courseId);
+        modelAndView.addObject("course", course);
+
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 
         return modelAndView;
     }
 
     @RequestMapping("/profile")
-    public ModelAndView user() {
+    public ModelAndView user(HttpServletRequest httpServletRequest)
+    {
         final ModelAndView modelAndView = new ModelAndView("/user/profile");
-
-        User user = new User();
-//        user.setGender("Male");
-        user.setInfo("lalalalalalalalalalalalalala");
-//        user.setLocation("Cherkasy, Ukraine");
-        user.setLogin("Anton Salenkov");
-        user.setPhoto("../img/avatar.jpg");
-
-        modelAndView.addObject("user", user);
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 
         return modelAndView;
     }
@@ -140,12 +119,5 @@ public class UserController {
         modelAndView.addObject("user", user);
 
         return modelAndView;
-    }
-
-    private static User removeOptionalFromUser(Optional<User> userOptional) {
-        return userOptional.orElseGet(() -> {
-            final User user = new User();
-            return user;
-        });
     }
 }
