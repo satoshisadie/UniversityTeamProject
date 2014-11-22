@@ -25,7 +25,11 @@
 
                     <label for="course-tags">Course tags</label>
                     <br>
-                    <select multiple id="course-tags" name="tags" class="tags"></select>
+                    <select multiple id="course-tags" name="tags" class="tags">
+                        <#list courseTags as ct>
+                            <option value="${ct.tagName}"></option>
+                        </#list>
+                    </select>
 
                     <div class="form-group">
                         <label for="course-start-date">Course start date</label>

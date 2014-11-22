@@ -1,9 +1,6 @@
 package com.university.dao;
 
-import com.university.controllers.client.model.Course;
-import com.university.controllers.client.model.CourseSaveForm;
-import com.university.controllers.client.model.Lesson;
-import com.university.controllers.client.model.Tag;
+import com.university.controllers.client.model.*;
 import com.university.utils.CommonUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -25,6 +22,17 @@ public class CourseDao {
                 "FROM tag";
 
         return jdbcTemplate.query(sql, new TagRowMapper());
+    }
+
+    public List<CourseTag> getTagsByCourse(long id) {
+        final String sql =
+                "SELECT ct.course, t.tagId, t.tag " +
+                "FROM tag t " +
+                "JOIN course_tag ct " +
+                "ON t.tagId = ct.tag " +
+                "WHERE ct.course = ?;";
+
+        return jdbcTemplate.query(sql, new CourseTagRowMapper(), id);
     }
 
     public List<Course> getCourses() {

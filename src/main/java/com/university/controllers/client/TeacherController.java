@@ -1,10 +1,7 @@
 package com.university.controllers.client;
 
 import com.google.gson.*;
-import com.university.controllers.client.model.Course;
-import com.university.controllers.client.model.CourseSaveForm;
-import com.university.controllers.client.model.Lesson;
-import com.university.controllers.client.model.Tag;
+import com.university.controllers.client.model.*;
 import com.university.dao.CourseDao;
 import com.university.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +43,8 @@ public class TeacherController {
         modelAndView.addObject("course", course);
         List<Tag> tags = courseDao.getTags();
         modelAndView.addObject("tags", tags);
+        List<CourseTag> courseTags = courseDao.getTagsByCourse(id);
+        modelAndView.addObject("courseTags", courseTags);
 
         return modelAndView;
     }
