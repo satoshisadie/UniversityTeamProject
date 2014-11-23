@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.6.21-log - MySQL Community Server (GPL)
--- Server OS:                    Win64
--- HeidiSQL Version:             9.1.0.4867
+-- Хост:                         127.0.0.1
+-- Версия сервера:               5.5.29 - MySQL Community Server (GPL)
+-- ОС Сервера:                   Win64
+-- HeidiSQL Версия:              9.1.0.4867
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,20 +10,20 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping database structure for educationalwebsite
+-- Дамп структуры базы данных educationalwebsite
 DROP DATABASE IF EXISTS `educationalwebsite`;
 CREATE DATABASE IF NOT EXISTS `educationalwebsite` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `educationalwebsite`;
 
 
--- Dumping structure for table educationalwebsite.admin
+-- Дамп структуры для таблица educationalwebsite.admin
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `adminId` int(10) unsigned NOT NULL,
   KEY `FK__user` (`adminId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.admin: ~2 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.admin: ~2 rows (приблизительно)
 DELETE FROM `admin`;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`adminId`) VALUES
@@ -32,7 +32,7 @@ INSERT INTO `admin` (`adminId`) VALUES
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.course
+-- Дамп структуры для таблица educationalwebsite.course
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `courseId` bigint(20) NOT NULL,
@@ -46,18 +46,18 @@ CREATE TABLE IF NOT EXISTS `course` (
   KEY `FK_course_teacher` (`teacher`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.course: ~4 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.course: ~4 rows (приблизительно)
 DELETE FROM `course`;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
 INSERT INTO `course` (`courseId`, `name`, `description`, `img`, `startDate`, `endDate`, `teacher`) VALUES
 	(1, 'Test2', '', '/img/download.png', '2014-12-12', '2014-11-11', 6),
 	(2, 'test course 2', 'text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text ', '/img/download.png', '2014-04-13', '2014-10-13', 5),
-	(3, 'test course 3', 'text text text text text text text text text text text ', '/img/download.png', '2014-11-23', '2015-05-12', 17),
+	(3, 'Financial Engineering and Risk Management Part I', 'Financial Engineering is a multidisciplinary field involving finance and economics, mathematics, statistics, engineering and computational methods. The emphasis of FE & RM Part II will be on the use of simple stochastic models to (i) solve portfolio optimization problems (ii) price derivative securities in various asset classes including equities and credit and (iii) consider some advanced applications of financial engineering including algorithmic trading and the pricing of real options. We will also consider the role that financial engineering played during the financial crisis.\r\n\r\nWe hope that students who complete the course and the prerequisite course (FE & RM Part I) will have a good understanding of the "rocket science" behind financial engineering. But perhaps more importantly, we hope they will also understand the limitations of this theory in practice and why financial models should always be treated with a healthy degree of skepticism. ', '/img/download.png', '2014-11-23', '2015-05-12', 17),
 	(43136064333301185, 'New Course', 'Description', '/img/download.png', '2014-12-12', '2015-04-04', 5);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.course_tag
+-- Дамп структуры для таблица educationalwebsite.course_tag
 DROP TABLE IF EXISTS `course_tag`;
 CREATE TABLE IF NOT EXISTS `course_tag` (
   `course` bigint(20) NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `course_tag` (
   KEY `FK_course_tag_tag` (`tag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.course_tag: ~4 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.course_tag: ~4 rows (приблизительно)
 DELETE FROM `course_tag`;
 /*!40000 ALTER TABLE `course_tag` DISABLE KEYS */;
 INSERT INTO `course_tag` (`course`, `tag`) VALUES
@@ -77,7 +77,7 @@ INSERT INTO `course_tag` (`course`, `tag`) VALUES
 /*!40000 ALTER TABLE `course_tag` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.lesson
+-- Дамп структуры для таблица educationalwebsite.lesson
 DROP TABLE IF EXISTS `lesson`;
 CREATE TABLE IF NOT EXISTS `lesson` (
   `lessonId` bigint(20) NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `lesson` (
   PRIMARY KEY (`lessonId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.lesson: ~3 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.lesson: ~3 rows (приблизительно)
 DELETE FROM `lesson`;
 /*!40000 ALTER TABLE `lesson` DISABLE KEYS */;
 INSERT INTO `lesson` (`lessonId`, `courseId`, `content`) VALUES
@@ -96,14 +96,14 @@ INSERT INTO `lesson` (`lessonId`, `courseId`, `content`) VALUES
 /*!40000 ALTER TABLE `lesson` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.student
+-- Дамп структуры для таблица educationalwebsite.student
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `studentId` int(10) unsigned NOT NULL,
   KEY `FK_student_user` (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.student: ~5 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.student: ~5 rows (приблизительно)
 DELETE FROM `student`;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
 INSERT INTO `student` (`studentId`) VALUES
@@ -115,7 +115,7 @@ INSERT INTO `student` (`studentId`) VALUES
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.student_course
+-- Дамп структуры для таблица educationalwebsite.student_course
 DROP TABLE IF EXISTS `student_course`;
 CREATE TABLE IF NOT EXISTS `student_course` (
   `courseId` bigint(20) unsigned NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `student_course` (
   KEY `FK_student_course_user` (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.student_course: ~7 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.student_course: ~7 rows (приблизительно)
 DELETE FROM `student_course`;
 /*!40000 ALTER TABLE `student_course` DISABLE KEYS */;
 INSERT INTO `student_course` (`courseId`, `studentId`, `status`) VALUES
@@ -140,7 +140,7 @@ INSERT INTO `student_course` (`courseId`, `studentId`, `status`) VALUES
 /*!40000 ALTER TABLE `student_course` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.student_course_status
+-- Дамп структуры для таблица educationalwebsite.student_course_status
 DROP TABLE IF EXISTS `student_course_status`;
 CREATE TABLE IF NOT EXISTS `student_course_status` (
   `statusId` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `student_course_status` (
   PRIMARY KEY (`statusId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.student_course_status: ~3 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.student_course_status: ~3 rows (приблизительно)
 DELETE FROM `student_course_status`;
 /*!40000 ALTER TABLE `student_course_status` DISABLE KEYS */;
 INSERT INTO `student_course_status` (`statusId`, `status`) VALUES
@@ -158,7 +158,7 @@ INSERT INTO `student_course_status` (`statusId`, `status`) VALUES
 /*!40000 ALTER TABLE `student_course_status` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.student_test_passing
+-- Дамп структуры для таблица educationalwebsite.student_test_passing
 DROP TABLE IF EXISTS `student_test_passing`;
 CREATE TABLE IF NOT EXISTS `student_test_passing` (
   `passingId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -171,13 +171,13 @@ CREATE TABLE IF NOT EXISTS `student_test_passing` (
   KEY `FK__test` (`test`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.student_test_passing: ~0 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.student_test_passing: ~0 rows (приблизительно)
 DELETE FROM `student_test_passing`;
 /*!40000 ALTER TABLE `student_test_passing` DISABLE KEYS */;
 /*!40000 ALTER TABLE `student_test_passing` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.tag
+-- Дамп структуры для таблица educationalwebsite.tag
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE IF NOT EXISTS `tag` (
   `tagId` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `tag` (
   PRIMARY KEY (`tagId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.tag: ~2 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.tag: ~2 rows (приблизительно)
 DELETE FROM `tag`;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
 INSERT INTO `tag` (`tagId`, `tag`) VALUES
@@ -194,26 +194,27 @@ INSERT INTO `tag` (`tagId`, `tag`) VALUES
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.teacher
+-- Дамп структуры для таблица educationalwebsite.teacher
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE IF NOT EXISTS `teacher` (
   `teacherId` int(10) unsigned NOT NULL,
   `educationalEstablishment` varchar(100) DEFAULT NULL,
   `academicStatus` varchar(100) DEFAULT NULL,
+  `university` varchar(100) DEFAULT NULL,
   KEY `FK__user` (`teacherId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.teacher: ~3 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.teacher: ~3 rows (приблизительно)
 DELETE FROM `teacher`;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` (`teacherId`, `educationalEstablishment`, `academicStatus`) VALUES
-	(5, 'dsdv', 'sdv'),
-	(6, 'sdv', NULL),
-	(17, 'cfgyu', 'cghj');
+INSERT INTO `teacher` (`teacherId`, `educationalEstablishment`, `academicStatus`, `university`) VALUES
+	(5, 'dsdv', 'sdv', NULL),
+	(6, 'sdv', NULL, NULL),
+	(17, 'cfgyu', 'cghj', NULL);
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.test
+-- Дамп структуры для таблица educationalwebsite.test
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE IF NOT EXISTS `test` (
   `testId` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -221,38 +222,40 @@ CREATE TABLE IF NOT EXISTS `test` (
   PRIMARY KEY (`testId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.test: ~0 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.test: ~0 rows (приблизительно)
 DELETE FROM `test`;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 
 
--- Dumping structure for table educationalwebsite.user
+-- Дамп структуры для таблица educationalwebsite.user
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `userId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `login` varchar(50) NOT NULL,
+  `firstName` varchar(50) DEFAULT NULL,
+  `lastName` varchar(50) DEFAULT NULL,
   `password` text NOT NULL,
   `photo` varchar(100) DEFAULT '/img/avatar.jpg',
   `info` text,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
--- Dumping data for table educationalwebsite.user: ~10 rows (approximately)
+-- Дамп данных таблицы educationalwebsite.user: ~10 rows (приблизительно)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`userId`, `email`, `login`, `password`, `photo`, `info`) VALUES
-	(2, 'satoshisadie@gmail.com', 'satoshisadie', '12345', '/img/avatar.jpg', NULL),
-	(3, 'SichaUA@gmail.com', 'Sicha', '12345', '/img/avatar.jpg', NULL),
-	(4, 'toxan56@ukr.net', 'toxan56', '12345', '/img/avatar.jpg', NULL),
-	(5, 'teacher1@gmail.com', 'teacher1', '123', '/img/avatar.jpg', NULL),
-	(6, 'teacher2@gmail.com', 'teacher2', '123', '/img/avatar.jpg', NULL),
-	(10, 'student1@gmail.com', 'student1', '12', '/img/avatar.jpg', NULL),
-	(11, 'student2@gmail.com', 'student2', '12', '/img/avatar.jpg', NULL),
-	(12, 'student3@gmail.com', 'student3', '12', '/img/avatar.jpg', NULL),
-	(16, 'qwe', 'qwe', 'qwe', '/img/avatar.jpg', NULL),
-	(17, 'ghj', 'ghj', '123', '/img/avatar.jpg', NULL);
+INSERT INTO `user` (`userId`, `email`, `login`, `firstName`, `lastName`, `password`, `photo`, `info`) VALUES
+	(2, 'satoshisadie@gmail.com', 'satoshisadie', NULL, NULL, '12345', '/img/avatar.jpg', NULL),
+	(3, 'SichaUA@gmail.com', 'Sicha', NULL, NULL, '12345', '/img/avatar.jpg', NULL),
+	(4, 'toxan56@ukr.net', 'toxan56', NULL, NULL, '12345', '/img/avatar.jpg', NULL),
+	(5, 'teacher1@gmail.com', 'teacher1', NULL, NULL, '123', '/img/avatar.jpg', NULL),
+	(6, 'teacher2@gmail.com', 'teacher2', NULL, NULL, '123', '/img/avatar.jpg', NULL),
+	(10, 'student1@gmail.com', 'student1', NULL, NULL, '12', '/img/avatar.jpg', NULL),
+	(11, 'student2@gmail.com', 'student2', NULL, NULL, '12', '/img/avatar.jpg', NULL),
+	(12, 'student3@gmail.com', 'student3', NULL, NULL, '12', '/img/avatar.jpg', NULL),
+	(16, 'qwe', 'qwe', NULL, NULL, 'qwe', '/img/avatar.jpg', NULL),
+	(17, 'email', 'login', 'Martin', 'Haugh', 'password', '/img/avatar.jpg', NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
