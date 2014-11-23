@@ -32,12 +32,9 @@
                     </div>
                 </blockquote>
 
-            <#--<br>-->
-            <#--<br>-->
-
                 <div class="student-courses">
                     <#list courses as course>
-                        <div class="student-course media">
+                        <div class="student-course media" style="margin-bottom: 30px;">
                             <a class="media-left">
                                 <img src="/img/avatar.jpg">
                             </a>
@@ -46,12 +43,14 @@
                                 <a href="./${course.id?c}">
                                     <h4 class="media-heading">${course.name}</h4>
                                 </a>
-                                <span class="description">${course.description}</span>
-                                <br>
-                                <a class="course-info" href="/student/courses/${course.id?c}">course info</a>
-                                <a class="un-enroll" href="/student/courses/${course.id?c}">un-ebroll</a>
-                                <a class="go-to-class btn btn-success" href="/student/lessons/?courseId=${course.id?c}">Go to class</a>
+                                <span>Stanford</span>
+                                <div class="buttons-container" style="margin-top: 15px;">
+                                    <a class="course-info" href="/student/courses/${course.id?c}">course info</a>
+                                    <span>|</span>
+                                    <a class="un-enroll" href="/student/courses/${course.id?c}">un-enroll</a>
+                                </div>
                             </div>
+                            <a class="go-to-class btn btn-success" style="float: right; margin-top: -70px;" href="/student/lessons/?courseId=${course.id?c}">Go to class</a>
 
                             <input class="id" type="hidden" value="${course.id?c}">
                         </div>
