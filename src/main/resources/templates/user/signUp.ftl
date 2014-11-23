@@ -17,16 +17,16 @@
     <div class="content row">
         <div class="col-md-4 col-md-offset-4">
 
-            <div class="form-group">
-                <label for="student"> Select user type: </label>
-                <label class="radio-inline">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary active">
                     <input type="radio" name="userType" id="student" checked> Student
                 </label>
-                <label class="radio-inline">
+                <label class="btn btn-primary">
                     <input type="radio" name="userType" id="teacher"> Teacher
                 </label>
             </div>
-
+            <br>
+            <br>
             <form id="studentReg" class="student-form" method="POST" action="/new-student">
                 <div class="form-group">
                     <label for="stE-mail">E-mail</label>

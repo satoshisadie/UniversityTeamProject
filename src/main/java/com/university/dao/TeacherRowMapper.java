@@ -15,6 +15,8 @@ public class TeacherRowMapper implements RowMapper<Teacher> {
         teacher.setId(rs.getInt("userId"));
         teacher.setEmail(rs.getString("email"));
         teacher.setLogin(rs.getString("login"));
+        teacher.setFirstName(rs.getString("firstName"));
+        teacher.setLastName(rs.getString("lastName"));
         teacher.setPassword(rs.getString("password"));
         teacher.setPhoto(rs.getString("photo"));
         teacher.setInfo(rs.getString("info"));

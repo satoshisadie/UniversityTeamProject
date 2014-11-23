@@ -1,22 +1,22 @@
 package com.university.controllers.client.model;
 
-import java.util.Date;
-
 public class Teacher {
-    private int id;
+    private Integer id;
     private String email;
     private String login;
+    private String firstName;
+    private String lastName;
     private String password;
     private String photo;
     private String info;
     private String educationalEstablishment;
     private String academicStatus;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -34,6 +34,22 @@ public class Teacher {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {

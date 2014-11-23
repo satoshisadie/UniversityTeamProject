@@ -6,10 +6,13 @@
 
     <#include "*/commonHeader.ftl">
 
+    <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap-tagsinput.css">
+    <link type="text/css" rel="stylesheet" href="/css/libs/typeaheadjs.css">
     <link type="text/css" rel="stylesheet" href="/css/teacher/courses.css">
 
+    <script type="application/javascript" src="/js/libs/bootstrap-tagsinput.js"></script>
+    <script type="application/javascript" src="/js/libs/typeahead.bundle.js"></script>
     <script type="application/javascript" src="/js/teacher/tags.js"></script>
-
 </head>
 <body>
     <div class="container">
@@ -32,26 +35,26 @@
                     </select>
 
                     <div class="form-group">
-                        <label for="course-start-date">Course start date</label>
+                        <label for="start-date">Course start date</label>
                         <#if course.startDate??>
-                            <input id="course-start-date" name="startDate" class="form-control" type="text" value="${course.startDate?string("MM/dd/yyyy")!}">
+                            <input id="start-date" name="startDate" class="form-control" type="text" value="${course.startDate?string("MM/dd/yyyy")!}">
                         <#else>
-                            <input id="course-start-date" name="startDate" class="form-control" type="text">
+                            <input id="start-date" name="startDate" class="form-control" type="text">
                         </#if>
                     </div>
 
                     <div class="form-group">
-                        <label for="course-end-date">Course end date</label>
+                        <label for="end-date">Course end date</label>
                         <#if course.endDate??>
-                            <input id="course-end-date" name="endDate" class="form-control" type="text" value="${course.endDate?string("MM/dd/yyyy")!}">
+                            <input id="end-date" name="endDate" class="form-control" type="text" value="${course.endDate?string("MM/dd/yyyy")!}">
                         <#else>
-                            <input id="course-end-date" name="endDate" class="form-control" type="text">
+                            <input id="end-date" name="endDate" class="form-control" type="text">
                         </#if>
                     </div>
 
                     <div class="form-group">
                         <label for="course-description">Description</label>
-                        <textarea id="course-description" name="description" class="form-control">${course.description!}</textarea>
+                        <textarea id="course-description" name="description" class="form-control" rows="8">${course.description!}</textarea>
                     </div>
 
                     <a class="btn btn-primary" href="/teacher/lessons/?courseId=${course.id?c}">Lessons</a>

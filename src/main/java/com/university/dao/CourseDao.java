@@ -28,8 +28,7 @@ public class CourseDao {
         final String sql =
                 "SELECT ct.course, t.tagId, t.tag " +
                 "FROM tag t " +
-                "JOIN course_tag ct " +
-                "ON t.tagId = ct.tag " +
+                "JOIN course_tag ct ON t.tagId = ct.tag " +
                 "WHERE ct.course = ?;";
 
         return jdbcTemplate.query(sql, new CourseTagRowMapper(), id);
@@ -54,23 +53,25 @@ public class CourseDao {
 
     public void saveCourse(long id, CourseSaveForm form) {
         final String sql =
-                "INSERT INTO course(courseId, name, description) " +
-                "VALUES (?, ?, ?) " +
+                "INSERT INTO course(courseId, name, description, startDate, endDate) " +
+                "VALUES (?, ?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE " +
-                    "name = ?," +
-                    "description = ?;";
+                    "name = VALUES(name)," +
+                    "description = VALUES(description)," +
+                    "startDate = VALUES(startDate)," +
+                    "endDate = VALUES(endDate);";
 
-        jdbcTemplate.update(sql, id, form.getName(), form.getDescription(), form.getName(), form.getDescription());
+        jdbcTemplate.update(sql, id, form.getName(), form.getDescription(), form.getStartDate(), form.getEndDate());
 
-        final List<String> tags = form.getTags();
-        final Map<String, Integer> idByName = getTags().stream().collect(Collectors.toMap(Tag::getName, Tag::getId));
-        final String preparedTagsValues = tags.stream().map(tagName -> "(" + id + "," + idByName.get(tagName) + ")").collect(Collectors.joining(","));
-
-        final String sql2 =
-                "DELETE course_tag ct WHERE ct.courseId = ?;" +
-                "INSERT INTO course_tag(courseId, tagId) VALUES " + preparedTagsValues + ";";
-
-        jdbcTemplate.update(sql2);
+//        final List<String> tags = form.getTags();
+//        final Map<String, Integer> idByName = getTags().stream().collect(Collectors.toMap(Tag::getName, Tag::getId));
+//        final String preparedTagsValues = tags.stream().map(tagName -> "(" + id + "," + idByName.get(tagName) + ")").collect(Collectors.joining(","));
+//
+//        final String sql2 =
+//                "DELETE course_tag ct WHERE ct.courseId = ?;" +
+//                "INSERT INTO course_tag(courseId, tagId) VALUES " + preparedTagsValues + ";";
+//
+//        jdbcTemplate.update(sql2);
     }
 
     public List<Lesson> getLessons(long courseId) {

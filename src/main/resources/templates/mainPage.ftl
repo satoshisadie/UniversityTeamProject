@@ -33,12 +33,11 @@
                         </a>
 
                         <div class="media-body">
-                            <a href="./${course.id?c}">
+                            <a href="./courses/${course.id?c}">
                                 <h4 class="media-heading">${course.name}</h4>
                             </a>
                             <p>Stanford</p>
                             <p>Teacher teacher</p>
-                            <#--<span class="description">${course.description}</span><br>-->
                         </div>
 
                         <input class="id" type="hidden" value="${course.id?c}">

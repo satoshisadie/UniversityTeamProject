@@ -41,9 +41,11 @@ public class TeacherController {
 
         final Course course = getCourse(id);
         modelAndView.addObject("course", course);
-        List<Tag> tags = courseDao.getTags();
+
+        final List<Tag> tags = courseDao.getTags();
         modelAndView.addObject("tags", tags);
-        List<CourseTag> courseTags = courseDao.getTagsByCourse(id);
+
+        final List<CourseTag> courseTags = courseDao.getTagsByCourse(id);
         modelAndView.addObject("courseTags", courseTags);
 
         return modelAndView;

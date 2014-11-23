@@ -1,3 +1,5 @@
+<#setting locale="en_US">
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -15,42 +17,48 @@
 </head>
 <body>
 <div class="container">
-<#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
     <div class="content row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="text-center">
-                <h2>${course.name}</h2>
-            <#if course.img??>
-                <p><img src="${course.img}"></p>
-            </#if>
-                <p>
-                    <button class="btn btn-lg btn-primary">Learn</button>
-                </p>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" style="min-height: 150px;">
+                <h1 class="text-center">${course.name}</h1>
             </div>
-            <div class="col-md-8">
-            <#--<div class="bs-callout bs-callout-info">-->
-            <#--</div>-->
-                <h3 class="text-center">About this course</h3>
+        </div>
 
-                <p>${course.description}</p>
-            </div>
-            <div class="col-md-4">
-                <div class="text-center">
-                    <h3>Teacher</h3>
-                <#if teacher.photo??>
-                    <img src="${teacher.photo}">
-                </#if>
-                    <h4>${teacher.login}</h4>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-7">
+                    <h3>About the Course</h3>
+                    <p>${course.description}</p>
+                </div>
 
-                    <p>Educational establishment: ${teacher.educationalEstablishment}</p>
+                <div class="col-md-4 col-md-offset-1">
+                    <h3>Session</h3>
+                    <span>${course.startDate?date} - ${course.endDate?date}</span>
+                    <button class="btn btn-lg btn-primary">Join for free</button>
 
-                    <p>Academic status: ${teacher.academicStatus}</p>
+                    <h3>Instructor</h3>
+                    <div class="course media">
+                        <#if teacher.photo??>
+                            <a class="media-left">
+                                <img class="img-circle" src="${teacher.photo}">
+                            </a>
+                        </#if>
+
+                        <div class="media-body">
+                            <h4>${teacher.firstName!} ${teacher.lastName!}</h4>
+
+                            <p>Academic status: ${teacher.academicStatus}</p>
+                            <p>Educational establishment: ${teacher.educationalEstablishment}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-<#include "*/footer.ftl">
+
+    <#include "*/footer.ftl">
 </div>
 </body>
 </html>

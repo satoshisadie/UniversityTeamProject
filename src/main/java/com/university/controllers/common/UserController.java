@@ -82,7 +82,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("/course/{courseId}")
+    @RequestMapping("/courses/{courseId}")
     public ModelAndView course(@PathVariable Long courseId,
                                HttpServletRequest httpServletRequest) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/course");
@@ -91,21 +91,15 @@ public class UserController {
 
         if(course.isPresent()) {
             modelAndView.addObject("course", course.get());
-        }else{
-            throw new Exception("Course not found");
+
+            final Teacher teacher = userDao.getTeacherById(course.get().getTeacher());
+            modelAndView.addObject("teacher", teacher);
+
+            CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+
+            return modelAndView;
         }
-
-        final Optional<Teacher> teacher = userDao.getTeacherById(course.get().getTeacher());
-
-        if(teacher.isPresent()) {
-            modelAndView.addObject("teacher", teacher.get());
-        }else{
-            throw new Exception("Teacher not found");
-        }
-
-        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
-
-        return modelAndView;
+        throw new Exception("Course not found");
     }
 
     @RequestMapping("/profile")
@@ -118,17 +112,10 @@ public class UserController {
     }
 
     @RequestMapping("/profile/edit")
-    public ModelAndView edit() {
+    public ModelAndView edit(HttpServletRequest httpServletRequest) {
         final ModelAndView modelAndView = new ModelAndView("/user/editProfile");
 
-        User user = new User();
-//        user.setGender("Male");
-        user.setInfo("lalalalalalalalalalalalalala");
-//        user.setLocation("Cherkasy, Ukraine");
-        user.setLogin("Anton Salenkov");
-        user.setPhoto("../img/avatar.jpg");
-
-        modelAndView.addObject("user", user);
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 
         return modelAndView;
     }

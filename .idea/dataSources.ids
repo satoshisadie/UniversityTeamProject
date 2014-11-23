@@ -13,20 +13,23 @@
     <schema name="" catalog="sakila"/>
     <schema name="" catalog="world"/>
     <table name="admin" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="adminId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="adminId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <index name="FK__user" unique="false" columns="adminId"/>
     </table>
     <table name="course" schema="" catalog="educationalwebsite" type="TABLE">
       <column name="courseId" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
       <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="img" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" def="Jy9pbWcvZG93bmxvYWQucG5nJw=="/>
+      <column name="startDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="endDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="teacher" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="courseId"/>
+      <index name="FK_course_teacher" unique="false" columns="teacher"/>
     </table>
     <table name="course_tag" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="courseTagId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="course" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
       <column name="tag" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="courseTagId"/>
       <index name="FK_course_tag_course" unique="false" columns="course"/>
       <index name="FK_course_tag_tag" unique="false" columns="tag"/>
     </table>
@@ -37,12 +40,12 @@
       <primary-key name="PRIMARY" columns="lessonId"/>
     </table>
     <table name="student" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="studentId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="studentId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <index name="FK_student_user" unique="false" columns="studentId"/>
     </table>
     <table name="student_course" schema="" catalog="educationalwebsite" type="TABLE">
       <column name="courseId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="studentId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="studentId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="status" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5"/>
       <index name="FK_student_course_course" unique="false" columns="courseId"/>
       <index name="FK_student_course_student_course_status" unique="false" columns="status"/>
@@ -55,7 +58,7 @@
     </table>
     <table name="student_test_passing" schema="" catalog="educationalwebsite" type="TABLE">
       <column name="passingId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="test" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="test" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <column name="time" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
       <column name="result" sqlType="FLOAT UNSIGNED" precision="12" scale="0" nullable="false" jdbcType="7" remarks="MCUgPD0gcmVzIDw9IDEwMCU="/>
@@ -64,25 +67,27 @@
       <index name="FK__test" unique="false" columns="test"/>
     </table>
     <table name="tag" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="tagId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="tagId" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5" autoIncrement="true"/>
       <column name="tag" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="tagId"/>
     </table>
     <table name="teacher" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="teacherId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="teacherId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="educationalEstablishment" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
       <column name="academicStatus" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
       <index name="FK__user" unique="false" columns="teacherId"/>
     </table>
     <table name="test" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="testId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="testId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="path" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="testId"/>
     </table>
     <table name="user" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="userId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="userId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="email" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <column name="login" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="firstName" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="lastName" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
       <column name="password" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="photo" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12" def="Jy9pbWcvYXZhdGFyLmpwZyc="/>
       <column name="info" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>

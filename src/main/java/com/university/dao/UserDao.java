@@ -81,7 +81,7 @@ public class UserDao {
         final String sql =
                 "SELECT * " +
                 "FROM course c " +
-                "INNER JOIN student_course sc ON sc.courseId = c.courseId " +
+                "JOIN student_course sc ON sc.courseId = c.courseId " +
                 "WHERE sc.studentId = ? AND sc.status = 2";
 
         return jdbcTemplate.query(sql, new CourseRowMapper(), userId);
@@ -93,6 +93,8 @@ public class UserDao {
                     "u.userId," +
                     "u.email," +
                     "u.login," +
+                    "u.firstName," +
+                    "u.lastName," +
                     "u.password," +
                     "u.photo," +
                     "u.info," +
@@ -107,11 +109,28 @@ public class UserDao {
         return CommonUtils.selectOne(jdbcTemplate, sql, new UserRowMapper(), login);
     }
 
-    public Optional<Teacher> getTeacherById(int teacherId) {
-        final String sql = "SELECT * " +
-                           "From user u INNER JOIN teacher t ON(u.userId = t.teacherId) " +
-                           "WHERE u.userId = ? ";
+    public Teacher getTeacherById(int teacherId) {
+        final String sql =
+                "SELECT " +
+                    "u.userId," +
+                    "u.email," +
+                    "u.login," +
+                    "u.firstName," +
+                    "u.lastName," +
+                    "u.password," +
+                    "u.photo," +
+                    "u.info," +
+                    "t.educationalEstablishment," +
+                    "t.academicStatus," +
+                    "CASE " +
+                        "WHEN (SELECT COUNT(1) FROM admin a WHERE a.adminId = u.userId) > 0 THEN 'admin' " +
+                        "WHEN (SELECT COUNT(1) FROM teacher t WHERE t.teacherId = u.userId) > 0 THEN 'teacher' " +
+                        "WHEN (SELECT COUNT(1) FROM student s WHERE s.studentId = u.userId) > 0 THEN 'student' " +
+                    "END AS type " +
+                "FROM user u " +
+                "JOIN teacher t ON t.teacherId = u.userId " +
+                "WHERE u.userId = ?;";
 
-        return CommonUtils.selectOne(jdbcTemplate, sql, new TeacherRowMapper(), teacherId);
+        return jdbcTemplate.query(sql, new TeacherRowMapper(), teacherId).get(0);
     }
 }
