@@ -1,6 +1,7 @@
 package com.university.dao;
 
 import com.university.controllers.client.model.Course;
+import com.university.controllers.client.model.StudentCourse;
 import com.university.controllers.client.model.Teacher;
 import com.university.controllers.client.model.User;
 import com.university.utils.CommonUtils;
@@ -77,14 +78,14 @@ public class UserDao {
     }
 
     //TODO Semenets Remake this
-    public List<Course> getUserCourses(long userId) {
+    public List<StudentCourse> getUserCourses(long userId) {
         final String sql =
                 "SELECT * " +
                 "FROM course c " +
                 "JOIN student_course sc ON sc.courseId = c.courseId " +
-                "WHERE sc.studentId = ? AND sc.status = 2";
+                "WHERE sc.studentId = ?";
 
-        return jdbcTemplate.query(sql, new CourseRowMapper(), userId);
+        return jdbcTemplate.query(sql, new StudentCourseRowMapper(), userId);
     }
 
     public Optional<User> getUserByLogin(String login) {

@@ -36,12 +36,12 @@ $(document).ready(function () {
         }
     }
 
-    $('#student').click(function () {
+    $('#student').change(function () {
         $('.student-form').show();
         $('.teacher-form').hide();
     });
 
-    $('#teacher').click(function () {
+    $('#teacher').change(function () {
         $('.student-form').hide();
         $('.teacher-form').show();
     });

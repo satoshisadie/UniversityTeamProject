@@ -82,7 +82,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("/courses/{courseId}")
+    @RequestMapping("/course/{courseId}")
     public ModelAndView course(@PathVariable Long courseId,
                                HttpServletRequest httpServletRequest) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/course");

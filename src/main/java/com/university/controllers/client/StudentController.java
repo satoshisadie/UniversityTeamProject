@@ -39,7 +39,7 @@ public class StudentController {
         final User user = CommonUtils.getUserFromRequest(httpServletRequest);
         modelAndView.addObject("user", user);
 
-        final List<Course> userCourses = userDao.getUserCourses(user.getId());
+        final List<StudentCourse> userCourses = userDao.getUserCourses(user.getId());
         modelAndView.addObject("courses", userCourses);
 
         return modelAndView;
