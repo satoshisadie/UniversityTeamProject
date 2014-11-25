@@ -2,62 +2,39 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Pass test</title>
 
-    <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
-
-    <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
-    <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
+    <#include "*/commonHeader.ftl">
+    <script type="application/javascript" src="/js/student/test.js"></script>
 </head>
 <body>
-<div class="container">
-<#include "*/menu.ftl">
+    <div class="container">
+        <#include "*/menu.ftl">
 
-    <div class="col-md-8 col-md-offset-2">
-        <blockquote>
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>${test.title}</h4>
-                </div>
-            </div>
-        </blockquote>
+        <div class="content row">
+            <div class="col-md-6 col-md-offset-3">
+                <#list test.questions as question>
+                    <div class="question">
+                        <span>${question.text}</span>
 
-        <form method="post" action="#">
-        <#list test.questions as question>
-            <div class="well">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>${question.title}</h4>
+                        <div class="answers">
+                            <#list question.answers as answer>
+                                <div class="answer">
+                                    <input type="checkbox"/>
+                                    <span class="answer-text">${answer.text}</span>
+                                </div>
+                            </#list>
+                        </div>
                     </div>
-                </div>
+                </#list>
 
-                <div class="row">
-                    <div class="col-md-10">${question.description!}</div>
-                </div>
-
-                <div class="row text-center">
-                    <img src="${question.picture!}">
-                </div>
+                <input class="submit-answers btn btn-primary" type="button" value="Submit answers">
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-md-offset-1">
-                    <#list question.answers as ans>
-                        <label class="radio">
-                            <input type="radio" name="${question.title}" id="${ans}">${ans}
-                        </label>
-                    </#list>
-                </div>
-            </div>
-
-            <hr>
-        </#list>
-
-            <input class="btn btn-default" type="submit" value="Send">
-        </form>
+        <#include "*/footer.ftl">
     </div>
 
-<#include "*/footer.ftl">
-</div>
+    <input class="lesson-id" type="hidden" value="${lessonId}">
 </body>
 </html>

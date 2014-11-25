@@ -44,7 +44,7 @@
                         <div class="student-course media" style="margin-bottom: 30px;">
                             <a class="media-left">
                                 <#if course.img??>
-                                    <img src="${course.img}">
+                                    <img src="${course.img}" style="max-height: 100px; max-width: 100px;">
                                 </#if>
                             </a>
 
@@ -55,14 +55,12 @@
                                 <span>Stanford</span>
 
                                 <div class="buttons-container" style="margin-top: 15px;">
-                                    <a class="course-info btn btn-info" href="../course/${course.id?c}">course info</a>
-                                    <span></span>
-                                    <a class="un-enroll btn btn-danger"
-                                       href="/student/courses/${course.id?c}">un-enroll</a>
+                                    <a class="course-info" href="../course/${course.id?c}">course info</a>
+                                    <span>|</span>
+                                    <a class="un-enroll" href="/student/courses/${course.id?c}">un-enroll</a>
                                 </div>
                             </div>
-                            <a class="go-to-class btn btn-success" style="float: right; margin-top: -70px;"
-                               href="/student/lessons/?courseId=${course.id?c}">Go to class</a>
+                            <a class="go-to-class btn btn-success" style="float: right; margin-top: -50px;" href="/student/lessons/?courseId=${course.id?c}">Go to class</a>
 
                             <input class="id" type="hidden" value="${course.id?c}">
                         </div>
@@ -77,7 +75,7 @@
                         <div class="student-course media" style="margin-bottom: 30px;">
                             <a class="media-left">
                                 <#if course.img??>
-                                    <img src="${course.img}">
+                                    <img src="${course.img}" style="max-height: 100px; max-width: 100px;">
                                 </#if>
                             </a>
 
@@ -88,11 +86,10 @@
                                 <span>Stanford</span>
 
                                 <div class="buttons-container" style="margin-top: 15px;">
-                                    <a class="course-info btn btn-info" href="../course/${course.id?c}">course info</a>
+                                    <a class="course-info" href="../course/${course.id?c}">course info</a>
                                 </div>
                             </div>
-                            <a class="go-to-class btn btn-success" style="float: right; margin-top: -70px;"
-                               href="/student/lessons/?courseId=${course.id?c}">Go to class</a>
+                            <a class="go-to-class btn btn-success" style="float: right; margin-top: -50px;" href="/student/lessons/?courseId=${course.id?c}">Go to class</a>
 
                             <input class="id" type="hidden" value="${course.id?c}">
                         </div>
@@ -108,7 +105,7 @@
                         <div class="student-course media" style="margin-bottom: 30px;">
                             <a class="media-left">
                                 <#if course.img??>
-                                    <img src="${course.img}">
+                                    <img src="${course.img}" style="max-height: 100px; max-width: 100px;">
                                 </#if>
                             </a>
 
@@ -119,10 +116,9 @@
                                 <span>Stanford</span>
 
                                 <div class="buttons-container" style="margin-top: 15px;">
-                                    <a class="course-info btn btn-info" href="../course/${course.id?c}">course info</a>
-                                    <span></span>
-                                    <a class="un-enroll btn btn-danger"
-                                       href="/student/courses/${course.id?c}">un-enroll</a>
+                                    <a class="course-info" href="../course/${course.id?c}">course info</a>
+                                    <span>|</span>
+                                    <a class="un-enroll" href="/student/courses/${course.id?c}">un-enroll</a>
                                 </div>
                             </div>
 

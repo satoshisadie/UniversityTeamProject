@@ -1,16 +1,18 @@
 package com.university.dao;
 
+import com.google.gson.Gson;
 import com.university.controllers.client.model.*;
 import com.university.utils.CommonUtils;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CourseDao {
     private JdbcTemplate jdbcTemplate;
+    private Gson gson = new Gson();
 
     public CourseDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -109,6 +111,29 @@ public class CourseDao {
                     "content = VALUES(content);";
 
         jdbcTemplate.update(sql);
+    }
+
+    public Optional<String> getTest(long lessonId) {
+        final String sql =
+                "SELECT t.content " +
+                "FROM test t " +
+                "WHERE t.lessonId = ?";
+
+        try {
+            return Optional.of(jdbcTemplate.queryForObject(sql, String.class, lessonId));
+        } catch (DataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
+    public void saveTest(Test test) {
+        final String sql =
+                "INSERT INTO test(testId, lessonId, content) " +
+                "VALUES (?, ?, ?) " +
+                "ON DUPLICATE KEY UPDATE " +
+                    "content = VALUES(content)";
+
+        jdbcTemplate.update(sql, test.getId(), test.getLessonId(), gson.toJson(test));
     }
 
     private String preparedLessonsValues(List<Lesson> lessons) {

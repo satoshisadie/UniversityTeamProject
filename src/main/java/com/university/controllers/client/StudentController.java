@@ -1,25 +1,28 @@
 package com.university.controllers.client;
 
+import com.google.gson.*;
 import com.university.controllers.client.model.*;
 import com.university.dao.CourseDao;
 import com.university.dao.UserDao;
 import com.university.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/student")
 public class StudentController {
     @Autowired CourseDao courseDao;
     @Autowired UserDao userDao;
+    final Gson serializer = new Gson();
+    final JsonParser jsonParser = new JsonParser();
 
     @RequestMapping("/lessons/")
     public ModelAndView course(@RequestParam(value = "courseId") Long courseId) throws Exception {
@@ -45,43 +48,47 @@ public class StudentController {
         return modelAndView;
     }
 
-    @RequestMapping("/test/{id}")
-    public ModelAndView passTest(@PathVariable Long testId)
-    {
+    @RequestMapping("/test/")
+    public ModelAndView passTest(@RequestParam Long lessonId) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/student/test");
 
-        Test newTest = new Test();
-        newTest.setTitle("Information technology test 1");
+        final Optional<String> test = courseDao.getTest(lessonId);
 
-        List<String> ans = new ArrayList<>();
-        ans.add("sdjb sdf sdfm");
-        ans.add("sdkvh sduhf ");
-        ans.add("lasc asdk a[sldk aosdjkn oasj");
+        if (test.isPresent()) {
+            modelAndView.addObject("test", serializer.fromJson(test.get(), Test.class));
+            modelAndView.addObject("lessonId", lessonId);
+            return modelAndView;
+        }
+        throw new Exception("Resource not found");
+    }
 
-        Question question = new Question();
-        question.setTitle("WTF?");
-        question.setPicture("/img/download.png");
-        question.setAnswers(ans);
+    @RequestMapping("/test/check")
+    @ResponseBody
+    public String checkTest(@RequestParam Long lessonId,
+                            @RequestParam String questionsJson)
+    {
+        final JsonArray questionsArray = jsonParser.parse(questionsJson).getAsJsonArray();
 
-        List<Question> questions = new ArrayList<>();
-        questions.add(question);
+        final Test test = serializer.fromJson(courseDao.getTest(lessonId).get(), Test.class);
 
-        ans = new ArrayList<>();
-        ans.add("sdjvb kasjdf keajd");
-        ans.add("5");
-        ans.add("kwahsd  adhn awisdh");
-        ans.add("aesdf sadc");
+        final Iterator<JsonElement> iterator = questionsArray.iterator();
 
-        question = new Question();
-        question.setTitle("Select best number");
-        question.setDescription("fghjkjhgfdfghjkljhgf cvjkjhgv jkljhgv njm,jhg.");
-        question.setAnswers(ans);
-        questions.add(question);
+        int index = 0;
+        int answeredQuestionsCount = 0;
 
-        newTest.setQuestions(questions);
+        while (iterator.hasNext()) {
+            final List<String> selectedAnswers = Arrays.asList(serializer.fromJson(iterator.next(), String[].class));
+            final List<String> correctAnswers = test.getQuestions().get(index).getAnswers().stream()
+                    .filter(Answer::getIsCorrect)
+                    .map(Answer::getText)
+                    .collect(Collectors.toList());
 
-        modelAndView.addObject("test", newTest);
+            if (selectedAnswers.size() == correctAnswers.size() && selectedAnswers.containsAll(correctAnswers)) {
+                answeredQuestionsCount++;
+            }
+            index++;
+        }
 
-        return modelAndView;
+        return Integer.toString(answeredQuestionsCount);
     }
 }

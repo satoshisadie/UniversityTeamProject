@@ -37,8 +37,10 @@
                     <div class="teacher-lesson routable" data-hash="#lesson-${lesson_index + 1}">
                         <label for="content">Lesson content</label>
                         <textarea id="content" class="content" rows="4">${lesson.content!}</textarea>
-
-                        <input class="id" type="hidden" value="${lesson.id}"/>
+                        <br>
+                        <br>
+                        <a class="btn btn-primary" href="/teacher/tests/?lessonId=${lesson.id?c}">Edit test</a>
+                        <input class="id" type="hidden" value="${lesson.id?c}"/>
                     </div>
                 </#list>
             </div>

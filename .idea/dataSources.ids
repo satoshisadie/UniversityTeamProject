@@ -75,11 +75,13 @@
       <column name="teacherId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="educationalEstablishment" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
       <column name="academicStatus" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="university" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
       <index name="FK__user" unique="false" columns="teacherId"/>
     </table>
     <table name="test" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="testId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="path" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="testId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="lessonId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="content" sqlType="MEDIUMTEXT" precision="16777215" scale="0" nullable="false" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="testId"/>
     </table>
     <table name="user" schema="" catalog="educationalwebsite" type="TABLE">

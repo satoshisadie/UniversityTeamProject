@@ -1,0 +1,18 @@
+.question {
+    margin-top: 40px;
+}
+
+.question:last-child {
+    margin-bottom: 200px;
+}
+
+.question:first-child {
+    margin: 0;
+}
+
+.answer {
+    margin: 15px 0 15px 0;
+}
+
+.is-correct {
+}

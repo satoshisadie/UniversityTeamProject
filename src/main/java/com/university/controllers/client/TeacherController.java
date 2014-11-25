@@ -97,6 +97,33 @@ public class TeacherController {
         return "success";
     }
 
+    @RequestMapping(value = "/tests/")
+    public ModelAndView test(@RequestParam long lessonId) {
+        final ModelAndView modelAndView = new ModelAndView("/teacher/test");
+
+        final Optional<String> testJson = courseDao.getTest(lessonId);
+        if (testJson.isPresent()) {
+            modelAndView.addObject("test", serializer.fromJson(testJson.get(), Test.class));
+        }
+
+        modelAndView.addObject("lessonId", lessonId);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/tests/save", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveTest(@RequestParam String testJson) {
+        final Test test = serializer.fromJson(testJson, Test.class);
+        if (test.getId() == null) {
+            test.setId(CommonUtils.generateId());
+        }
+
+        courseDao.saveTest(test);
+
+        return "success";
+    }
+
     private Course getCourse(long id) {
         final Optional<Course> courseOptional = courseDao.getCourse(id);
 

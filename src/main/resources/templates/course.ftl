@@ -36,7 +36,7 @@
                 <div class="col-md-4 col-md-offset-1">
                     <h3>Session</h3>
                     <span>${course.startDate?date} - ${course.endDate?date}</span>
-                    <button class="btn btn-lg btn-primary">Join for free</button>
+                    <button class="btn btn-lg btn-primary" style="margin-top: 10px;">Join for free</button>
 
                     <h3>Instructor</h3>
                     <div class="course media">
