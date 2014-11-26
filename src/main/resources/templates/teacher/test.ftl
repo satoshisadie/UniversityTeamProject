@@ -47,6 +47,8 @@
         <#include "*/footer.ftl" >
     </div>
     <input class="lesson-id" type="hidden" value="${lessonId?c}"/>
-    <input class="test-id" type="hidden" value="${test.id?c!}"/>
+    <#if test??>
+        <input class="test-id" type="hidden" value="${test.id?c}"/>
+    </#if>
 </body>
 </html>

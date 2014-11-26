@@ -90,9 +90,9 @@ CREATE TABLE IF NOT EXISTS `lesson` (
 DELETE FROM `lesson`;
 /*!40000 ALTER TABLE `lesson` DISABLE KEYS */;
 INSERT INTO `lesson` (`lessonId`, `courseId`, `content`) VALUES
-	(1, 1, '<p>Test content 1</p>\n<p><iframe src="http://www.youtube.com/embed/M7lc1UVf-VE" frameborder="0" width="317" height="193"></iframe></p>\n<p>rewrew</p>'),
+	(1, 1, '<h2>Test content 1</h2>\n<p><iframe src="http://www.youtube.com/embed/M7lc1UVf-VE" frameborder="0" width="317" height="193"></iframe></p>\n<p>rewrew</p>'),
 	(2, 1, '<h2>Test content 2</h2>'),
-	(3, 1, '<h2>Lecture 1</h2>\n<p>Text text text text text text text text text text text text text</p>\n<p>text text text text text text text text text text text text text</p>\n<p>text text text text text text text text text text text text text</p>\n<p>text text text text text text text text text text text text text.</p>\n<p><iframe src="http://www.youtube.com/embed/M7lc1UVf-VE" frameborder="0" width="324" height="198"></iframe></p>');
+	(3, 1, '<h2>Lecture 1</h2>\n<p>Text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text.</p>\n<p><iframe src="http://www.youtube.com/embed/M7lc1UVf-VE" frameborder="0" width="400" height="300"></iframe></p>');
 /*!40000 ALTER TABLE `lesson` ENABLE KEYS */;
 
 
@@ -111,7 +111,8 @@ INSERT INTO `student` (`studentId`) VALUES
 	(10),
 	(11),
 	(12),
-	(16);
+	(16),
+	(18);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 
 
@@ -217,14 +218,18 @@ INSERT INTO `teacher` (`teacherId`, `educationalEstablishment`, `academicStatus`
 -- Дамп структуры для таблица educationalwebsite.test
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE IF NOT EXISTS `test` (
-  `testId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `path` varchar(100) NOT NULL,
+  `testId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `lessonId` bigint(20) unsigned NOT NULL,
+  `content` mediumtext NOT NULL,
   PRIMARY KEY (`testId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6732803274136634639 DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы educationalwebsite.test: ~0 rows (приблизительно)
 DELETE FROM `test`;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
+INSERT INTO `test` (`testId`, `lessonId`, `content`) VALUES
+	(1137817271919660877, 1, '{"id":1137817271919660877,"lessonId":1,"questions":[{"text":"Question 1","answers":[{"text":"question 1 answer 1 c","isCorrect":true},{"text":"question 1 answer 2 ic","isCorrect":false},{"text":"question 1 answer 3 c","isCorrect":true}]},{"text":"Question 2","answers":[{"text":"question 2 answer 1 ic","isCorrect":false},{"text":"question 2 answer 2 c","isCorrect":true},{"text":"question 2 answer 3 ic","isCorrect":false},{"text":"question 2 answer 4 ic","isCorrect":false}]},{"text":"Question 3","answers":[{"text":"question 3 answer 1 c","isCorrect":true},{"text":"question 3 answer 2 c","isCorrect":true}]}]}'),
+	(5294134890473304542, 2, '{"id":5294134890473304542,"lessonId":2,"questions":[{"text":"wew","answers":[{"text":"rewrew","isCorrect":false},{"text":"rwer","isCorrect":false}]}]}');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 
 
@@ -240,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `photo` varchar(100) DEFAULT '/img/avatar.jpg',
   `info` text,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы educationalwebsite.user: ~10 rows (приблизительно)
 DELETE FROM `user`;
