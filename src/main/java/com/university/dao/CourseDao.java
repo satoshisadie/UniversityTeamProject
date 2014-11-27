@@ -36,14 +36,17 @@ public class CourseDao {
         return jdbcTemplate.query(sql, new CourseTagRowMapper(), id);
     }
 
-    public List<Course> getCourses() {
+    public List<Course> getOpenCourses() {
         final String sql =
                 "SELECT * " +
-                "FROM course";
+                "FROM session s " +
+                "JOIN course c ON s.course = c.courseId " +
+                "WHERE s.status <> 2";
 
         return jdbcTemplate.query(sql, new CourseRowMapper());
     }
 
+    //TODO Sichkar replace this function to getSession()
     public Optional<Course> getCourse(long id) {
         final String sql =
                 "SELECT * " +
@@ -51,6 +54,16 @@ public class CourseDao {
                 "WHERE c.courseId = ?";
 
         return CommonUtils.selectOne(jdbcTemplate, sql, new CourseRowMapper(), id);
+    }
+
+    public Optional<Session> getSession(long id) {
+        final String sql =
+                "SELECT * " +
+                "FROM session s " +
+                "JOIN course c ON s.course = c.courseId " +
+                "WHERE s.sessionId = ?";
+
+        return CommonUtils.selectOne(jdbcTemplate, sql, new SessionRowMapper(), id);
     }
 
     public void saveCourse(long id, CourseSaveForm form) {

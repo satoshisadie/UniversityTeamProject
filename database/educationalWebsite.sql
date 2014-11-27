@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Хост:                         127.0.0.1
--- Версия сервера:               5.5.29 - MySQL Community Server (GPL)
--- ОС Сервера:                   Win64
--- HeidiSQL Версия:              9.1.0.4867
+-- Host:                         127.0.0.1
+-- Server version:               5.6.21-log - MySQL Community Server (GPL)
+-- Server OS:                    Win64
+-- HeidiSQL Version:             9.1.0.4867
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,20 +10,20 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Дамп структуры базы данных educationalwebsite
+-- Dumping database structure for educationalwebsite
 DROP DATABASE IF EXISTS `educationalwebsite`;
 CREATE DATABASE IF NOT EXISTS `educationalwebsite` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `educationalwebsite`;
 
 
--- Дамп структуры для таблица educationalwebsite.admin
+-- Dumping structure for table educationalwebsite.admin
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `adminId` int(10) unsigned NOT NULL,
   KEY `FK__user` (`adminId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.admin: ~2 rows (приблизительно)
+-- Dumping data for table educationalwebsite.admin: ~2 rows (approximately)
 DELETE FROM `admin`;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`adminId`) VALUES
@@ -32,32 +32,29 @@ INSERT INTO `admin` (`adminId`) VALUES
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.course
+-- Dumping structure for table educationalwebsite.course
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `courseId` bigint(20) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `img` varchar(100) NOT NULL DEFAULT '/img/download.png',
-  `startDate` date NOT NULL,
-  `endDate` date NOT NULL,
   `teacher` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`courseId`),
   KEY `FK_course_teacher` (`teacher`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.course: ~4 rows (приблизительно)
+-- Dumping data for table educationalwebsite.course: ~3 rows (approximately)
 DELETE FROM `course`;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` (`courseId`, `name`, `description`, `img`, `startDate`, `endDate`, `teacher`) VALUES
-	(1, 'Test2', '', '/img/download.png', '2014-12-12', '2014-11-11', 6),
-	(2, 'test course 2', 'text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text ', '/img/download.png', '2014-04-13', '2014-10-13', 5),
-	(3, 'Financial Engineering and Risk Management Part I', 'Financial Engineering is a multidisciplinary field involving finance and economics, mathematics, statistics, engineering and computational methods. The emphasis of FE & RM Part II will be on the use of simple stochastic models to (i) solve portfolio optimization problems (ii) price derivative securities in various asset classes including equities and credit and (iii) consider some advanced applications of financial engineering including algorithmic trading and the pricing of real options. We will also consider the role that financial engineering played during the financial crisis.\r\n\r\nWe hope that students who complete the course and the prerequisite course (FE & RM Part I) will have a good understanding of the "rocket science" behind financial engineering. But perhaps more importantly, we hope they will also understand the limitations of this theory in practice and why financial models should always be treated with a healthy degree of skepticism. ', '/img/download.png', '2014-11-23', '2015-05-12', 17),
-	(43136064333301185, 'New Course', 'Description', '/img/download.png', '2014-12-12', '2015-04-04', 5);
+INSERT INTO `course` (`courseId`, `name`, `description`, `img`, `teacher`) VALUES
+	(1, 'Internet History, Technology, and Security', 'The impact of technology and networks on our lives, culture, and society continues to increase. The very fact that you can take this course from anywhere in the world requires a technological infrastructure that was designed, engineered, and built over the past sixty years. To function in an information-centric world, we need to understand the workings of network technology. This course will open up the Internet and show you how it was created, who created it and how it works. Along the way we will meet many of the innovators who developed the Internet and Web technologies that we use today.', '/img/download.png', 6),
+	(2, 'R Programming', 'In this course you will learn how to program in R and how to use R for effective data analysis. You will learn how to install and configure software necessary for a statistical programming environment and describe generic programming language concepts as they are implemented in a high-level statistical language. The course covers practical issues in statistical computing which includes programming in R, reading data into R, accessing R packages, writing R functions, debugging, profiling R code, and organizing and commenting R code. Topics in statistical data analysis will provide working examples.', '/img/download.png', 5),
+	(3, 'Financial Engineering and Risk Management Part I', 'Financial Engineering is a multidisciplinary field involving finance and economics, mathematics, statistics, engineering and computational methods. The emphasis of FE & RM Part II will be on the use of simple stochastic models to (i) solve portfolio optimization problems (ii) price derivative securities in various asset classes including equities and credit and (iii) consider some advanced applications of financial engineering including algorithmic trading and the pricing of real options. We will also consider the role that financial engineering played during the financial crisis.\r\n\r\nWe hope that students who complete the course and the prerequisite course (FE & RM Part I) will have a good understanding of the "rocket science" behind financial engineering. But perhaps more importantly, we hope they will also understand the limitations of this theory in practice and why financial models should always be treated with a healthy degree of skepticism. ', '/img/download.png', 17);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.course_tag
+-- Dumping structure for table educationalwebsite.course_tag
 DROP TABLE IF EXISTS `course_tag`;
 CREATE TABLE IF NOT EXISTS `course_tag` (
   `course` bigint(20) NOT NULL,
@@ -66,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `course_tag` (
   KEY `FK_course_tag_tag` (`tag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.course_tag: ~4 rows (приблизительно)
+-- Dumping data for table educationalwebsite.course_tag: ~4 rows (approximately)
 DELETE FROM `course_tag`;
 /*!40000 ALTER TABLE `course_tag` DISABLE KEYS */;
 INSERT INTO `course_tag` (`course`, `tag`) VALUES
@@ -77,33 +74,77 @@ INSERT INTO `course_tag` (`course`, `tag`) VALUES
 /*!40000 ALTER TABLE `course_tag` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.lesson
-DROP TABLE IF EXISTS `lesson`;
-CREATE TABLE IF NOT EXISTS `lesson` (
-  `lessonId` bigint(20) NOT NULL,
-  `courseId` bigint(20) NOT NULL,
-  `content` longtext NOT NULL,
-  PRIMARY KEY (`lessonId`)
+-- Dumping structure for table educationalwebsite.enrolment
+DROP TABLE IF EXISTS `enrolment`;
+CREATE TABLE IF NOT EXISTS `enrolment` (
+  `sessionId` bigint(20) unsigned NOT NULL,
+  `studentId` int(10) unsigned NOT NULL,
+  `status` smallint(5) unsigned NOT NULL COMMENT '1 - current; 2 - pass; 3 - upcoming',
+  KEY `sessionId` (`sessionId`),
+  KEY `studentId` (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.lesson: ~3 rows (приблизительно)
+-- Dumping data for table educationalwebsite.enrolment: ~2 rows (approximately)
+DELETE FROM `enrolment`;
+/*!40000 ALTER TABLE `enrolment` DISABLE KEYS */;
+INSERT INTO `enrolment` (`sessionId`, `studentId`, `status`) VALUES
+	(1, 2, 1),
+	(2, 2, 3),
+	(3, 2, 2);
+/*!40000 ALTER TABLE `enrolment` ENABLE KEYS */;
+
+
+-- Dumping structure for table educationalwebsite.lesson
+DROP TABLE IF EXISTS `lesson`;
+CREATE TABLE IF NOT EXISTS `lesson` (
+  `lessonId` bigint(20) unsigned NOT NULL,
+  `sessionId` bigint(20) unsigned NOT NULL,
+  `content` longtext NOT NULL,
+  PRIMARY KEY (`lessonId`),
+  KEY `FK_lesson_session` (`sessionId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table educationalwebsite.lesson: ~3 rows (approximately)
 DELETE FROM `lesson`;
 /*!40000 ALTER TABLE `lesson` DISABLE KEYS */;
-INSERT INTO `lesson` (`lessonId`, `courseId`, `content`) VALUES
+INSERT INTO `lesson` (`lessonId`, `sessionId`, `content`) VALUES
 	(1, 1, '<h2>Test content 1</h2>\n<p><iframe src="http://www.youtube.com/embed/M7lc1UVf-VE" frameborder="0" width="317" height="193"></iframe></p>\n<p>rewrew</p>'),
 	(2, 1, '<h2>Test content 2</h2>'),
 	(3, 1, '<h2>Lecture 1</h2>\n<p>Text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text.</p>\n<p><iframe src="http://www.youtube.com/embed/M7lc1UVf-VE" frameborder="0" width="400" height="300"></iframe></p>');
 /*!40000 ALTER TABLE `lesson` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.student
+-- Dumping structure for table educationalwebsite.session
+DROP TABLE IF EXISTS `session`;
+CREATE TABLE IF NOT EXISTS `session` (
+  `sessionId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `course` bigint(20) NOT NULL,
+  `startDate` date NOT NULL,
+  `endDate` date NOT NULL,
+  `status` smallint(6) NOT NULL DEFAULT '3' COMMENT '1 - life; 2 - ended; 3 - upcoming',
+  `passRating` float DEFAULT NULL COMMENT 'rating to pass the course',
+  PRIMARY KEY (`sessionId`),
+  KEY `FK_session_course` (`course`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table educationalwebsite.session: ~2 rows (approximately)
+DELETE FROM `session`;
+/*!40000 ALTER TABLE `session` DISABLE KEYS */;
+INSERT INTO `session` (`sessionId`, `course`, `startDate`, `endDate`, `status`, `passRating`) VALUES
+	(1, 1, '2014-11-01', '2015-04-01', 1, NULL),
+	(2, 2, '2015-02-01', '2015-06-01', 3, NULL),
+	(3, 3, '2014-07-01', '2014-11-01', 2, NULL);
+/*!40000 ALTER TABLE `session` ENABLE KEYS */;
+
+
+-- Dumping structure for table educationalwebsite.student
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `studentId` int(10) unsigned NOT NULL,
   KEY `FK_student_user` (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.student: ~5 rows (приблизительно)
+-- Dumping data for table educationalwebsite.student: ~6 rows (approximately)
 DELETE FROM `student`;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
 INSERT INTO `student` (`studentId`) VALUES
@@ -116,32 +157,7 @@ INSERT INTO `student` (`studentId`) VALUES
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.student_course
-DROP TABLE IF EXISTS `student_course`;
-CREATE TABLE IF NOT EXISTS `student_course` (
-  `courseId` bigint(20) unsigned NOT NULL,
-  `studentId` int(10) unsigned NOT NULL,
-  `status` smallint(5) unsigned NOT NULL,
-  KEY `FK_student_course_course` (`courseId`),
-  KEY `FK_student_course_student_course_status` (`status`),
-  KEY `FK_student_course_user` (`studentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Дамп данных таблицы educationalwebsite.student_course: ~7 rows (приблизительно)
-DELETE FROM `student_course`;
-/*!40000 ALTER TABLE `student_course` DISABLE KEYS */;
-INSERT INTO `student_course` (`courseId`, `studentId`, `status`) VALUES
-	(2, 2, 2),
-	(3, 2, 1),
-	(1, 2, 3),
-	(2, 2, 3),
-	(3, 2, 3),
-	(1, 2, 2),
-	(43136064333301185, 11, 1);
-/*!40000 ALTER TABLE `student_course` ENABLE KEYS */;
-
-
--- Дамп структуры для таблица educationalwebsite.student_course_status
+-- Dumping structure for table educationalwebsite.student_course_status
 DROP TABLE IF EXISTS `student_course_status`;
 CREATE TABLE IF NOT EXISTS `student_course_status` (
   `statusId` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -149,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `student_course_status` (
   PRIMARY KEY (`statusId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.student_course_status: ~3 rows (приблизительно)
+-- Dumping data for table educationalwebsite.student_course_status: ~3 rows (approximately)
 DELETE FROM `student_course_status`;
 /*!40000 ALTER TABLE `student_course_status` DISABLE KEYS */;
 INSERT INTO `student_course_status` (`statusId`, `status`) VALUES
@@ -159,7 +175,7 @@ INSERT INTO `student_course_status` (`statusId`, `status`) VALUES
 /*!40000 ALTER TABLE `student_course_status` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.student_test_passing
+-- Dumping structure for table educationalwebsite.student_test_passing
 DROP TABLE IF EXISTS `student_test_passing`;
 CREATE TABLE IF NOT EXISTS `student_test_passing` (
   `passingId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -172,13 +188,13 @@ CREATE TABLE IF NOT EXISTS `student_test_passing` (
   KEY `FK__test` (`test`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.student_test_passing: ~0 rows (приблизительно)
+-- Dumping data for table educationalwebsite.student_test_passing: ~0 rows (approximately)
 DELETE FROM `student_test_passing`;
 /*!40000 ALTER TABLE `student_test_passing` DISABLE KEYS */;
 /*!40000 ALTER TABLE `student_test_passing` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.tag
+-- Dumping structure for table educationalwebsite.tag
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE IF NOT EXISTS `tag` (
   `tagId` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -186,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `tag` (
   PRIMARY KEY (`tagId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.tag: ~2 rows (приблизительно)
+-- Dumping data for table educationalwebsite.tag: ~2 rows (approximately)
 DELETE FROM `tag`;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
 INSERT INTO `tag` (`tagId`, `tag`) VALUES
@@ -195,7 +211,7 @@ INSERT INTO `tag` (`tagId`, `tag`) VALUES
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.teacher
+-- Dumping structure for table educationalwebsite.teacher
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE IF NOT EXISTS `teacher` (
   `teacherId` int(10) unsigned NOT NULL,
@@ -205,17 +221,17 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   KEY `FK__user` (`teacherId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.teacher: ~3 rows (приблизительно)
+-- Dumping data for table educationalwebsite.teacher: ~3 rows (approximately)
 DELETE FROM `teacher`;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
 INSERT INTO `teacher` (`teacherId`, `educationalEstablishment`, `academicStatus`, `university`) VALUES
-	(5, 'dsdv', 'sdv', NULL),
-	(6, 'sdv', NULL, NULL),
-	(17, 'cfgyu', 'cghj', NULL);
+	(5, 'Johns Hopkins University', 'Professor', NULL),
+	(6, 'University of Michigan', 'Associate Professor', NULL),
+	(17, 'Columbia University', 'Co-Director, Center for Financial Engineering', NULL);
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.test
+-- Dumping structure for table educationalwebsite.test
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE IF NOT EXISTS `test` (
   `testId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -224,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `test` (
   PRIMARY KEY (`testId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6732803274136634639 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.test: ~0 rows (приблизительно)
+-- Dumping data for table educationalwebsite.test: ~2 rows (approximately)
 DELETE FROM `test`;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
 INSERT INTO `test` (`testId`, `lessonId`, `content`) VALUES
@@ -233,7 +249,7 @@ INSERT INTO `test` (`testId`, `lessonId`, `content`) VALUES
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.user
+-- Dumping structure for table educationalwebsite.user
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `userId` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -247,20 +263,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.user: ~10 rows (приблизительно)
+-- Dumping data for table educationalwebsite.user: ~10 rows (approximately)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`userId`, `email`, `login`, `firstName`, `lastName`, `password`, `photo`, `info`) VALUES
 	(2, 'satoshisadie@gmail.com', 'satoshisadie', NULL, NULL, '12345', '/img/avatar.jpg', NULL),
 	(3, 'SichaUA@gmail.com', 'Sicha', NULL, NULL, '12345', '/img/avatar.jpg', NULL),
 	(4, 'toxan56@ukr.net', 'toxan56', NULL, NULL, '12345', '/img/avatar.jpg', NULL),
-	(5, 'teacher1@gmail.com', 'teacher1', NULL, NULL, '123', '/img/avatar.jpg', NULL),
-	(6, 'teacher2@gmail.com', 'teacher2', NULL, NULL, '123', '/img/avatar.jpg', NULL),
+	(5, 'teacher1@gmail.com', 'BrianC', 'Brian', 'Caffo', '123', '/img/avatar.jpg', 'Brian Caffo, PhD is a professor in the Department of Biostatistics at the Johns Hopkins University Bloomberg School of Public Health. He graduated from the Department of Statistics at the University of Florida in 2001. He works in the fields of computational statistics and neuroinformatics and co-created the SMART (www.smart-stats.org) working group. He has been the recipient of the Presidential Early Career Award for Scientist (PECASE) and Engineers and Bloomberg School of Public Health Golden Apple and AMTRA teaching awards.'),
+	(6, 'teacher2@gmail.com', 'CharlesS', 'Charles', 'Severance', '123', '/img/avatar.jpg', 'Charles Severance (a.k.a. Dr. Chuck - www.dr-chuck.com) is a Clinical Associate Professor at the University of Michigan School of Information, where he teaches various technology-oriented courses including programming, database design, and Web development. Chuck has written a number of books includingUsing Google App Engine and Python for Informatics. His research field is in the building of learning management systems such as Sakai, Moodle, Blackboard, ANGEL, and others. He was the chief architect for the Sakai Project, a learning management system used at about 300 schools worldwide and wrote the book, Sakai:Free as in Freedom that describes his experiences as one of the leaders of the project. In the mid-1990s he was the host of Internet:TCI, a national television talk show about the Internet that ran for several years on the TCI cable system. Some of the videos used in this class will come from that television program. He is currently a columnist for the IEEE Computer Magazine and writes a monthly column called "Computing Conversations" that features video interviews with famous technology leaders and innovators. The course will also include some videos from those columns and interviews.'),
 	(10, 'student1@gmail.com', 'student1', NULL, NULL, '12', '/img/avatar.jpg', NULL),
 	(11, 'student2@gmail.com', 'student2', NULL, NULL, '12', '/img/avatar.jpg', NULL),
 	(12, 'student3@gmail.com', 'student3', NULL, NULL, '12', '/img/avatar.jpg', NULL),
 	(16, 'qwe', 'qwe', NULL, NULL, 'qwe', '/img/avatar.jpg', NULL),
-	(17, 'email', 'login', 'Martin', 'Haugh', 'password', '/img/avatar.jpg', NULL);
+	(17, 'email', 'MartinH', 'Martin', 'Haugh', 'password', '/img/avatar.jpg', 'Professor Martin Haugh is co-Director of the Center for Financial Engineering at Columbia University. He originally joined Columbia University in January 2002 and was a faculty member in the Department of Industrial Engineering and Operations Research until June 2005. During this time his teaching and research focused on financial engineering. Between 2005 and 2009, Professor Haugh worked in the hedge fund industry in both New York and London, specializing in equity and credit derivatives. He returned to Columbia in July 2009. Professor Haugh holds a PhD in Operations Research from MIT and also holds Master of Science degrees from the University of Oxford and University College Cork.');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

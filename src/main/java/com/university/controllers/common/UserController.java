@@ -1,6 +1,7 @@
 package com.university.controllers.common;
 
 import com.university.controllers.client.model.Course;
+import com.university.controllers.client.model.Session;
 import com.university.controllers.client.model.Teacher;
 import com.university.controllers.client.model.User;
 import com.university.dao.CourseDao;
@@ -88,7 +89,7 @@ public class UserController {
     {
         final ModelAndView modelAndView = new ModelAndView("/mainPage");
 
-        final List<Course> courses = courseDao.getCourses();
+        final List<Course> courses = courseDao.getOpenCourses();
         modelAndView.addObject("courses", courses);
 
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
@@ -96,17 +97,17 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("/course/{courseId}")
-    public ModelAndView course(@PathVariable Long courseId,
+    @RequestMapping("/course/{sessionId}")
+    public ModelAndView course(@PathVariable Long sessionId,
                                HttpServletRequest httpServletRequest) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/course");
 
-        final Optional<Course> course = courseDao.getCourse(courseId);
+        final Optional<Session> session = courseDao.getSession(sessionId);
 
-        if(course.isPresent()) {
-            modelAndView.addObject("course", course.get());
+        if(session.isPresent()) {
+            modelAndView.addObject("course", session.get());
 
-            final Teacher teacher = userDao.getTeacherById(course.get().getTeacher());
+            final Teacher teacher = userDao.getTeacherById(session.get().getTeacher());
             modelAndView.addObject("teacher", teacher);
 
             CommonUtils.addUserToModel(httpServletRequest, modelAndView);

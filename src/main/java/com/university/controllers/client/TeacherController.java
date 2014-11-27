@@ -24,7 +24,7 @@ public class TeacherController {
     public ModelAndView courses() {
         final ModelAndView modelAndView = new ModelAndView("/teacher/courses");
 
-        List<Course> courses = courseDao.getCourses();
+        List<Course> courses = courseDao.getOpenCourses();
         modelAndView.addObject("courses", courses);
 
         return modelAndView;
