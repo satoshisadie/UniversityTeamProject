@@ -14,11 +14,11 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">More<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">About us</a></li>
+                                <li><a href="/about-us">About us</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Contacts</a></li>
+                                <li><a href="/contacts">Contacts</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Help</a></li>
+                                <li><a href="/help">Help</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -36,6 +36,8 @@
                                     </#if>
                                     <li class="divider"></li>
                                     <li><a href="/profile">Profile</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="http://localhost:8085/log-out">Log-out</a></li>
                                 </ul>
                             </li>
                         <#else>

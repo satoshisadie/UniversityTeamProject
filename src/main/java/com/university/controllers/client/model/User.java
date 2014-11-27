@@ -1,7 +1,7 @@
 package com.university.controllers.client.model;
 
 public class User {
-    private Long id;
+    private Integer id;
     private String login;
     private String firstName;
     private String lastName;
@@ -11,11 +11,11 @@ public class User {
     private String password;
     private String type;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

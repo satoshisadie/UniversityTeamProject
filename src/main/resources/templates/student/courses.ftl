@@ -6,7 +6,6 @@
 
 <#include "*/commonHeader.ftl">
     <link type="text/css" rel="stylesheet" href="/css/student/courses.css">
-    <script type="application/javascript" src="/js/student/courses.js"></script>
 </head>
 <body>
 <div class="container">

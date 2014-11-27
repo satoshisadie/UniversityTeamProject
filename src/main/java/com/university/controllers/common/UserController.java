@@ -61,6 +61,14 @@ public class UserController {
         return "redirect:/sign-in";
     }
 
+    @RequestMapping(value = "/log-out")
+    public String newUser(HttpServletRequest httpServletRequest) {
+        final HttpSession session = httpServletRequest.getSession();
+        session.removeAttribute("user");
+
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/new-teacher", method = RequestMethod.POST)
 //    @ResponseBody
     public String newTeacher(Teacher teacher) {
@@ -114,6 +122,33 @@ public class UserController {
     @RequestMapping("/profile/edit")
     public ModelAndView edit(HttpServletRequest httpServletRequest) {
         final ModelAndView modelAndView = new ModelAndView("/user/editProfile");
+
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/about-us")
+    public ModelAndView aboutUs(HttpServletRequest httpServletRequest) {
+        final ModelAndView modelAndView = new ModelAndView("/user/aboutUs");
+
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/contacts")
+    public ModelAndView contacts(HttpServletRequest httpServletRequest) {
+        final ModelAndView modelAndView = new ModelAndView("/user/contacts");
+
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/help")
+    public ModelAndView help(HttpServletRequest httpServletRequest) {
+        final ModelAndView modelAndView = new ModelAndView("/user/help");
 
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 
