@@ -25,7 +25,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns( "*//**").excludePathPatterns("/login");
+//        registry.addInterceptor(new LoginInterceptor()).addPathPatterns( "/**").excludePathPatterns("/sign-in");
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/admin/**", "/student/**", "/teacher/**").excludePathPatterns("/sign-in", "/teachers");
     }
 
     @Bean FreeMarkerConfigurer freeMarkerConfigurer() {

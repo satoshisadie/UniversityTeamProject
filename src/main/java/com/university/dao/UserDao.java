@@ -134,4 +134,13 @@ public class UserDao {
 
         return jdbcTemplate.query(sql, new TeacherRowMapper(), teacherId).get(0);
     }
+
+    public List<Teacher> getAllTeachers() {
+        final String sql =
+                "SELECT * " +
+                "FROM teacher t " +
+                "JOIN user u ON t.teacherId = u.userId ";
+
+        return jdbcTemplate.query(sql, new TeacherRowMapper());
+    }
 }

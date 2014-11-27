@@ -43,6 +43,12 @@ public class UserController {
                 final HttpSession session = httpServletRequest.getSession();
                 session.setAttribute("user", user);
 
+                final String urlBeforeSignIn = (String)session.getAttribute("URLBeforeSignIn");
+
+                if(urlBeforeSignIn != null) {
+                    return "redirect:" + urlBeforeSignIn;
+                }
+
                 return "redirect:";
             }
         }
@@ -124,6 +130,18 @@ public class UserController {
         final ModelAndView modelAndView = new ModelAndView("/user/editProfile");
 
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/teachers")
+    public ModelAndView teachers(HttpServletRequest httpServletRequest) {
+        final ModelAndView modelAndView = new ModelAndView("/user/teachers");
+
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+
+        List<Teacher> teachers = userDao.getAllTeachers();
+        modelAndView.addObject("teachers", teachers);
 
         return modelAndView;
     }

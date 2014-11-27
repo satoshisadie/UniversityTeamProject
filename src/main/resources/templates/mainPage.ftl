@@ -33,7 +33,7 @@
                         </a>
 
                         <div class="media-body">
-                            <a href="./courses/${course.id?c}">
+                            <a href="./course/${course.id?c}">
                                 <h4 class="media-heading">${course.name}</h4>
                             </a>
                             <p>Stanford</p>
