@@ -1,0 +1,28 @@
+.user-photo{
+    display: inline;
+}
+
+.user-name-type{
+    display: inline-block;
+    margin-left: 25%;
+}
+
+.user-name{
+    font-size: 24pt;
+    text-align: center;
+}
+
+.user-type{
+    text-align: center;
+    font-size: 12pt;
+}
+
+.user-login{
+    font-size: 16pt;
+    display: inline;
+}
+
+.edit-button{
+    display: inline;
+    float: right;
+}
