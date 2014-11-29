@@ -1,9 +1,6 @@
 package com.university.dao;
 
-import com.university.controllers.client.model.Course;
-import com.university.controllers.client.model.StudentCourse;
-import com.university.controllers.client.model.Teacher;
-import com.university.controllers.client.model.User;
+import com.university.controllers.client.model.*;
 import com.university.utils.CommonUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -77,15 +74,15 @@ public class UserDao {
         return CommonUtils.selectOne(jdbcTemplate, sql, new UserRowMapper(), id);
     }
 
-    //TODO Semenets Remake this
-    public List<StudentCourse> getUserCourses(long userId) {
+    public List<Session> getUserSessions(long userId) {
         final String sql =
                 "SELECT * " +
-                "FROM course c " +
-                "JOIN student_course sc ON sc.courseId = c.courseId " +
-                "WHERE sc.studentId = ?";
+                "FROM enrolment e " +
+                "JOIN session s ON e.sessionId = s.sessionId " +
+                "JOIN course c ON c.courseId = s.course " +
+                "WHERE e.studentId = ?";
 
-        return jdbcTemplate.query(sql, new StudentCourseRowMapper(), userId);
+        return jdbcTemplate.query(sql, new SessionRowMapper(), userId);
     }
 
     public Optional<User> getUserByLogin(String login) {

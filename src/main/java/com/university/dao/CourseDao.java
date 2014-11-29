@@ -36,24 +36,14 @@ public class CourseDao {
         return jdbcTemplate.query(sql, new CourseTagRowMapper(), id);
     }
 
-    public List<Course> getOpenCourses() {
+    public List<Session> getOpenSessions() {
         final String sql =
                 "SELECT * " +
                 "FROM session s " +
                 "JOIN course c ON s.course = c.courseId " +
                 "WHERE s.status <> 2";
 
-        return jdbcTemplate.query(sql, new CourseRowMapper());
-    }
-
-    //TODO Sichkar replace this function to getSession()
-    public Optional<Course> getCourse(long id) {
-        final String sql =
-                "SELECT * " +
-                "FROM course c " +
-                "WHERE c.courseId = ?";
-
-        return CommonUtils.selectOne(jdbcTemplate, sql, new CourseRowMapper(), id);
+        return jdbcTemplate.query(sql, new SessionRowMapper());
     }
 
     public Optional<Session> getSession(long id) {
@@ -68,15 +58,13 @@ public class CourseDao {
 
     public void saveCourse(long id, CourseSaveForm form) {
         final String sql =
-                "INSERT INTO course(courseId, name, description, startDate, endDate) " +
-                "VALUES (?, ?, ?, ?, ?) " +
+                "INSERT INTO course(courseId, name, description) " +
+                "VALUES (?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE " +
                     "name = VALUES(name)," +
-                    "description = VALUES(description)," +
-                    "startDate = VALUES(startDate)," +
-                    "endDate = VALUES(endDate);";
+                    "description = VALUES(description);";
 
-        jdbcTemplate.update(sql, id, form.getName(), form.getDescription(), form.getStartDate(), form.getEndDate());
+        jdbcTemplate.update(sql, id, form.getName(), form.getDescription());
 
 //        final List<String> tags = form.getTags();
 //        final Map<String, Integer> idByName = getTags().stream().collect(Collectors.toMap(Tag::getName, Tag::getId));
@@ -89,13 +77,13 @@ public class CourseDao {
 //        jdbcTemplate.update(sql2);
     }
 
-    public List<Lesson> getLessons(long courseId) {
+    public List<Lesson> getLessons(long sessionId) {
         final String sql =
                 "SELECT * " +
                 "FROM lesson l " +
-                "WHERE l.courseId = ?";
+                "WHERE l.sessionId = ?";
 
-        return jdbcTemplate.query(sql, new LessonRowMapper(), courseId);
+        return jdbcTemplate.query(sql, new LessonRowMapper(), sessionId);
     }
 
     public Optional<Lesson> getLesson(long id) {
@@ -151,7 +139,7 @@ public class CourseDao {
 
     private String preparedLessonsValues(List<Lesson> lessons) {
         return lessons.stream()
-                .map(lesson -> "(" + lesson.getId() + "," + lesson.getCourseId() + ",'" + lesson.getContent() + "')")
+                .map(lesson -> "(" + lesson.getId() + "," + lesson.getSessionId() + ",'" + lesson.getContent() + "')")
                 .collect(Collectors.joining(","));
     }
 }

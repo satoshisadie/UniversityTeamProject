@@ -89,8 +89,8 @@ public class UserController {
     {
         final ModelAndView modelAndView = new ModelAndView("/mainPage");
 
-        final List<Course> courses = courseDao.getOpenCourses();
-        modelAndView.addObject("courses", courses);
+        final List<Session> sessions = courseDao.getOpenSessions();
+        modelAndView.addObject("sessions", sessions);
 
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 
@@ -105,7 +105,7 @@ public class UserController {
         final Optional<Session> session = courseDao.getSession(sessionId);
 
         if(session.isPresent()) {
-            modelAndView.addObject("course", session.get());
+            modelAndView.addObject("session", session.get());
 
             final Teacher teacher = userDao.getTeacherById(session.get().getTeacher());
             modelAndView.addObject("teacher", teacher);

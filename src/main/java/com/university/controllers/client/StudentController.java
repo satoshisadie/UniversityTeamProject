@@ -25,10 +25,10 @@ public class StudentController {
     final JsonParser jsonParser = new JsonParser();
 
     @RequestMapping("/lessons/")
-    public ModelAndView course(@RequestParam(value = "courseId") Long courseId) throws Exception {
+    public ModelAndView course(@RequestParam(value = "sessionId") Long sessionId) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/student/lessons");
 
-        final List<Lesson> lessons = courseDao.getLessons(courseId);
+        final List<Lesson> lessons = courseDao.getLessons(sessionId);
         modelAndView.addObject("lessons", lessons);
 
         return modelAndView;
@@ -42,8 +42,8 @@ public class StudentController {
         final User user = CommonUtils.getUserFromRequest(httpServletRequest);
         modelAndView.addObject("user", user);
 
-        final List<StudentCourse> userCourses = userDao.getUserCourses(user.getId());
-        modelAndView.addObject("courses", userCourses);
+        final List<Session> userSessions = userDao.getUserSessions(user.getId());
+        modelAndView.addObject("sessions", userSessions);
 
         return modelAndView;
     }

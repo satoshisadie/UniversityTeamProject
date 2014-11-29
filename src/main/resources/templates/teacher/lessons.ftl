@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <input class="course-id" type="hidden" value="${courseId}"/>
+    <input class="course-id" type="hidden" value="${sessionId}"/>
 </div>
 </body>
 </html>

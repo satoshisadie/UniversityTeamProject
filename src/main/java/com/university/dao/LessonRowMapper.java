@@ -12,7 +12,7 @@ public class LessonRowMapper implements RowMapper<Lesson> {
         final Lesson lesson = new Lesson();
 
         lesson.setId(rs.getLong("lessonId"));
-        lesson.setCourseId(rs.getLong("courseId"));
+        lesson.setSessionId(rs.getLong("sessionId"));
         lesson.setContent(rs.getString("content"));
 
         return lesson;
