@@ -22,7 +22,7 @@
     <div class="content row">
         <div class="row">
             <div class="col-md-10 col-md-offset-1" style="min-height: 150px;">
-                <h1 class="text-center">${course.name}</h1>
+                <h1 class="text-center">${session.name}</h1>
             </div>
         </div>
 
@@ -30,12 +30,12 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="col-md-7">
                     <h3>About the Course</h3>
-                    <p>${course.description}</p>
+                    <p>${session.description}</p>
                 </div>
 
                 <div class="col-md-4 col-md-offset-1">
                     <h3>Session</h3>
-                    <span>${course.startDate?date} - ${course.endDate?date}</span>
+                    <span>${session.startDate?date} - ${session.endDate?date}</span>
                     <button class="btn btn-lg btn-primary">Join for free</button>
 
                     <h3>Instructor</h3>

@@ -24,8 +24,8 @@ public class TeacherController {
     public ModelAndView courses() {
         final ModelAndView modelAndView = new ModelAndView("/teacher/courses");
 
-        List<Course> courses = courseDao.getOpenCourses();
-        modelAndView.addObject("courses", courses);
+        List<Session> sessions = courseDao.getOpenSessions();
+        modelAndView.addObject("sessions", sessions);
 
         return modelAndView;
     }
@@ -35,17 +35,17 @@ public class TeacherController {
         return "redirect:./" + CommonUtils.generateId();
     }
 
-    @RequestMapping(value = "/courses/{id}")
-    public ModelAndView editCourse(@PathVariable long id) {
+    @RequestMapping(value = "/courses/{sessionId}")
+    public ModelAndView editCourse(@PathVariable long sessionId) {
         final ModelAndView modelAndView = new ModelAndView("/teacher/course");
 
-        final Course course = getCourse(id);
-        modelAndView.addObject("course", course);
+        final Session session = getSession(sessionId);
+        modelAndView.addObject("session", session);
 
         final List<Tag> tags = courseDao.getTags();
         modelAndView.addObject("tags", tags);
 
-        final List<CourseTag> courseTags = courseDao.getTagsByCourse(id);
+        final List<CourseTag> courseTags = courseDao.getTagsByCourse(session.getCourse());
         modelAndView.addObject("courseTags", courseTags);
 
         return modelAndView;
@@ -59,12 +59,12 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/lessons/")
-    public ModelAndView lessons(@RequestParam long courseId) {
+    public ModelAndView lessons(@RequestParam long sessionId) {
         final ModelAndView modelAndView = new ModelAndView("/teacher/lessons");
 
-        final List<Lesson> courseLessons = courseDao.getLessons(courseId);
+        final List<Lesson> courseLessons = courseDao.getLessons(sessionId);
         modelAndView.addObject("lessons", courseLessons);
-        modelAndView.addObject("courseId", courseId);
+        modelAndView.addObject("sessionId", sessionId);
 
         return modelAndView;
     }
@@ -86,7 +86,7 @@ public class TeacherController {
                 lesson.setId(id.getAsLong());
             }
 
-            lesson.setCourseId(lessonObject.get("courseId").getAsLong());
+            lesson.setSessionId(lessonObject.get("courseId").getAsLong());
             lesson.setContent(lessonObject.get("content").getAsString());
 
             lessons.add(lesson);
@@ -124,13 +124,13 @@ public class TeacherController {
         return "success";
     }
 
-    private Course getCourse(long id) {
-        final Optional<Course> courseOptional = courseDao.getCourse(id);
+    private Session getSession(long id) {
+        final Optional<Session> sessionOptional = courseDao.getSession(id);
 
-        return courseOptional.orElseGet(() -> {
-            final Course course = new Course();
-            course.setId(id);
-            return course;
+        return sessionOptional.orElseGet(() -> {
+            final Session session = new Session();
+            session.setSessionId(id);
+            return session;
         });
     }
 }

@@ -2,7 +2,7 @@ package com.university.controllers.client.model;
 
 public class Lesson {
     private Long id;
-    private Long courseId;
+    private Long sessionId;
     private String content;
 
     public Long getId() {
@@ -13,12 +13,12 @@ public class Lesson {
         this.id = id;
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public Long getSessionId() {
+        return sessionId;
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setSessionId(Long sessionId) {
+        this.sessionId = sessionId;
     }
 
     public String getContent() {
