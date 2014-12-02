@@ -1,0 +1,24 @@
+.user-login{
+    font-size: 16pt;
+    display: inline;
+}
+
+.view-button{
+    display: inline;
+    float: right;
+}
+
+.user-photo{
+    display: inline;
+}
+
+.upload-button{
+    display: inline;
+    margin-left: 25%;
+}
+
+.some-info{
+    font-size: 14pt;
+    font-weight: bold;
+    line-height: 40px;
+}

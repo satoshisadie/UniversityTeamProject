@@ -1,9 +1,6 @@
 package com.university.dao;
 
-import com.university.controllers.client.model.Course;
-import com.university.controllers.client.model.StudentCourse;
-import com.university.controllers.client.model.Teacher;
-import com.university.controllers.client.model.User;
+import com.university.controllers.client.model.*;
 import com.university.utils.CommonUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -142,5 +139,23 @@ public class UserDao {
                 "JOIN user u ON t.teacherId = u.userId ";
 
         return jdbcTemplate.query(sql, new TeacherRowMapper());
+    }
+
+    public void saveProfile(long id, ProfileSaveForm profileSaveForm, String userType) {
+        final String sql =
+                "UPDATE user u " +
+                        "SET u.firstName = ?, u.lastName = ?, u.info = ? " +
+                        "WHERE u.userId = ? ";
+
+        jdbcTemplate.update(sql, profileSaveForm.getFirstName(), profileSaveForm.getLastName(), profileSaveForm.getInfo(), id);
+
+        if (userType.equals("teacher")) {
+            final String sql2 =
+                    "UPDATE teacher t " +
+                            "SET t.academicStatus = ?, t.educationalEstablishment = ? " +
+                            "WHERE t.teacherId = ?; ";
+
+            jdbcTemplate.update(sql2, profileSaveForm.getAcademicStatus(), profileSaveForm.getEducationalEstablishment(), id);
+        }
     }
 }

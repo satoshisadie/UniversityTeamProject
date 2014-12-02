@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <div class="user-login">${user.login}</div>
                     <div class="edit-button">
-                        <a href="profile/edit" class="btn btn-default">Edit Profile</a>
+                        <a href="/profile/edit" class="btn btn-default">Edit Profile</a>
                     </div>
                 </div><hr>
 
@@ -28,13 +28,11 @@
                         <img src="${user.photo}" width="100" height="100">
                     </div>
                     <div class="user-name-type">
-                        <#if user.type == "teacher">
-                            <div class="user-name">
-                                <#if user.firstName?? && user.lastName??>
-                                    ${user.firstName} ${user.lastName}
-                                </#if>
-                            </div>
-                        </#if>
+                        <div class="user-name">
+                            <#if user.firstName?? && user.lastName??>
+                                ${user.firstName} ${user.lastName}
+                            </#if>
+                        </div>
                         <div class="user-type">
                             ${user.type}
                         </div>
@@ -49,6 +47,26 @@
                         </#if>
                     </div>
                 </div>
+
+                <#if user.type == "teacher">
+                    <div class="form-group">
+                        <label for="teacher-educationalEstablishment">Educational Establishment:</label>
+                        <div class="teacher-educationalEstablishment">
+                            <#if teacher.educationalEstablishment??>
+                                ${teacher.educationalEstablishment}
+                            </#if>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacher-academicStatus">Academic Status:</label>
+                        <div class="teacher-academicStatus">
+                            <#if teacher.academicStatus??>
+                                ${teacher.academicStatus}
+                            </#if>
+                        </div>
+                    </div>
+                </#if>
 
             </div>
         </div>

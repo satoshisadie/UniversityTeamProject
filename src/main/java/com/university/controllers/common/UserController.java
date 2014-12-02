@@ -1,9 +1,6 @@
 package com.university.controllers.common;
 
-import com.university.controllers.client.model.Course;
-import com.university.controllers.client.model.Session;
-import com.university.controllers.client.model.Teacher;
-import com.university.controllers.client.model.User;
+import com.university.controllers.client.model.*;
 import com.university.dao.CourseDao;
 import com.university.dao.UserDao;
 import com.university.utils.CommonUtils;
@@ -133,6 +130,15 @@ public class UserController {
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/profile/edit/save", method = RequestMethod.POST)
+    public String saveCourse(ProfileSaveForm profileSaveForm, HttpServletRequest httpServletRequest) {
+
+        User user = CommonUtils.getUserFromRequest(httpServletRequest);
+        userDao.saveProfile(user.getId(), profileSaveForm, user.getType());
+
+        return "redirect:../../profile/";
     }
 
     @RequestMapping("/teachers")
