@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -89,6 +91,11 @@ public class UserController {
 
         final List<Course> courses = courseDao.getCourses();
         modelAndView.addObject("courses", courses);
+
+        final Map<Integer, Teacher> teacherById = userDao.getAllTeachers().stream()
+                .collect(Collectors.toMap(Teacher::getId, teacher -> teacher));
+        final List<Teacher> coursesTeachers = courses.stream().map(course -> teacherById.get(course.getTeacherId())).collect(Collectors.toList());
+        modelAndView.addObject("coursesTeachers", coursesTeachers);
 
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 

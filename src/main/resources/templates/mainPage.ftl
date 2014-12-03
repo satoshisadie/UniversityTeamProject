@@ -30,21 +30,21 @@
 
         <div class="col-md-6">
             <div class="courses">
-                <#list sessions as session>
+                <#list courses as course>
                     <div class="course media">
                         <a class="media-left">
                             <img src="/img/avatar.jpg">
                         </a>
 
                         <div class="media-body">
-                            <a href="./course/${session.sessionId?c}">
-                                <h4 class="media-heading">${session.name}</h4>
+                            <a href="./course/${course.id?c}">
+                                <h4 class="media-heading">${course.name}</h4>
                             </a>
-                            <p>Stanford</p>
-                            <p>Teacher teacher</p>
+                            <p>${coursesTeachers[course_index].educationalEstablishment!}</p>
+                            <p>${coursesTeachers[course_index].firstName!} ${coursesTeachers[course_index].lastName!}</p>
                         </div>
 
-                        <input class="id" type="hidden" value="${session.sessionId?c}">
+                        <input class="id" type="hidden" value="${course.id?c}">
                         <input class="tags" type="hidden" value="math"/>
                     </div>
                 </#list>
