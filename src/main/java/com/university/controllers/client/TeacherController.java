@@ -24,7 +24,7 @@ public class TeacherController {
     public ModelAndView courses() {
         final ModelAndView modelAndView = new ModelAndView("/teacher/courses");
 
-        List<Session> sessions = courseDao.getOpenSessions();
+        List<CourseSession> sessions = courseDao.getOpenSessions();
         modelAndView.addObject("sessions", sessions);
 
         return modelAndView;
@@ -39,7 +39,7 @@ public class TeacherController {
     public ModelAndView editCourse(@PathVariable long sessionId) {
         final ModelAndView modelAndView = new ModelAndView("/teacher/course");
 
-        final Session session = getSession(sessionId);
+        final CourseSession session = getSession(sessionId);
         modelAndView.addObject("session", session);
 
         final List<Tag> tags = courseDao.getTags();
@@ -124,11 +124,11 @@ public class TeacherController {
         return "success";
     }
 
-    private Session getSession(long id) {
-        final Optional<Session> sessionOptional = courseDao.getSession(id);
+    private CourseSession getSession(long id) {
+        final Optional<CourseSession> sessionOptional = courseDao.getSession(id);
 
         return sessionOptional.orElseGet(() -> {
-            final Session session = new Session();
+            final CourseSession session = new CourseSession();
             session.setSessionId(id);
             return session;
         });

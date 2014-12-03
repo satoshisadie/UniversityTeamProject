@@ -21,7 +21,11 @@
         <div class="col-md-2 col-md-offset-2">
             <ul class="nav nav-pills nav-stacked">
                 <#list lessons as lesson>
-                    <li role="presentation"><a href="#lesson-${lesson_index + 1}">Lesson ${lesson_index + 1}</a></li>
+                    <li role="presentation">
+                        <a href="#lesson-${lesson_index + 1}" aria-controls="lesson-${lesson_index + 1}" role="tab" data-toggle="pill">
+                            Lesson ${lesson_index + 1}
+                        </a>
+                    </li>
                 </#list>
             </ul>
             <br>
@@ -32,9 +36,9 @@
         </div>
 
         <div class="col-md-6">
-            <div class="lessons">
+            <div class="lessons tab-content">
                 <#list lessons as lesson>
-                    <div class="teacher-lesson routable" data-hash="#lesson-${lesson_index + 1}">
+                    <div id="lesson-${lesson_index + 1}" class="teacher-lesson tab-pane" role="tabpanel">
                         <label for="content">Lesson content</label>
                         <textarea id="content" class="content" rows="4">${lesson.content!}</textarea>
                         <br>

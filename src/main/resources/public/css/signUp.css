@@ -1,0 +1,8 @@
+#teacher-form {
+    display: none;
+}
+
+#teacher-form,
+#student-form {
+    margin-top: 40px;
+}

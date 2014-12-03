@@ -2,6 +2,9 @@ package com.university.dao;
 
 import com.google.gson.Gson;
 import com.university.controllers.client.model.*;
+import com.university.dao.rowMappers.CourseTagRowMapper;
+import com.university.dao.rowMappers.LessonRowMapper;
+import com.university.dao.rowMappers.TagRowMapper;
 import com.university.utils.CommonUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,7 +39,7 @@ public class CourseDao {
         return jdbcTemplate.query(sql, new CourseTagRowMapper(), id);
     }
 
-    public List<Session> getOpenSessions() {
+    public List<CourseSession> getOpenSessions() {
         final String sql =
                 "SELECT * " +
                 "FROM session s " +
@@ -46,7 +49,7 @@ public class CourseDao {
         return jdbcTemplate.query(sql, new SessionRowMapper());
     }
 
-    public Optional<Session> getSession(long id) {
+    public Optional<CourseSession> getSession(long id) {
         final String sql =
                 "SELECT * " +
                 "FROM session s " +

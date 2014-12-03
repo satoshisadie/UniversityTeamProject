@@ -1,4 +1,4 @@
-package com.university.dao;
+package com.university.dao.rowMappers;
 
 import com.university.controllers.client.model.User;
 import org.springframework.jdbc.core.RowMapper;

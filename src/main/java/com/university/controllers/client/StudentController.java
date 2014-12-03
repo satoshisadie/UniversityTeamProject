@@ -42,7 +42,7 @@ public class StudentController {
         final User user = CommonUtils.getUserFromRequest(httpServletRequest);
         modelAndView.addObject("user", user);
 
-        final List<Session> userSessions = userDao.getUserSessions(user.getId());
+        final List<CourseSession> userSessions = userDao.getUserSessions(user.getId());
         modelAndView.addObject("sessions", userSessions);
 
         return modelAndView;

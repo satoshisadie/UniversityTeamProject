@@ -28,10 +28,10 @@
       <index name="FK_course_teacher" unique="false" columns="teacher"/>
     </table>
     <table name="course_tag" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="course" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="tag" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <index name="FK_course_tag_course" unique="false" columns="course"/>
-      <index name="FK_course_tag_tag" unique="false" columns="tag"/>
+      <column name="courseId" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="tagId" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5"/>
+      <index name="FK_course_tag_course" unique="false" columns="courseId"/>
+      <index name="FK_course_tag_tag" unique="false" columns="tagId"/>
     </table>
     <table name="lesson" schema="" catalog="educationalwebsite" type="TABLE">
       <column name="lessonId" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
@@ -68,7 +68,7 @@
     </table>
     <table name="tag" schema="" catalog="educationalwebsite" type="TABLE">
       <column name="tagId" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5" autoIncrement="true"/>
-      <column name="tag" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="tagId"/>
     </table>
     <table name="teacher" schema="" catalog="educationalwebsite" type="TABLE">

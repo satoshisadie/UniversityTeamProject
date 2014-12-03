@@ -1,5 +1,6 @@
 package com.university.config;
 
+import com.google.gson.Gson;
 import freemarker.template.TemplateException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -52,5 +53,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         freeMarkerViewResolver.setSuffix(".ftl");
 
         return freeMarkerViewResolver;
+    }
+
+    @Bean Gson serializer() {
+        return new Gson();
     }
 }

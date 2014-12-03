@@ -1,4 +1,4 @@
-package com.university.dao;
+package com.university.dao.rowMappers;
 
 import com.university.controllers.client.model.Tag;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,7 +12,7 @@ public class TagRowMapper implements RowMapper<Tag> {
         final Tag tag = new Tag();
 
         tag.setId(rs.getInt("tagId"));
-        tag.setName(rs.getString("tag"));
+        tag.setName(rs.getString("name"));
 
         return tag;
     }

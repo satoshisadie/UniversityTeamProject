@@ -2,7 +2,7 @@ package com.university.controllers.client.model;
 
 import java.util.Date;
 
-public class Session {
+public class CourseSession {
     private Long sessionId;
     private Long course;
     private Date startDate;

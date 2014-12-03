@@ -2,3 +2,11 @@
     margin-top: 100px;
     min-height: 600px;
 }
+
+.validationMessage {
+    color: Red;
+}
+
+.customMessage {
+    color: Orange;
+}

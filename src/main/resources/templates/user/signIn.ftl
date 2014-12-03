@@ -5,6 +5,7 @@
     <title></title>
 
     <#include "*/commonHeader.ftl">
+    <script type="application/javascript" src="/js/signIn.js"></script>
 </head>
 <body>
     <div class="container">
@@ -12,19 +13,21 @@
 
         <div class="content row">
             <div class="col-md-4 col-md-offset-4">
-                <form method="POST" action="/login">
-                    <div class="form-group">
-                        <label for="login">Login</label>
-                        <input id="login" name="login" type="text" class="form-control">
-                    </div>
+                <span style="color: red; margin-bottom: 30px; display: block;" data-bind="visible: signInFailed">
+                    Please, check password and login
+                </span>
 
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input id="password" name="password" type="password" class="form-control">
-                    </div>
+                <div class="form-group">
+                    <label for="login">Login</label>
+                    <input id="login" class="form-control" type="text" data-bind="value: login">
+                </div>
 
-                    <input class="btn btn-primary" type="submit" value="LOGIN">
-                </form>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" class="form-control" data-bind="value: password">
+                </div>
+
+                <input class="btn btn-primary" value="Login" data-bind="click: signIn">
             </div>
         </div>
 

@@ -1,13 +1,4 @@
 $(document).ready(function () {
-
-    $(window).on('hashchange', function () {
-        var hash = window.location.hash;
-
-        hideAll();
-
-        $('[data-hash=' + hash + ']').closest('.routable').show();
-    });
-
     $('.save-changes').click(function () {
         tinymce.triggerSave();
 
@@ -38,10 +29,6 @@ $(document).ready(function () {
             alert(response);
         });
     });
-
-    function hideAll() {
-        $('.routable').hide();
-    }
 
     tinymce.init({
         selector: '.teacher-lesson .content',

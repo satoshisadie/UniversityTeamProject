@@ -17,10 +17,14 @@
     <div class="content row">
         <div class="col-md-2 col-lg-offset-2">
             <ul class="tag-select nav nav-pills nav-stacked">
-                <li role="presentation"><a href="#computer science">Computer sciense</a></li>
-                <li role="presentation"><a href="#math">Math</a></li>
-                <li role="presentation"><a href="#biology">Biology</a></li>
-                <li role="presentation"><a href="#literature">Literature</a></li>
+                <li role="presentation"><a data-tag="arts">Arts</a></li>
+                <li role="presentation"><a data-tag="biology">Biology</a></li>
+                <li role="presentation"><a data-tag="chemistry">Chemistry</a></li>
+                <li role="presentation"><a data-tag="computer science">Computer Science</a></li>
+                <li role="presentation"><a data-tag="economics">Economics</a></li>
+                <li role="presentation"><a data-tag="law">Law</a></li>
+                <li role="presentation"><a data-tag="mathematics">Mathematics</a></li>
+                <li role="presentation"><a data-tag="physics">Physics</a></li>
             </ul>
         </div>
 

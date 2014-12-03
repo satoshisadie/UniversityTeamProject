@@ -49,8 +49,8 @@
                         <div class="media-body">
                             <h4>${teacher.firstName!} ${teacher.lastName!}</h4>
 
-                            <p>Academic status: ${teacher.academicStatus}</p>
-                            <p>Educational establishment: ${teacher.educationalEstablishment}</p>
+                            <p>Academic status: ${teacher.academicStatus!}</p>
+                            <p>Educational establishment: ${teacher.educationalEstablishment!}</p>
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@
 <link type="text/css" rel="stylesheet" href="/css/main.css">
 
 <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
+<script type="application/javascript" src="/js/libs/knockout-3.2.0.js"></script>
+<script type="application/javascript" src="/js/libs/knockout.validation.js"></script>
 <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
 <script type="application/javascript" src="/js/libs/underscore.js"></script>
-<script type="application/javascript" src="/js/main.js"></script>

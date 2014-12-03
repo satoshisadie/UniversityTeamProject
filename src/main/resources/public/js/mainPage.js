@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('.tag-select a').click(function (event) {
         event.preventDefault();
 
-        var tag = $(this).attr('href').replace('#', '');
+        var tag = $(this).attr('data-tag');
 
         $('.course').each(function () {
             var $course = $(this);

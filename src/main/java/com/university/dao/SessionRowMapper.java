@@ -1,26 +1,26 @@
 package com.university.dao;
 
-import com.university.controllers.client.model.Session;
+import com.university.controllers.client.model.CourseSession;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SessionRowMapper implements RowMapper<Session> {
+public class SessionRowMapper implements RowMapper<CourseSession> {
     @Override
-    public Session mapRow(ResultSet rs, int rowNum) throws SQLException {
-        final Session session = new Session();
+    public CourseSession mapRow(ResultSet rs, int rowNum) throws SQLException {
+        final CourseSession courseSession = new CourseSession();
 
-        session.setSessionId(rs.getLong("sessionId"));
-        session.setCourse(rs.getLong("course"));
-        session.setStartDate(rs.getDate("startDate"));
-        session.setEndDate(rs.getDate("endDate"));
-        session.setStatus(rs.getInt("status"));
-        session.setName(rs.getString("name"));
-        session.setDescription(rs.getString("description"));
-        session.setImg(rs.getString("img"));
-        session.setTeacher(rs.getInt("teacher"));
+        courseSession.setSessionId(rs.getLong("sessionId"));
+        courseSession.setCourse(rs.getLong("course"));
+        courseSession.setStartDate(rs.getDate("startDate"));
+        courseSession.setEndDate(rs.getDate("endDate"));
+        courseSession.setStatus(rs.getInt("status"));
+        courseSession.setName(rs.getString("name"));
+        courseSession.setDescription(rs.getString("description"));
+        courseSession.setImg(rs.getString("img"));
+        courseSession.setTeacher(rs.getInt("teacher"));
 
-        return session;
+        return courseSession;
     }
 }
