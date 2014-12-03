@@ -3,30 +3,26 @@ package com.university.controllers.client.model;
 import java.util.Date;
 
 public class CourseSession {
-    private Long sessionId;
-    private Long course;
+    private Long id;
+    private Long courseId;
     private Date startDate;
     private Date endDate;
     private Integer status;
-    private String name;
-    private String description;
-    private String img;
-    private int teacher;
 
-    public Long getSessionId() {
-        return sessionId;
+    public Long getId() {
+        return id;
     }
 
-    public void setSessionId(Long sessionId) {
-        this.sessionId = sessionId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getCourse() {
-        return course;
+    public Long getCourseId() {
+        return courseId;
     }
 
-    public void setCourse(Long course) {
-        this.course = course;
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
     }
 
     public Date getStartDate() {
@@ -51,37 +47,5 @@ public class CourseSession {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public int getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(int teacher) {
-        this.teacher = teacher;
     }
 }

@@ -12,7 +12,7 @@ public class TagRowMapper implements RowMapper<Tag> {
         final Tag tag = new Tag();
 
         tag.setId(rs.getInt("tagId"));
-        tag.setName(rs.getString("name"));
+        tag.setName(rs.getString("tagName"));
 
         return tag;
     }

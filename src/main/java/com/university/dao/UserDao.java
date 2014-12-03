@@ -80,7 +80,7 @@ public class UserDao {
                 "JOIN course c ON c.courseId = s.course " +
                 "WHERE e.studentId = ?";
 
-        return jdbcTemplate.query(sql, new SessionRowMapper(), userId);
+        return jdbcTemplate.query(sql, new CourseSessionRowMapper(), userId);
     }
 
     public Optional<User> getUserByCredentials(String login, String password) {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,15 +18,16 @@ import java.util.Optional;
 @RequestMapping(value = "/teacher")
 public class TeacherController {
     @Autowired private CourseDao courseDao;
-    final Gson serializer = new Gson();
-    final JsonParser jsonParser = new JsonParser();
+    @Autowired private Gson serializer;
+    @Autowired private JsonParser jsonParser;
 
     @RequestMapping(value = "/courses/")
-    public ModelAndView courses() {
+    public ModelAndView courses(HttpServletRequest httpServletRequest) {
         final ModelAndView modelAndView = new ModelAndView("/teacher/courses");
 
-        List<CourseSession> sessions = courseDao.getOpenSessions();
-        modelAndView.addObject("sessions", sessions);
+        final User user = CommonUtils.getUserFromRequest(httpServletRequest);
+        final List<Course> courses = courseDao.getCoursesByTeacher(user.getId());
+        modelAndView.addObject("courses", courses);
 
         return modelAndView;
     }
@@ -35,18 +37,18 @@ public class TeacherController {
         return "redirect:./" + CommonUtils.generateId();
     }
 
-    @RequestMapping(value = "/courses/{sessionId}")
-    public ModelAndView editCourse(@PathVariable long sessionId) {
+    @RequestMapping(value = "/courses/{courseId}")
+    public ModelAndView editCourse(@PathVariable long courseId) {
         final ModelAndView modelAndView = new ModelAndView("/teacher/course");
 
-        final CourseSession session = getSession(sessionId);
-        modelAndView.addObject("session", session);
+        final Course course = courseDao.getCourse(courseId);
+        modelAndView.addObject("course", course);
 
-        final List<Tag> tags = courseDao.getTags();
-        modelAndView.addObject("tags", tags);
+        final List<CourseSession> sessions = courseDao.getCourseSessions(courseId);
+        modelAndView.addObject("sessions", sessions);
 
-        final List<CourseTag> courseTags = courseDao.getTagsByCourse(session.getCourse());
-        modelAndView.addObject("courseTags", courseTags);
+        final List<Tag> courseTags = courseDao.getTagsByCourse(courseId);
+        modelAndView.addObject("tags", courseTags);
 
         return modelAndView;
     }
@@ -129,7 +131,7 @@ public class TeacherController {
 
         return sessionOptional.orElseGet(() -> {
             final CourseSession session = new CourseSession();
-            session.setSessionId(id);
+            session.setId(id);
             return session;
         });
     }

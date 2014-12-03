@@ -6,20 +6,16 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SessionRowMapper implements RowMapper<CourseSession> {
+public class CourseSessionRowMapper implements RowMapper<CourseSession> {
     @Override
     public CourseSession mapRow(ResultSet rs, int rowNum) throws SQLException {
         final CourseSession courseSession = new CourseSession();
 
-        courseSession.setSessionId(rs.getLong("sessionId"));
-        courseSession.setCourse(rs.getLong("course"));
+        courseSession.setId(rs.getLong("sessionId"));
+        courseSession.setCourseId(rs.getLong("courseId"));
         courseSession.setStartDate(rs.getDate("startDate"));
         courseSession.setEndDate(rs.getDate("endDate"));
         courseSession.setStatus(rs.getInt("status"));
-        courseSession.setName(rs.getString("name"));
-        courseSession.setDescription(rs.getString("description"));
-        courseSession.setImg(rs.getString("img"));
-        courseSession.setTeacher(rs.getInt("teacher"));
 
         return courseSession;
     }

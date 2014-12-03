@@ -1,13 +1,11 @@
 package com.university.controllers.client.model;
 
-import java.util.Date;
-
 public class Course {
     private Long id;
+    private Integer teacherId;
     private String name;
     private String description;
     private String img;
-    private int teacher;
 
     public Long getId() {
         return id;
@@ -15,6 +13,14 @@ public class Course {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
     }
 
     public String getName() {
@@ -39,13 +45,5 @@ public class Course {
 
     public void setImg(String img) {
         this.img = img;
-    }
-
-    public int getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(int teacher) {
-        this.teacher = teacher;
     }
 }

@@ -19,21 +19,21 @@
                 <a class="btn btn-primary" href="/teacher/courses/new" style="margin-bottom: 30px;">New course</a>
 
                 <div class="courses">
-                    <#list sessions as session>
+                    <#list courses as course>
                         <div class="teacher-course media">
                             <a class="media-left">
                                 <img src="/img/avatar.jpg">
                             </a>
 
                             <div class="media-body">
-                                <a href="./${session.sessionId?c}">
-                                    <h4 class="media-heading">${session.name}</h4>
+                                <a href="./${course.id?c}">
+                                    <h4 class="media-heading">${course.name}</h4>
                                 </a>
-                                <span class="description">${session.description}</span><br>
-                                <a class="edit" href="/teacher/courses/${session.sessionId?c}">Edit</a>
+                                <span class="description">${course.description}</span><br>
+                                <a class="edit" href="/teacher/courses/${course.id?c}">Edit</a>
                             </div>
 
-                            <input class="id" type="hidden" value="${session.sessionId?c}">
+                            <input class="id" type="hidden" value="${course.id?c}">
                         </div>
                     </#list>
                 </div>
