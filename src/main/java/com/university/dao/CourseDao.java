@@ -9,6 +9,7 @@ import com.university.utils.CommonUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -61,6 +62,30 @@ public class CourseDao {
                          "JOIN course_tag ct ON ct.tagId = t.tagId " +
                          "WHERE ct.courseId = c.courseId) AS tags " +
                 "FROM course c;";
+
+        return jdbcTemplate.query(sql, new CourseRowMapper());
+    }
+
+    public List<Course> getCoursesByIds(List<Long> coursesIds) {
+        if (coursesIds.isEmpty()) return Collections.emptyList();
+
+        final String concatenatedCoursesIds = coursesIds.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(","));
+
+        final String sql =
+                "SELECT " +
+                        "c.courseId," +
+                        "c.teacherId," +
+                        "c.name," +
+                        "c.description," +
+                        "c.img," +
+                        "(SELECT GROUP_CONCAT(CONCAT(t.tagId, ',', t.tagName) SEPARATOR ',')" +
+                         "FROM tag t " +
+                         "JOIN course_tag ct ON ct.tagId = t.tagId " +
+                         "WHERE ct.courseId = c.courseId) AS tags " +
+                "FROM course c " +
+                "WHERE c.courseId IN (" + concatenatedCoursesIds + ");";
 
         return jdbcTemplate.query(sql, new CourseRowMapper());
     }

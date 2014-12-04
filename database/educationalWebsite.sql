@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `course_tag` (
   KEY `FK_course_tag_tag` (`tagId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.course_tag: ~4 rows (приблизительно)
+-- Дамп данных таблицы educationalwebsite.course_tag: ~5 rows (приблизительно)
 DELETE FROM `course_tag`;
 /*!40000 ALTER TABLE `course_tag` DISABLE KEYS */;
 INSERT INTO `course_tag` (`courseId`, `tagId`) VALUES
@@ -74,24 +74,24 @@ INSERT INTO `course_tag` (`courseId`, `tagId`) VALUES
 /*!40000 ALTER TABLE `course_tag` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.enrolment
-DROP TABLE IF EXISTS `enrolment`;
-CREATE TABLE IF NOT EXISTS `enrolment` (
+-- Дамп структуры для таблица educationalwebsite.enrollment
+DROP TABLE IF EXISTS `enrollment`;
+CREATE TABLE IF NOT EXISTS `enrollment` (
   `sessionId` bigint(20) unsigned NOT NULL,
   `studentId` int(10) unsigned NOT NULL,
-  `status` smallint(5) unsigned NOT NULL COMMENT '1 - current; 2 - pass; 3 - upcoming',
+  `status` smallint(5) unsigned NOT NULL COMMENT '1 - current; 2 - past; 3 - upcoming',
   KEY `sessionId` (`sessionId`),
   KEY `studentId` (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.enrolment: ~3 rows (приблизительно)
-DELETE FROM `enrolment`;
-/*!40000 ALTER TABLE `enrolment` DISABLE KEYS */;
-INSERT INTO `enrolment` (`sessionId`, `studentId`, `status`) VALUES
-	(1, 2, 1),
-	(2, 2, 3),
-	(3, 2, 2);
-/*!40000 ALTER TABLE `enrolment` ENABLE KEYS */;
+-- Дамп данных таблицы educationalwebsite.enrollment: ~3 rows (приблизительно)
+DELETE FROM `enrollment`;
+/*!40000 ALTER TABLE `enrollment` DISABLE KEYS */;
+INSERT INTO `enrollment` (`sessionId`, `studentId`, `status`) VALUES
+	(1, 10, 1),
+	(2, 10, 3),
+	(3, 10, 2);
+/*!40000 ALTER TABLE `enrollment` ENABLE KEYS */;
 
 
 -- Дамп структуры для таблица educationalwebsite.lesson
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `session` (
   `courseId` bigint(20) unsigned NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
-  `status` smallint(6) NOT NULL DEFAULT '3' COMMENT '1 - life; 2 - ended; 3 - upcoming',
+  `status` smallint(6) NOT NULL DEFAULT '3' COMMENT '1 - live; 2 - past; 3 - upcoming',
   `passRating` float DEFAULT NULL COMMENT 'rating to pass the course',
   PRIMARY KEY (`sessionId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   KEY `FK_student_user` (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.student: ~7 rows (приблизительно)
+-- Дамп данных таблицы educationalwebsite.student: ~6 rows (приблизительно)
 DELETE FROM `student`;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
 INSERT INTO `student` (`studentId`) VALUES
@@ -199,9 +199,9 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `tagId` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `tagName` varchar(50) NOT NULL,
   PRIMARY KEY (`tagId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.tag: ~2 rows (приблизительно)
+-- Дамп данных таблицы educationalwebsite.tag: ~8 rows (приблизительно)
 DELETE FROM `tag`;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
 INSERT INTO `tag` (`tagId`, `tagName`) VALUES
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   KEY `FK__user` (`teacherId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.teacher: ~3 rows (приблизительно)
+-- Дамп данных таблицы educationalwebsite.teacher: ~4 rows (приблизительно)
 DELETE FROM `teacher`;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
 INSERT INTO `teacher` (`teacherId`, `educationalEstablishment`, `academicStatus`, `university`) VALUES

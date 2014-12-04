@@ -11,6 +11,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UserDao {
     private JdbcTemplate jdbcTemplate;
@@ -72,12 +73,11 @@ public class UserDao {
         return CommonUtils.selectOne(jdbcTemplate, sql, new UserRowMapper(), id);
     }
 
-    public List<CourseSession> getUserSessions(long userId) {
+    public List<CourseSession> getUserCoursesSessions(long userId) {
         final String sql =
                 "SELECT * " +
-                "FROM enrolment e " +
-                "JOIN session s ON e.sessionId = s.sessionId " +
-                "JOIN course c ON c.courseId = s.course " +
+                "FROM enrollment e " +
+                "JOIN session s ON s.sessionId = e.sessionId " +
                 "WHERE e.studentId = ?";
 
         return jdbcTemplate.query(sql, new CourseSessionRowMapper(), userId);
@@ -131,11 +131,28 @@ public class UserDao {
         return jdbcTemplate.query(sql, new TeacherRowMapper(), teacherId).get(0);
     }
 
+    public List<Teacher> getTeachersByIds(List<Integer> teachersIds) {
+        final String concatenatedTeacherIds = teachersIds.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(","));
+
+        final String sql =
+                "SELECT " +
+                        getUserAttributesString() + "," +
+                        "t.educationalEstablishment," +
+                        "t.academicStatus " +
+                "FROM user u " +
+                "JOIN teacher t ON t.teacherId = u.userId " +
+                "WHERE u.userId IN (" + concatenatedTeacherIds + ");";
+
+        return jdbcTemplate.query(sql, new TeacherRowMapper());
+    }
+
     public List<Teacher> getAllTeachers() {
         final String sql =
-                "SELECT * " +
+                "SELECT " + getUserAttributesString() + " " +
                 "FROM teacher t " +
-                "JOIN user u ON t.teacherId = u.userId ";
+                "JOIN user u ON u.userId = t.teacherId;";
 
         return jdbcTemplate.query(sql, new TeacherRowMapper());
     }
@@ -143,16 +160,16 @@ public class UserDao {
     public void saveProfile(long id, ProfileSaveForm profileSaveForm, String userType) {
         final String sql =
                 "UPDATE user u " +
-                        "SET u.firstName = ?, u.lastName = ?, u.info = ? " +
-                        "WHERE u.userId = ? ";
+                "SET u.firstName = ?, u.lastName = ?, u.info = ? " +
+                "WHERE u.userId = ? ";
 
         jdbcTemplate.update(sql, profileSaveForm.getFirstName(), profileSaveForm.getLastName(), profileSaveForm.getInfo(), id);
 
         if (userType.equals("teacher")) {
             final String sql2 =
                     "UPDATE teacher t " +
-                            "SET t.academicStatus = ?, t.educationalEstablishment = ? " +
-                            "WHERE t.teacherId = ?; ";
+                    "SET t.academicStatus = ?, t.educationalEstablishment = ? " +
+                    "WHERE t.teacherId = ?; ";
 
             jdbcTemplate.update(sql2, profileSaveForm.getAcademicStatus(), profileSaveForm.getEducationalEstablishment(), id);
         }

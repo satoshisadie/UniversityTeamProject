@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping(value = "/student")
 public class StudentController {
-    @Autowired CourseDao courseDao;
-    @Autowired UserDao userDao;
-    final Gson serializer = new Gson();
-    final JsonParser jsonParser = new JsonParser();
+    @Autowired private CourseDao courseDao;
+    @Autowired private UserDao userDao;
+    @Autowired private Gson serializer;
+    @Autowired private JsonParser jsonParser;
 
     @RequestMapping("/lessons/")
     public ModelAndView course(@RequestParam(value = "sessionId") Long sessionId) throws Exception {
@@ -42,8 +42,22 @@ public class StudentController {
         final User user = CommonUtils.getUserFromRequest(httpServletRequest);
         modelAndView.addObject("user", user);
 
-        final List<CourseSession> userSessions = userDao.getUserSessions(user.getId());
-        modelAndView.addObject("sessions", userSessions);
+        final List<CourseSession> sessions = userDao.getUserCoursesSessions(user.getId());
+        modelAndView.addObject("sessions", sessions);
+
+        final List<Long> coursesIds = sessions.stream()
+                .map(CourseSession::getCourseId)
+                .collect(Collectors.toList());
+
+        final List<Course> courses = courseDao.getCoursesByIds(coursesIds);
+        final Map<String, Course> courseById = courses.stream()
+                .collect(Collectors.toMap(course -> course.getId().toString(), course -> course));
+        modelAndView.addObject("courseById", courseById);
+
+        final List<Integer> teachersIds = courses.stream().map(Course::getTeacherId).collect(Collectors.toList());
+        final Map<String, Teacher> teacherById = userDao.getTeachersByIds(teachersIds).stream()
+                .collect(Collectors.toMap(teacher -> teacher.getId().toString(), teacher -> teacher));
+        modelAndView.addObject("teacherById", teacherById);
 
         return modelAndView;
     }

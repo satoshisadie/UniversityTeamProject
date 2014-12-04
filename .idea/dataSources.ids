@@ -30,10 +30,10 @@
       <index name="FK_course_tag_course" unique="false" columns="courseId"/>
       <index name="FK_course_tag_tag" unique="false" columns="tagId"/>
     </table>
-    <table name="enrolment" schema="" catalog="educationalwebsite" type="TABLE">
+    <table name="enrollment" schema="" catalog="educationalwebsite" type="TABLE">
       <column name="sessionId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
       <column name="studentId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="status" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5" remarks="MSAtIGN1cnJlbnQ7IDIgLSBwYXNzOyAzIC0gdXBjb21pbmc="/>
+      <column name="status" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5" remarks="MSAtIGN1cnJlbnQ7IDIgLSBwYXN0OyAzIC0gdXBjb21pbmc="/>
       <index name="sessionId" unique="false" columns="sessionId"/>
       <index name="studentId" unique="false" columns="studentId"/>
     </table>
