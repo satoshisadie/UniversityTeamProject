@@ -13,7 +13,7 @@
     <div class="container">
         <#include "*/menu.ftl">
 
-
+        <#include "*/footer.ftl">
     </div>
 </body>
 </html>

@@ -54,6 +54,7 @@
             </div>
         </div>
     </div>
+    <#include "*/footer.ftl">
 
     <input class="course-id" type="hidden" value="${sessionId}"/>
 </div>

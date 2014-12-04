@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Profile</title>
 
     <#include "*/commonHeader.ftl">
 
@@ -23,19 +23,33 @@
                     </div>
                 </div><hr>
 
-                <div class="form-group">
-                    <div class="user-photo">
+                <div class="info media">
+                    <div class="media-left">
                         <img src="${user.photo}" width="100" height="100">
                     </div>
-                    <div class="user-name-type">
+                    <div class="media-body">
                         <div class="user-name">
                             <#if user.firstName?? && user.lastName??>
                                 ${user.firstName} ${user.lastName}
                             </#if>
                         </div>
-                        <div class="user-type">
-                            ${user.type}
-                        </div>
+                        <#if user.type == "teacher">
+                            <div class="form-group">
+                                <div class="teacher-educationalEstablishment">
+                                    <#if teacher.educationalEstablishment??>
+                                        ${teacher.educationalEstablishment}
+                                    </#if>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="teacher-academicStatus">
+                                    <#if teacher.academicStatus??>
+                                        ${teacher.academicStatus}
+                                    </#if>
+                                </div>
+                            </div>
+                        </#if>
                     </div>
                 </div><hr>
 
@@ -47,26 +61,6 @@
                         </#if>
                     </div>
                 </div>
-
-                <#if user.type == "teacher">
-                    <div class="form-group">
-                        <label for="teacher-educationalEstablishment">Educational Establishment:</label>
-                        <div class="teacher-educationalEstablishment">
-                            <#if teacher.educationalEstablishment??>
-                                ${teacher.educationalEstablishment}
-                            </#if>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="teacher-academicStatus">Academic Status:</label>
-                        <div class="teacher-academicStatus">
-                            <#if teacher.academicStatus??>
-                                ${teacher.academicStatus}
-                            </#if>
-                        </div>
-                    </div>
-                </#if>
 
             </div>
         </div>

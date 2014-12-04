@@ -126,6 +126,12 @@ public class UserController {
     {
         final ModelAndView modelAndView = new ModelAndView("/user/profile");
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+        User user = CommonUtils.getUserFromRequest(httpServletRequest);
+        if(user.getType().equals("teacher"))
+        {
+            Teacher teacher = userDao.getTeacherById(user.getId());
+            modelAndView.addObject("teacher", teacher);
+        }
 
         return modelAndView;
     }
@@ -133,8 +139,37 @@ public class UserController {
     @RequestMapping("/profile/edit")
     public ModelAndView edit(HttpServletRequest httpServletRequest) {
         final ModelAndView modelAndView = new ModelAndView("/user/editProfile");
-
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+        User user = CommonUtils.getUserFromRequest(httpServletRequest);
+        if(user.getType().equals("teacher"))
+        {
+            Teacher teacher = userDao.getTeacherById(user.getId());
+            modelAndView.addObject("teacher", teacher);
+        }
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/teachers/viewProfile/{userId}")
+    public ModelAndView viewProfile(@PathVariable int userId)
+    {
+        final ModelAndView modelAndView = new ModelAndView("/user/viewProfile");
+
+        User u = userDao.getFullUserById(userId);
+        modelAndView.addObject("u", u);
+
+        if(u.getType().equals("teacher"))
+        {
+            Teacher teacher = userDao.getTeacherById(u.getId());
+            modelAndView.addObject("teacher", teacher);
+        }
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/specialisation")
+    public ModelAndView specialisation(HttpServletRequest httpServletRequest) {
+        final ModelAndView modelAndView = new ModelAndView("/user/specialisation");
 
         return modelAndView;
     }

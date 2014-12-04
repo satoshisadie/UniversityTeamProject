@@ -66,7 +66,7 @@ public class UserDao {
 
     public Optional<User> getUserById(long id) {
         final String sql =
-                "SELECT * " +
+                "SELECT " +
                 "FROM user " +
                 "WHERE userId = ?";
 
@@ -99,6 +99,16 @@ public class UserDao {
                 "WHERE u.login = ?;";
 
         return CommonUtils.selectOne(jdbcTemplate, sql, new UserRowMapper(), login);
+    }
+
+
+    public User getFullUserById(long id){
+        final String sql =
+                "SELECT " + getUserAttributesString() +
+                "FROM user u " +
+                "WHERE u.userId = ?";
+
+        return jdbcTemplate.query(sql, new UserRowMapper(), id).get(0);
     }
 
     public String getUserAttributesString() {

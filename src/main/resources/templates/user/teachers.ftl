@@ -32,6 +32,9 @@
                         <p>Academic status: ${teacher.academicStatus}</p>
 
                         <p>Educational establishment: ${teacher.educationalEstablishment}</p>
+
+                        <a class="edit" href="/teachers/viewProfile/${teacher.id?c}">View Profile</a>
+                        <input class="id" type="hidden" value="${teacher.id?c}">
                     </div>
                 </div>
 

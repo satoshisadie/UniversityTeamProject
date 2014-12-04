@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Edit Profile</title>
 
     <#include "*/commonHeader.ftl">
 
@@ -16,31 +16,30 @@
             <div class="content row">
                 <div class="col-md-8 col-md-offset-2">
 
-                    <div class="form-group">
-                        <div class="user-login">${user.login}</div>
-                        <div class="view-button">
+                    <div class="media">
+                        <div class="user-login media-left">${user.login}</div>
+                        <div class="view-button media-body">
                             <a href="../profile" class="btn btn-default">View Profile</a>
                         </div>
                     </div><hr>
 
-                    <div class="some-info">Change User Information:</div>
+                    <div class="some-info">User Information</div>
 
                     <form action="edit/save" method="post">
 
                         <div class="form-group">
-                            <label for="user-photo-change">Change Avatar:</label>
-                            <div class="user-photo-change">
-                                <div class="user-photo">
+                            <div class="media">
+                                <div class="user-photo media-left">
                                     <img src="${user.photo}" width="100" height="100">
                                 </div>
-                                <div class="upload-button">
+                                <div class="upload-button media-body" onclick='alert("This button must upload user avatar!")'>
                                     <input class="btn btn-default" type="button" value="Upload"/>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="user-firstName">Change Name:</label>
+                            <label for="user-firstName">First Name</label>
                                 <#if user.firstName??>
                                     <input id="user-firstName" name="firstName" class="form-control" type="text" value="${user.firstName!}"/>
                                 <#else>
@@ -49,7 +48,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="user-lastName">Change Surname:</label>
+                            <label for="user-lastName">Last Name</label>
                                 <#if user.lastName??>
                                     <input id="user-lastName" name="lastName" class="form-control" type="text" value="${user.lastName!}"/>
                                 <#else>
@@ -58,7 +57,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="user-info">Change Info:</label>
+                            <label for="user-info">About</label>
                                 <#if user.info??>
                                     <textarea id="user-info" name="info" class="form-control" rows="3">${user.info!}</textarea>
                                 <#else>
@@ -69,7 +68,7 @@
                         <#if user.type == "teacher">
 
                             <div class="form-group">
-                                <label for="teacher-academicStatus">Change Academic Status:</label>
+                                <label for="teacher-academicStatus">Academic Status</label>
                                 <#if teacher.academicStatus??>
                                     <textarea id="teacher-academicStatus" name="academicStatus" class="form-control" rows="3">${teacher.academicStatus!}</textarea>
                                 <#else>
@@ -78,7 +77,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="teacher-educationalEstablishment">Change Educational Establishment:</label>
+                                <label for="teacher-educationalEstablishment">Educational Establishment</label>
                                 <#if teacher.educationalEstablishment??>
                                     <textarea id="teacher-educationalEstablishment" name="educationalEstablishment" class="form-control" rows="3">${teacher.educationalEstablishment!}</textarea>
                                 <#else>
