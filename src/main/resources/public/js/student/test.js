@@ -19,12 +19,17 @@ $(document).ready(function () {
         $.ajax({
             url: '/student/test/check',
             type: 'POST',
+            dataType: 'json',
             data: {
                 lessonId: $('.lesson-id').val(),
                 questionsJson: JSON.stringify(questions)
             }
         }).done(function (response) {
-            alert(response);
+            if (response.status === 'success') {
+                alert("Good work! You have passed the test. Correct answers percent is " + response.correctAnswersPercent)
+            } else {
+                alert("Sorry. You haven't passed the test. Correct answers percent is " + response.correctAnswersPercent)
+            }
         });
     });
 });

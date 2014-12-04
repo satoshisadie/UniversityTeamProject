@@ -104,7 +104,7 @@ public class TeacherController {
     public ModelAndView test(@RequestParam long lessonId) {
         final ModelAndView modelAndView = new ModelAndView("/teacher/test");
 
-        final Optional<String> testJson = courseDao.getTest(lessonId);
+        final Optional<String> testJson = courseDao.getTestByLessonId(lessonId);
         if (testJson.isPresent()) {
             modelAndView.addObject("test", serializer.fromJson(testJson.get(), Test.class));
         }

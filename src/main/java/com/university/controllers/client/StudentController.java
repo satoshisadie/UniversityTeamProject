@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,12 +25,21 @@ public class StudentController {
     @Autowired private Gson serializer;
     @Autowired private JsonParser jsonParser;
 
+    private final DecimalFormat wholePercentsFormat = new DecimalFormat("#");
+
     @RequestMapping("/lessons/")
     public ModelAndView course(@RequestParam(value = "sessionId") Long sessionId) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/student/lessons");
 
         final List<Lesson> lessons = courseDao.getLessons(sessionId);
         modelAndView.addObject("lessons", lessons);
+
+        final List<Long> lessonsIds = lessons.stream().map(Lesson::getId).collect(Collectors.toList());
+        final List<Test> tests = courseDao.getTestsByLessonsIds(lessonsIds).stream()
+                .map(test -> serializer.fromJson(test, Test.class))
+                .collect(Collectors.toList());
+
+
 
         return modelAndView;
     }
@@ -66,7 +76,7 @@ public class StudentController {
     public ModelAndView passTest(@RequestParam Long lessonId) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/student/test");
 
-        final Optional<String> test = courseDao.getTest(lessonId);
+        final Optional<String> test = courseDao.getTestByLessonId(lessonId);
 
         if (test.isPresent()) {
             modelAndView.addObject("test", serializer.fromJson(test.get(), Test.class));
@@ -79,16 +89,17 @@ public class StudentController {
     @RequestMapping("/test/check")
     @ResponseBody
     public String checkTest(@RequestParam Long lessonId,
-                            @RequestParam String questionsJson)
+                            @RequestParam String questionsJson,
+                            HttpServletRequest httpServletRequest)
     {
         final JsonArray questionsArray = jsonParser.parse(questionsJson).getAsJsonArray();
 
-        final Test test = serializer.fromJson(courseDao.getTest(lessonId).get(), Test.class);
+        final Test test = serializer.fromJson(courseDao.getTestByLessonId(lessonId).get(), Test.class);
 
         final Iterator<JsonElement> iterator = questionsArray.iterator();
 
         int index = 0;
-        int answeredQuestionsCount = 0;
+        int correctAnswersCount = 0;
 
         while (iterator.hasNext()) {
             final List<String> selectedAnswers = Arrays.asList(serializer.fromJson(iterator.next(), String[].class));
@@ -98,11 +109,24 @@ public class StudentController {
                     .collect(Collectors.toList());
 
             if (selectedAnswers.size() == correctAnswers.size() && selectedAnswers.containsAll(correctAnswers)) {
-                answeredQuestionsCount++;
+                correctAnswersCount++;
             }
             index++;
         }
 
-        return Integer.toString(answeredQuestionsCount);
+        final User student = CommonUtils.getUserFromRequest(httpServletRequest);
+        courseDao.saveTestPassing(student.getId(), test.getId(), correctAnswersCount);
+
+        final JsonObject response = new JsonObject();
+
+        final double correctAnswersPercent = 1.0 * correctAnswersCount / test.getQuestions().size() * 100;
+        if (correctAnswersPercent >= 80) {
+            response.addProperty("status", "success");
+        } else {
+            response.addProperty("status", "failure");
+        }
+        response.addProperty("correctAnswersPercent", wholePercentsFormat.format(correctAnswersPercent));
+
+        return response.toString();
     }
 }

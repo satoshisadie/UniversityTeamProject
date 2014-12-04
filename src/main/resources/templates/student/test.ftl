@@ -12,23 +12,24 @@
         <#include "*/menu.ftl">
 
         <div class="content row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-8 col-md-offset-2">
                 <#list test.questions as question>
-                    <div class="question">
-                        <span>${question.text}</span>
+                    <div class="question" style="margin-top: 30px; border: 1px solid darkgrey; padding: 0 20px 20px 20px;">
+                        <h3>Question ${question_index + 1}</h3>
+                        <span style="margin-bottom: 10px; display: block;">${question.text}</span>
 
                         <div class="answers">
                             <#list question.answers as answer>
-                                <div class="answer">
+                                <label class="answer" style="margin-top: 5px; display: block; font-weight: normal;">
                                     <input type="checkbox"/>
                                     <span class="answer-text">${answer.text}</span>
-                                </div>
+                                </label>
                             </#list>
                         </div>
                     </div>
                 </#list>
 
-                <input class="submit-answers btn btn-primary" type="button" value="Submit answers">
+                <input class="submit-answers btn btn-success" style="margin-top: 20px" type="button" value="Submit answers">
             </div>
         </div>
 

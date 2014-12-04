@@ -30,7 +30,7 @@
                         <h3>Sessions</h3>
                         <select class="form-control">
                             <#list sessions as session>
-                                <option value="${session.id}">${session.startDate?date} - ${session.endDate?date}</option>
+                                <option value="${session.id?c}">${session.startDate?date} - ${session.endDate?date}</option>
                             </#list>
                         </select>
                         <button class="btn btn-lg btn-primary" style="margin-top: 20px;">Join for free</button>

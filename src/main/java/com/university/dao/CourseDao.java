@@ -118,16 +118,6 @@ public class CourseDao {
         return jdbcTemplate.query(sql, new CourseSessionRowMapper(), courseId);
     }
 
-    public List<CourseSession> getOpenSessions() {
-        final String sql =
-                "SELECT * " +
-                "FROM session s " +
-                "JOIN course c ON s.course = c.courseId " +
-                "WHERE s.status <> 2";
-
-        return jdbcTemplate.query(sql, new CourseSessionRowMapper());
-    }
-
     public Optional<CourseSession> getSession(long id) {
         final String sql =
                 "SELECT * " +
@@ -171,15 +161,6 @@ public class CourseDao {
         return jdbcTemplate.query(sql, new LessonRowMapper(), sessionId);
     }
 
-    public Optional<Lesson> getLesson(long id) {
-        final String sql =
-                "SELECT * " +
-                "FROM lesson l " +
-                "WHERE l.lessonId = ?";
-
-        return CommonUtils.selectOne(jdbcTemplate, sql, new LessonRowMapper(), id);
-    }
-
     public void saveLessons(List<Lesson> lessons) {
         final List<Lesson> preparedLessons = lessons.stream()
                 .map(lesson -> {
@@ -199,7 +180,7 @@ public class CourseDao {
         jdbcTemplate.update(sql);
     }
 
-    public Optional<String> getTest(long lessonId) {
+    public Optional<String> getTestByLessonId(long lessonId) {
         final String sql =
                 "SELECT t.content " +
                 "FROM test t " +
@@ -210,6 +191,17 @@ public class CourseDao {
         } catch (DataAccessException e) {
             return Optional.empty();
         }
+    }
+
+    public List<String> getTestsByLessonsIds(List<Long> lessonsIds) {
+        final String concatenatedLessonsIds = lessonsIds.stream().map(Object::toString).collect(Collectors.joining(","));
+
+        final String sql =
+                "SELECT t.content " +
+                "FROM test t " +
+                "WHERE t.lessonId IN (" + concatenatedLessonsIds + ");";
+
+        return jdbcTemplate.queryForList(sql, String.class);
     }
 
     public void saveTest(Test test) {
@@ -226,5 +218,13 @@ public class CourseDao {
         return lessons.stream()
                 .map(lesson -> "(" + lesson.getId() + "," + lesson.getSessionId() + ",'" + lesson.getContent() + "')")
                 .collect(Collectors.joining(","));
+    }
+
+    public void saveTestPassing(int studentId, long testId, int correctAnswersCount) {
+        final String sql =
+                "INSERT INTO student_test(studentId, testId, date, correctAnswersCount) " +
+                "VALUES (?, ?, CURRENT_TIMESTAMP(), ?)";
+
+        jdbcTemplate.update(sql, studentId, testId, correctAnswersCount);
     }
 }

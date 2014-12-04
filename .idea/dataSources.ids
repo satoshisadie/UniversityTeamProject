@@ -49,7 +49,7 @@
       <column name="courseId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
       <column name="startDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <column name="endDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
-      <column name="status" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" def="Mw==" remarks="MSAtIGxpZmU7IDIgLSBlbmRlZDsgMyAtIHVwY29taW5n"/>
+      <column name="status" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" def="Mw==" remarks="MSAtIGxpdmU7IDIgLSBwYXN0OyAzIC0gdXBjb21pbmc="/>
       <column name="passRating" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7" remarks="cmF0aW5nIHRvIHBhc3MgdGhlIGNvdXJzZQ=="/>
       <primary-key name="PRIMARY" columns="sessionId"/>
     </table>
@@ -62,15 +62,11 @@
       <column name="status" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="statusId"/>
     </table>
-    <table name="student_test_passing" schema="" catalog="educationalwebsite" type="TABLE">
-      <column name="passingId" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="test" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
-      <column name="time" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
-      <column name="result" sqlType="FLOAT UNSIGNED" precision="12" scale="0" nullable="false" jdbcType="7" remarks="MCUgPD0gcmVzIDw9IDEwMCU="/>
-      <column name="path" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="passingId"/>
-      <index name="FK__test" unique="false" columns="test"/>
+    <table name="student_test" schema="" catalog="educationalwebsite" type="TABLE">
+      <column name="studentId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="testId" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="correctAnswersCount" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
     </table>
     <table name="tag" schema="" catalog="educationalwebsite" type="TABLE">
       <column name="tagId" sqlType="SMALLINT UNSIGNED" precision="5" scale="0" nullable="false" jdbcType="5" autoIncrement="true"/>
