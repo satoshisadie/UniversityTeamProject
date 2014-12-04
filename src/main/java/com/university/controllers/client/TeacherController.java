@@ -38,7 +38,9 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/courses/{courseId}")
-    public ModelAndView editCourse(@PathVariable long courseId) {
+    public ModelAndView editCourse(@PathVariable long courseId,
+                                   HttpServletRequest httpServletRequest)
+    {
         final ModelAndView modelAndView = new ModelAndView("/teacher/course");
 
         final Course course = courseDao.getCourse(courseId);
@@ -47,8 +49,7 @@ public class TeacherController {
         final List<CourseSession> sessions = courseDao.getCourseSessions(courseId);
         modelAndView.addObject("sessions", sessions);
 
-        final List<Tag> courseTags = courseDao.getTagsByCourse(courseId);
-        modelAndView.addObject("tags", courseTags);
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 
         return modelAndView;
     }

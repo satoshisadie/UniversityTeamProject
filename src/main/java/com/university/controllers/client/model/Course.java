@@ -1,11 +1,14 @@
 package com.university.controllers.client.model;
 
+import java.util.List;
+
 public class Course {
     private Long id;
     private Integer teacherId;
     private String name;
     private String description;
     private String img;
+    private List<Tag> tags;
 
     public Long getId() {
         return id;
@@ -45,5 +48,13 @@ public class Course {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

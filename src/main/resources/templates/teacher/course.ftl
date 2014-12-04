@@ -30,8 +30,8 @@
                     <label for="course-tags">Tags</label>
                     <br>
                     <select multiple id="course-tags" name="tags" class="tags">
-                        <#if tags??>
-                            <#list tags as tag>
+                        <#if course.tags??>
+                            <#list course.tags as tag>
                                 <option value="${tag.name}"></option>
                             </#list>
                         </#if>
@@ -57,6 +57,8 @@
                     <input class="add-session btn btn-primary" style="display: block;" type="button" value="Add new session"/>
 
                     <input class="btn btn-primary" style="margin-top: 40px;" type="submit" value="Save"/>
+
+                    <input name="teacherId" type="hidden" value="${user.id}">
                 </form>
             </div>
         </div>

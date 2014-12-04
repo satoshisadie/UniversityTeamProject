@@ -102,24 +102,23 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("/course/{sessionId}")
-    public ModelAndView course(@PathVariable Long sessionId,
+    @RequestMapping("/course/{courseId}")
+    public ModelAndView course(@PathVariable Long courseId,
                                HttpServletRequest httpServletRequest) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/course");
 
-        final Optional<CourseSession> session = courseDao.getSession(sessionId);
+        final Course course = courseDao.getCourse(courseId);
+        modelAndView.addObject("course", course);
 
-        if(session.isPresent()) {
-            modelAndView.addObject("session", session.get());
+        final List<CourseSession> sessions = courseDao.getCourseSessions(courseId);
+        modelAndView.addObject("sessions", sessions);
 
-//            final Teacher teacher = userDao.getTeacherById(session.get().getTeacher());
-//            modelAndView.addObject("teacher", teacher);
+        final Teacher teacher = userDao.getTeacherById(course.getTeacherId());
+        modelAndView.addObject("teacher", teacher);
 
-            CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 
-            return modelAndView;
-        }
-        throw new Exception("Course not found");
+        return modelAndView;
     }
 
     @RequestMapping("/profile")

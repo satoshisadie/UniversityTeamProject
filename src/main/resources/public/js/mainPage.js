@@ -1,11 +1,17 @@
 $(document).ready(function () {
+    var $course = $('.course');
 
     $('.tag-select a').click(function (event) {
         event.preventDefault();
 
         var tag = $(this).attr('data-tag');
 
-        $('.course').each(function () {
+        if (tag === 'all') {
+            $course.show();
+            return;
+        }
+
+        $course.each(function () {
             var $course = $(this);
 
             var tags = $course.find('.tags').val();
