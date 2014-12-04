@@ -150,9 +150,12 @@ public class UserDao {
 
     public List<Teacher> getAllTeachers() {
         final String sql =
-                "SELECT " + getUserAttributesString() + " " +
-                "FROM teacher t " +
-                "JOIN user u ON u.userId = t.teacherId;";
+                "SELECT " +
+                        getUserAttributesString() + "," +
+                        "t.educationalEstablishment," +
+                        "t.academicStatus " +
+                "FROM user u " +
+                "JOIN teacher t ON t.teacherId = u.userId;";
 
         return jdbcTemplate.query(sql, new TeacherRowMapper());
     }
