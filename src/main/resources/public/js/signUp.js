@@ -21,7 +21,7 @@ $(document).ready(function () {
 
         self.errors = ko.validation.group(self);
 
-        self.newStudent = function (formElement) {
+        self.newStudent = function () {
             if (self.errors().length) {
                 self.errors.showAllMessages();
                 return;
@@ -46,13 +46,13 @@ $(document).ready(function () {
         var self = this;
 
         self.email = ko.observable('').extend({
-            require: true,
+            required: true,
             email: true
         });
-        self.login = ko.observable('').extend({ require: true });
-        self.password = ko.observable('').extend({ require: true });
+        self.login = ko.observable('').extend({ required: true });
+        self.password = ko.observable('').extend({ required: true });
         self.confirmPassword = ko.observable('').extend({
-            require: true,
+            required: true,
             validation: {
                 validator: function (value) {
                     return value === self.password();
@@ -65,7 +65,7 @@ $(document).ready(function () {
 
         self.errors = ko.validation.group(self);
 
-        self.newTeacher = function (formElement) {
+        self.newTeacher = function () {
             if (self.errors().length) {
                 self.errors.showAllMessages();
                 return;

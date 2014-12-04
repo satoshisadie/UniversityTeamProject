@@ -53,17 +53,17 @@
                 <form id="teacher-form" data-bind="submit: newTeacher">
                     <div class="form-group">
                         <label for="teacher-email">E-mail</label>
-                        <input id="teacher-email" type="text" class="form-control" data-bind="email">
+                        <input id="teacher-email" type="text" class="form-control" data-bind="value: email">
                     </div>
 
                     <div class="form-group">
                         <label for="teacher-login">Login</label>
-                        <input id="teacher-login" type="text" class="form-control" data-bind="login">
+                        <input id="teacher-login" type="text" class="form-control" data-bind="value: login">
                     </div>
 
                     <div class="form-group">
                         <label for="teacher-password">Password</label>
-                        <input id="teacher-password" class="form-control" type="password" data-bind="password">
+                        <input id="teacher-password" class="form-control" type="password" data-bind="value: password">
                     </div>
 
                     <div class="form-group">

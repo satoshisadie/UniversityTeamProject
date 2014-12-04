@@ -6,8 +6,6 @@
 
     <#include "*/commonHeader.ftl">
 
-    <link type="text/css" rel="stylesheet" href="/css/teacherDashboard.css">
-
     <script type="application/javascript" src="/js/mainPage.js"></script>
 </head>
 <body>
