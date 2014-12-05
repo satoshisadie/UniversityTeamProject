@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -112,6 +114,14 @@ public class UserController {
 
         final List<CourseSession> sessions = courseDao.getCourseSessions(courseId);
         modelAndView.addObject("sessions", sessions);
+
+        User user = CommonUtils.getUserFromRequest(httpServletRequest);
+        if(user != null) {
+            modelAndView.addObject("userSigned", userDao.isStudentSignedToSession(user.getId(), sessions.get(0).getId()));
+            modelAndView.addObject("userIsPresent", 1);
+        }else{
+            modelAndView.addObject("userIsPresent", 0);
+        }
 
         final Teacher teacher = userDao.getTeacherById(course.getTeacherId());
         modelAndView.addObject("teacher", teacher);
@@ -228,5 +238,13 @@ public class UserController {
     public String tagsJson() {
         final List<Tag> tags = courseDao.getTags();
         return serializer.toJson(tags);
+    }
+
+    @RequestMapping(value = "/join-session", method = RequestMethod.POST)
+    @ResponseBody
+    public String joinSession(@RequestParam Long sessionId, @RequestParam String currentURL, HttpServletRequest httpServletRequest) {
+        httpServletRequest.getSession().setAttribute("redirectUrl", currentURL);
+
+        return "../sign-in";
     }
 }

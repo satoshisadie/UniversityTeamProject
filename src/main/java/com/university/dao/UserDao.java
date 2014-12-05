@@ -187,4 +187,19 @@ public class UserDao {
             jdbcTemplate.update(sql2, profileSaveForm.getAcademicStatus(), profileSaveForm.getEducationalEstablishment(), id);
         }
     }
+
+    public boolean isStudentSignedToSession(int studentId, long sessionId) {
+        final String sql =
+                "SELECT count(1) " +
+                "FROM enrollment e " +
+                "where e.sessionId = ? AND e.studentId = ?";
+
+        String ans = jdbcTemplate.queryForObject(sql, String.class, sessionId, studentId);
+
+        if(ans.equals("1")) {
+            return true;
+        }
+
+        return false;
+    }
 }

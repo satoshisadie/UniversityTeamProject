@@ -119,7 +119,7 @@ public class CourseDao {
         final String sql =
                 "SELECT * " +
                 "FROM session s " +
-                "JOIN course c ON s.course = c.courseId " +
+                "JOIN course c ON s.courseId = c.courseId " +
                 "WHERE s.sessionId = ?";
 
         return CommonUtils.selectOne(jdbcTemplate, sql, new CourseSessionRowMapper(), id);
@@ -233,5 +233,13 @@ public class CourseDao {
                 "VALUES (?, ?, CURRENT_TIMESTAMP(), ?, ?)";
 
         jdbcTemplate.update(sql, studentId, testId, correctAnswersCount, isPassed);
+    }
+
+    public void signStudentToSession(int studentId, long sessionId, int status) {
+        final String sql =
+                "INSERT INTO enrollment (sessionId, studentId, `status`) " +
+                "VALUES (?, ?, ?)";
+
+        jdbcTemplate.update(sql, sessionId, studentId, status);
     }
 }

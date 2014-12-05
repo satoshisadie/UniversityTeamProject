@@ -8,11 +8,14 @@ import com.university.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -128,5 +131,27 @@ public class StudentController {
         response.addProperty("correctAnswersPercent", wholePercentsFormat.format(correctAnswersPercent));
 
         return response.toString();
+    }
+
+    @RequestMapping(value = "/join-session", method = RequestMethod.POST)
+    @ResponseBody
+    public String joinSession(@RequestParam Long sessionId, HttpServletRequest httpServletRequest) {
+        User user = CommonUtils.getUserFromRequest(httpServletRequest);
+
+        Optional<CourseSession> session = courseDao.getSession(sessionId);
+
+        if(session.isPresent()) {
+            courseDao.signStudentToSession(user.getId(), session.get().getId(), session.get().getStatus());
+        }
+
+        return "success";
+    }
+
+    @RequestMapping(value = "/is-student-signed", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean isStudentSignedToSession(@RequestParam Long sessionId, HttpServletRequest httpServletRequest) {
+        User user = CommonUtils.getUserFromRequest(httpServletRequest);
+
+        return userDao.isStudentSignedToSession(user.getId(), sessionId);
     }
 }
