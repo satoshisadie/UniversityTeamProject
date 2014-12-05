@@ -176,10 +176,11 @@ public class UserController {
 
     @RequestMapping(value = "/profile/edit/save", method = RequestMethod.POST)
     public String saveCourse(ProfileSaveForm profileSaveForm, HttpServletRequest httpServletRequest) {
-
         User user = CommonUtils.getUserFromRequest(httpServletRequest);
         userDao.saveProfile(user.getId(), profileSaveForm, user.getType());
-
+        user = userDao.getFullUserById(user.getId());
+        HttpSession httpSession = httpServletRequest.getSession();
+        httpSession.setAttribute("user",user);
         return "redirect:../../profile/";
     }
 
