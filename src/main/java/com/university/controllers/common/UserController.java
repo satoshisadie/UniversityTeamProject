@@ -115,14 +115,6 @@ public class UserController {
         final List<CourseSession> sessions = courseDao.getCourseSessions(courseId);
         modelAndView.addObject("sessions", sessions);
 
-        User user = CommonUtils.getUserFromRequest(httpServletRequest);
-        if(user != null) {
-            modelAndView.addObject("userSigned", userDao.isStudentSignedToSession(user.getId(), sessions.get(0).getId()));
-            modelAndView.addObject("userIsPresent", 1);
-        }else{
-            modelAndView.addObject("userIsPresent", 0);
-        }
-
         final Teacher teacher = userDao.getTeacherById(course.getTeacherId());
         modelAndView.addObject("teacher", teacher);
 
@@ -165,12 +157,12 @@ public class UserController {
     {
         final ModelAndView modelAndView = new ModelAndView("/user/viewProfile");
 
-        User u = userDao.getFullUserById(userId);
-        modelAndView.addObject("u", u);
+        User user = userDao.getFullUserById(userId);
+        modelAndView.addObject("u", user);
 
-        if(u.getType().equals("teacher"))
+        if(user.getType().equals("teacher"))
         {
-            Teacher teacher = userDao.getTeacherById(u.getId());
+            Teacher teacher = userDao.getTeacherById(user.getId());
             modelAndView.addObject("teacher", teacher);
         }
 
@@ -178,10 +170,8 @@ public class UserController {
     }
 
     @RequestMapping("/specialisation")
-    public ModelAndView specialisation(HttpServletRequest httpServletRequest) {
-        final ModelAndView modelAndView = new ModelAndView("/user/specialisation");
-
-        return modelAndView;
+    public ModelAndView specialisation() {
+        return new ModelAndView("/user/specialisation");
     }
 
     @RequestMapping(value = "/profile/edit/save", method = RequestMethod.POST)
@@ -238,13 +228,5 @@ public class UserController {
     public String tagsJson() {
         final List<Tag> tags = courseDao.getTags();
         return serializer.toJson(tags);
-    }
-
-    @RequestMapping(value = "/join-session", method = RequestMethod.POST)
-    @ResponseBody
-    public String joinSession(@RequestParam Long sessionId, @RequestParam String currentURL, HttpServletRequest httpServletRequest) {
-        httpServletRequest.getSession().setAttribute("redirectUrl", currentURL);
-
-        return "../sign-in";
     }
 }

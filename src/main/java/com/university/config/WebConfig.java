@@ -29,7 +29,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/admin/**", "/student/**", "/teacher/**")
-                .excludePathPatterns("/sign-in", "/teachers");
+                .excludePathPatterns("/sign-in", "/teachers", "/student/enroll");
     }
 
     @Bean FreeMarkerConfigurer freeMarkerConfigurer() {

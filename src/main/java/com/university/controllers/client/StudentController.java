@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -133,25 +131,42 @@ public class StudentController {
         return response.toString();
     }
 
-    @RequestMapping(value = "/join-session", method = RequestMethod.POST)
+    @RequestMapping(value = "/enroll", method = RequestMethod.POST)
     @ResponseBody
-    public String joinSession(@RequestParam Long sessionId, HttpServletRequest httpServletRequest) {
-        User user = CommonUtils.getUserFromRequest(httpServletRequest);
+    public String enroll(@RequestParam Long sessionId,
+                         @RequestParam String currentUrl,
+                         HttpServletRequest httpServletRequest)
+    {
+        final User user = CommonUtils.getUserFromRequest(httpServletRequest);
+        final JsonObject response = new JsonObject();
 
-        Optional<CourseSession> session = courseDao.getSession(sessionId);
+        if (user == null) {
+            httpServletRequest.getSession().setAttribute("redirectUrl", currentUrl);
 
-        if(session.isPresent()) {
-            courseDao.signStudentToSession(user.getId(), session.get().getId(), session.get().getStatus());
+            response.addProperty("status", "failure");
+            response.addProperty("redirectUrl", "/sign-in");
+        } else {
+            final Optional<CourseSession> session = courseDao.getSession(sessionId);
+
+            if(session.isPresent()) {
+                courseDao.signStudentToSession(user.getId(), session.get().getId(), session.get().getStatus());
+                response.addProperty("status", "success");
+            } else {
+                response.addProperty("status", "failure");
+            }
         }
 
-        return "success";
+        return response.toString();
     }
 
-    @RequestMapping(value = "/is-student-signed", method = RequestMethod.POST)
+    @RequestMapping(value = "/get-sessions-with-enrollments", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean isStudentSignedToSession(@RequestParam Long sessionId, HttpServletRequest httpServletRequest) {
-        User user = CommonUtils.getUserFromRequest(httpServletRequest);
+    public String getSessionsWithEnrollments(@RequestParam Long courseId,
+                                             HttpServletRequest httpServletRequest)
+    {
+        final User user = CommonUtils.getUserFromRequest(httpServletRequest);
+        final List<Long> sessionsWithEnrollments = userDao.getSessionsWithEnrollments(user.getId(), courseId);
 
-        return userDao.isStudentSignedToSession(user.getId(), sessionId);
+        return serializer.toJson(sessionsWithEnrollments);
     }
 }

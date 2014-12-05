@@ -188,18 +188,14 @@ public class UserDao {
         }
     }
 
-    public boolean isStudentSignedToSession(int studentId, long sessionId) {
+    public List<Long> getSessionsWithEnrollments(int studentId, long courseId) {
         final String sql =
-                "SELECT count(1) " +
-                "FROM enrollment e " +
-                "where e.sessionId = ? AND e.studentId = ?";
+                "SELECT s.sessionId " +
+                "FROM course c " +
+                "JOIN session s ON s.courseId = c.courseId " +
+                "JOIN enrollment e ON e.sessionId = s.sessionId " +
+                "WHERE e.studentId = ? AND c.courseId = ?;";
 
-        String ans = jdbcTemplate.queryForObject(sql, String.class, sessionId, studentId);
-
-        if(ans.equals("1")) {
-            return true;
-        }
-
-        return false;
+        return jdbcTemplate.queryForList(sql, Long.class, studentId, courseId);
     }
 }

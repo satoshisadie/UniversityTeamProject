@@ -1,32 +1,43 @@
 $(document).ready(function() {
-    $('#join-button').click(function () {
+    $('.enroll-button').click(function () {
         $.ajax({
-            url: $('#right-href').attr("value"),
+            url: '/student/enroll',
             type: 'POST',
-            data: {sessionId: $('select').val(), currentURL: document.URL}
+            dataType: 'json',
+            data: {
+                sessionId: $('select').val(),
+                currentUrl: document.URL
+            }
         }).done(function (response) {
-            if(response !== "success"){
-                window.location = response;
-            }else{
-                $('#join-button').hide();
-                $('#already-signed').show();
+            if(response.status === "failure") {
+                window.location = response.redirectUrl;
+            } else {
+                coursePageModel.enrolledSessions.push(parseInt($('select').val()));
             }
         });
     });
 
-    $('select').change(function() {
+    function CoursePageModel() {
+        var self = this;
+
         $.ajax({
-            url: '/student/is-student-signed',
+            url: '/student/get-sessions-with-enrollments',
             type: 'POST',
-            data: {sessionId: $('select').val()}
-        }).done(function(response) {
-            if(response) {
-                $('#join-button').hide();
-                $('#already-signed').show();
-            }else{
-                $('#join-button').show();
-                $('#already-signed').hide();
+            dataType: 'json',
+            async: false,
+            data: {
+                courseId: $('.course-id').val()
             }
+        }).done(function (response) {
+            self.enrolledSessions = ko.observableArray(response);
         });
-    });
+
+        self.sessionId = ko.observable();
+        self.enrolled = ko.pureComputed(function () {
+            return self.enrolledSessions.indexOf(parseInt(self.sessionId())) >= 0
+        });
+    }
+
+    var coursePageModel = new CoursePageModel();
+    ko.applyBindings(coursePageModel);
 });
