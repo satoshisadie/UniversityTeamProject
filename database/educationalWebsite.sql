@@ -174,23 +174,26 @@ INSERT INTO `student_course_status` (`statusId`, `status`) VALUES
 /*!40000 ALTER TABLE `student_course_status` ENABLE KEYS */;
 
 
--- Дамп структуры для таблица educationalwebsite.student_test_passing
-DROP TABLE IF EXISTS `student_test_passing`;
-CREATE TABLE IF NOT EXISTS `student_test_passing` (
-  `passingId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `test` int(10) unsigned NOT NULL,
-  `date` date NOT NULL,
-  `time` time NOT NULL,
-  `result` float unsigned NOT NULL COMMENT '0% <= res <= 100%',
-  `path` varchar(100) NOT NULL,
-  PRIMARY KEY (`passingId`),
-  KEY `FK__test` (`test`)
+-- Дамп структуры для таблица educationalwebsite.student_test
+DROP TABLE IF EXISTS `student_test`;
+CREATE TABLE IF NOT EXISTS `student_test` (
+  `studentId` int(10) unsigned NOT NULL,
+  `testId` bigint(20) unsigned NOT NULL,
+  `date` datetime NOT NULL,
+  `correctAnswersCount` int(10) unsigned NOT NULL,
+  `isPassed` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы educationalwebsite.student_test_passing: ~0 rows (приблизительно)
-DELETE FROM `student_test_passing`;
-/*!40000 ALTER TABLE `student_test_passing` DISABLE KEYS */;
-/*!40000 ALTER TABLE `student_test_passing` ENABLE KEYS */;
+-- Дамп данных таблицы educationalwebsite.student_test: ~0 rows (приблизительно)
+DELETE FROM `student_test`;
+/*!40000 ALTER TABLE `student_test` DISABLE KEYS */;
+INSERT INTO `student_test` (`studentId`, `testId`, `date`, `correctAnswersCount`, `isPassed`) VALUES
+	(10, 1137817271919660877, '2014-12-05 11:25:09', 0, b'0'),
+	(10, 1137817271919660877, '2014-12-05 11:25:40', 0, b'0'),
+	(10, 1137817271919660877, '2014-12-05 11:26:42', 0, b'0'),
+	(10, 1137817271919660877, '2014-12-05 11:26:50', 0, b'0'),
+	(10, 1137817271919660877, '2014-12-05 11:27:09', 3, b'1');
+/*!40000 ALTER TABLE `student_test` ENABLE KEYS */;
 
 
 -- Дамп структуры для таблица educationalwebsite.tag
@@ -249,9 +252,6 @@ CREATE TABLE IF NOT EXISTS `test` (
 -- Дамп данных таблицы educationalwebsite.test: ~2 rows (приблизительно)
 DELETE FROM `test`;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` (`testId`, `lessonId`, `content`) VALUES
-	(1137817271919660877, 1, '{"id":1137817271919660877,"lessonId":1,"questions":[{"text":"Question 1","answers":[{"text":"question 1 answer 1 c","isCorrect":true},{"text":"question 1 answer 2 ic","isCorrect":false},{"text":"question 1 answer 3 c","isCorrect":true}]},{"text":"Question 2","answers":[{"text":"question 2 answer 1 ic","isCorrect":false},{"text":"question 2 answer 2 c","isCorrect":true},{"text":"question 2 answer 3 ic","isCorrect":false},{"text":"question 2 answer 4 ic","isCorrect":false}]},{"text":"Question 3","answers":[{"text":"question 3 answer 1 c","isCorrect":true},{"text":"question 3 answer 2 c","isCorrect":true}]}]}'),
-	(5294134890473304542, 2, '{"id":5294134890473304542,"lessonId":2,"questions":[{"text":"wew","answers":[{"text":"rewrew","isCorrect":false},{"text":"rwer","isCorrect":false}]}]}');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 
 
@@ -278,7 +278,7 @@ INSERT INTO `user` (`userId`, `email`, `login`, `firstName`, `lastName`, `passwo
 	(4, 'toxan56@ukr.net', 'toxan56', NULL, NULL, '12345', '/img/avatar.jpg', NULL),
 	(5, 'teacher1@gmail.com', 'BrianC', 'Brian', 'Caffo', '123', '/img/avatar.jpg', 'Brian Caffo, PhD is a professor in the Department of Biostatistics at the Johns Hopkins University Bloomberg School of Public Health. He graduated from the Department of Statistics at the University of Florida in 2001. He works in the fields of computational statistics and neuroinformatics and co-created the SMART (www.smart-stats.org) working group. He has been the recipient of the Presidential Early Career Award for Scientist (PECASE) and Engineers and Bloomberg School of Public Health Golden Apple and AMTRA teaching awards.'),
 	(6, 'teacher2@gmail.com', 'CharlesS', 'Charles', 'Severance', '123', '/img/avatar.jpg', 'Charles Severance (a.k.a. Dr. Chuck - www.dr-chuck.com) is a Clinical Associate Professor at the University of Michigan School of Information, where he teaches various technology-oriented courses including programming, database design, and Web development. Chuck has written a number of books includingUsing Google App Engine and Python for Informatics. His research field is in the building of learning management systems such as Sakai, Moodle, Blackboard, ANGEL, and others. He was the chief architect for the Sakai Project, a learning management system used at about 300 schools worldwide and wrote the book, Sakai:Free as in Freedom that describes his experiences as one of the leaders of the project. In the mid-1990s he was the host of Internet:TCI, a national television talk show about the Internet that ran for several years on the TCI cable system. Some of the videos used in this class will come from that television program. He is currently a columnist for the IEEE Computer Magazine and writes a monthly column called "Computing Conversations" that features video interviews with famous technology leaders and innovators. The course will also include some videos from those columns and interviews.'),
-	(10, 'student1@gmail.com', 'student1', NULL, NULL, '12', '/img/avatar.jpg', NULL),
+	(10, 'student1@gmail.com', 'student1', 'First name', 'Last name', '12', '/img/avatar.jpg', ''),
 	(11, 'student2@gmail.com', 'student2', NULL, NULL, '12', '/img/avatar.jpg', NULL),
 	(12, 'student3@gmail.com', 'student3', NULL, NULL, '12', '/img/avatar.jpg', NULL),
 	(16, 'qwe', 'qwe', NULL, NULL, 'qwe', '/img/avatar.jpg', NULL),

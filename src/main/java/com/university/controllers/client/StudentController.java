@@ -28,18 +28,17 @@ public class StudentController {
     private final DecimalFormat wholePercentsFormat = new DecimalFormat("#");
 
     @RequestMapping("/lessons/")
-    public ModelAndView course(@RequestParam(value = "sessionId") Long sessionId) throws Exception {
+    public ModelAndView course(@RequestParam Long sessionId,
+                               HttpServletRequest httpServletRequest)
+    {
         final ModelAndView modelAndView = new ModelAndView("/student/lessons");
 
         final List<Lesson> lessons = courseDao.getLessons(sessionId);
         modelAndView.addObject("lessons", lessons);
 
-        final List<Long> lessonsIds = lessons.stream().map(Lesson::getId).collect(Collectors.toList());
-        final List<Test> tests = courseDao.getTestsByLessonsIds(lessonsIds).stream()
-                .map(test -> serializer.fromJson(test, Test.class))
-                .collect(Collectors.toList());
-
-
+        final User student = CommonUtils.getUserFromRequest(httpServletRequest);
+        final List<Long> passedLessons = courseDao.getPassedLessons(student.getId(), sessionId);
+        modelAndView.addObject("passedLessons", passedLessons);
 
         return modelAndView;
     }
@@ -80,7 +79,8 @@ public class StudentController {
 
         if (test.isPresent()) {
             modelAndView.addObject("test", serializer.fromJson(test.get(), Test.class));
-            modelAndView.addObject("lessonId", lessonId);
+            modelAndView.addObject("lesson", courseDao.getLessonById(lessonId));
+
             return modelAndView;
         }
         throw new Exception("Resource not found");
@@ -115,15 +115,15 @@ public class StudentController {
         }
 
         final User student = CommonUtils.getUserFromRequest(httpServletRequest);
-        courseDao.saveTestPassing(student.getId(), test.getId(), correctAnswersCount);
-
         final JsonObject response = new JsonObject();
 
         final double correctAnswersPercent = 1.0 * correctAnswersCount / test.getQuestions().size() * 100;
         if (correctAnswersPercent >= 80) {
             response.addProperty("status", "success");
+            courseDao.saveTestPassing(student.getId(), test.getId(), correctAnswersCount, true);
         } else {
             response.addProperty("status", "failure");
+            courseDao.saveTestPassing(student.getId(), test.getId(), correctAnswersCount, false);
         }
         response.addProperty("correctAnswersPercent", wholePercentsFormat.format(correctAnswersPercent));
 

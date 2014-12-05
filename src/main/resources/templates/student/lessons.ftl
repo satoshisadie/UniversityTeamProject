@@ -7,8 +7,6 @@
     <#include "*/commonHeader.ftl">
 
     <link type="text/css" rel="stylesheet" href="/css/student/lessons.css">
-
-    <script type="application/javascript" src="/js/main.js"></script>
     <script type="application/javascript" src="/js/student/lessons.js"></script>
 </head>
 <body>
@@ -37,7 +35,11 @@
                         </div>
 
                         <br>
-                        <a class="btn btn-primary" href="/student/test/?lessonId=${lesson.id?c}">Pass test</a>
+                        <#if passedLessons?seq_contains(lesson.id)>
+                            <a class="btn btn-success">Test passed</a>
+                        <#else>
+                            <a class="btn btn-primary" href="/student/test/?lessonId=${lesson.id?c}">Pass test</a>
+                        </#if>
 
                         <input class="id" type="hidden" value="${lesson.id?c}"/>
                     </div>

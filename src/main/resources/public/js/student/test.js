@@ -30,6 +30,7 @@ $(document).ready(function () {
             } else {
                 alert("Sorry. You haven't passed the test. Correct answers percent is " + response.correctAnswersPercent)
             }
+            window.location = '/student/lessons/?sessionId=' + $('.session-id').val();
         });
     });
 });

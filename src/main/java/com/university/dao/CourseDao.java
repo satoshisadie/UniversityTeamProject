@@ -9,10 +9,7 @@ import com.university.utils.CommonUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CourseDao {
@@ -156,9 +153,18 @@ public class CourseDao {
         final String sql =
                 "SELECT * " +
                 "FROM lesson l " +
-                "WHERE l.sessionId = ?";
+                "WHERE l.sessionId = ?;";
 
         return jdbcTemplate.query(sql, new LessonRowMapper(), sessionId);
+    }
+
+    public Lesson getLessonById(long lessonId) {
+        final String sql =
+                "SELECT * " +
+                "FROM lesson l " +
+                "WHERE l.lessonId = ?;";
+
+        return jdbcTemplate.query(sql, new LessonRowMapper(), lessonId).get(0);
     }
 
     public void saveLessons(List<Lesson> lessons) {
@@ -193,15 +199,16 @@ public class CourseDao {
         }
     }
 
-    public List<String> getTestsByLessonsIds(List<Long> lessonsIds) {
-        final String concatenatedLessonsIds = lessonsIds.stream().map(Object::toString).collect(Collectors.joining(","));
-
+    public List<Long> getPassedLessons(long studentId, long sessionId) {
         final String sql =
-                "SELECT t.content " +
-                "FROM test t " +
-                "WHERE t.lessonId IN (" + concatenatedLessonsIds + ");";
+                "SELECT l.lessonId " +
+                "FROM session s " +
+                "JOIN lesson l ON l.sessionId = s.sessionId " +
+                "JOIN test t ON t.lessonId = l.lessonId " +
+                "JOIN student_test st ON st.testId = t.testId " +
+                "WHERE st.studentId = ? AND s.sessionId = ? AND st.isPassed = 1;";
 
-        return jdbcTemplate.queryForList(sql, String.class);
+        return jdbcTemplate.queryForList(sql, Long.class, studentId, sessionId);
     }
 
     public void saveTest(Test test) {
@@ -220,11 +227,11 @@ public class CourseDao {
                 .collect(Collectors.joining(","));
     }
 
-    public void saveTestPassing(int studentId, long testId, int correctAnswersCount) {
+    public void saveTestPassing(int studentId, long testId, int correctAnswersCount, boolean isPassed) {
         final String sql =
-                "INSERT INTO student_test(studentId, testId, date, correctAnswersCount) " +
-                "VALUES (?, ?, CURRENT_TIMESTAMP(), ?)";
+                "INSERT INTO student_test(studentId, testId, date, correctAnswersCount, isPassed) " +
+                "VALUES (?, ?, CURRENT_TIMESTAMP(), ?, ?)";
 
-        jdbcTemplate.update(sql, studentId, testId, correctAnswersCount);
+        jdbcTemplate.update(sql, studentId, testId, correctAnswersCount, isPassed);
     }
 }

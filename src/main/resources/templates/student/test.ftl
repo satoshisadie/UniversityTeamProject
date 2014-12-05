@@ -36,6 +36,7 @@
         <#include "*/footer.ftl">
     </div>
 
-    <input class="lesson-id" type="hidden" value="${lessonId}">
+    <input class="lesson-id" type="hidden" value="${lesson.id?c}">
+    <input class="session-id" type="hidden" value="${lesson.sessionId?c}">
 </body>
 </html>
