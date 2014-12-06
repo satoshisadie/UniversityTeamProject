@@ -61,6 +61,17 @@ public class TeacherController {
         return "redirect:../../courses/";
     }
 
+    @RequestMapping(value = "/lessons/new/")
+    public String newLesson(@RequestParam long sessionId) throws Exception {
+        final Optional<CourseSession> session = courseDao.getSession(sessionId);
+
+        if (session.isPresent()) {
+            courseDao.addLessonToSession(sessionId);
+            return "redirect:/teacher/lessons/?sessionId=" + sessionId;
+        }
+        throw new Exception("Resource not found");
+    }
+
     @RequestMapping(value = "/lessons/")
     public ModelAndView lessons(@RequestParam long sessionId) {
         final ModelAndView modelAndView = new ModelAndView("/teacher/lessons");
@@ -89,7 +100,7 @@ public class TeacherController {
                 lesson.setId(id.getAsLong());
             }
 
-            lesson.setSessionId(lessonObject.get("courseId").getAsLong());
+            lesson.setSessionId(lessonObject.get("sessionId").getAsLong());
             lesson.setContent(lessonObject.get("content").getAsString());
 
             lessons.add(lesson);

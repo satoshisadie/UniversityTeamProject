@@ -115,14 +115,14 @@ public class CourseDao {
         return jdbcTemplate.query(sql, new CourseSessionRowMapper(), courseId);
     }
 
-    public Optional<CourseSession> getSession(long id) {
+    public Optional<CourseSession> getSession(long sessionId) {
         final String sql =
                 "SELECT * " +
                 "FROM session s " +
                 "JOIN course c ON s.courseId = c.courseId " +
                 "WHERE s.sessionId = ?";
 
-        return CommonUtils.selectOne(jdbcTemplate, sql, new CourseSessionRowMapper(), id);
+        return CommonUtils.selectOne(jdbcTemplate, sql, new CourseSessionRowMapper(), sessionId);
     }
 
     public void saveCourse(long courseId, CourseSaveForm form) {
@@ -241,5 +241,13 @@ public class CourseDao {
                 "VALUES (?, ?, ?)";
 
         jdbcTemplate.update(sql, sessionId, studentId, status);
+    }
+
+    public void addLessonToSession(long sessionId) {
+        final String sql =
+                "INSERT INTO lesson(lessonId, sessionId, content) " +
+                "VALUES (?, ?, ?);";
+
+        jdbcTemplate.update(sql, CommonUtils.generateId(), sessionId, "");
     }
 }

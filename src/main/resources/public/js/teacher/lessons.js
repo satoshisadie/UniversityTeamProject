@@ -14,7 +14,7 @@ $(document).ready(function () {
 
             lesson.description = $(this).find('.description').val();
             lesson.content = $(this).find('.content').val();
-            lesson.courseId = $('.course-id').val();
+            lesson.sessionId = $('.session-id').val();
 
             lessons.push(lesson);
         });
@@ -28,6 +28,10 @@ $(document).ready(function () {
         }).done(function (response) {
             alert(response);
         });
+    });
+
+    $('.new-lesson').click(function () {
+        window.location = '/teacher/lessons/new/?sessionId=' + $('.session-id').val();
     });
 
     tinymce.init({

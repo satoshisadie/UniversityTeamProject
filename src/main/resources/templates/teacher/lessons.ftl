@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <input class="course-id" type="hidden" value="${sessionId}"/>
+        <input class="session-id" type="hidden" value="${sessionId}"/>
     </div>
 
     <#include "*/footer.ftl">
