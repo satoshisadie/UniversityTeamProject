@@ -87,7 +87,7 @@ public class CourseDao {
         return jdbcTemplate.query(sql, new CourseRowMapper());
     }
 
-    public Course getCourse(long courseId) {
+    public Optional<Course> getCourse(long courseId) {
         final String sql =
                 "SELECT " +
                         "c.courseId," +
@@ -102,7 +102,7 @@ public class CourseDao {
                 "FROM course c " +
                 "WHERE c.courseId = ?;";
 
-        return jdbcTemplate.query(sql, new CourseRowMapper(), courseId).get(0);
+        return CommonUtils.selectOne(jdbcTemplate, sql, new CourseRowMapper(), courseId);
     }
 
     public List<CourseSession> getCourseSessions(long courseId) {

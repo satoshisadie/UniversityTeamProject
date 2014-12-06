@@ -4,46 +4,41 @@
     <meta charset="UTF-8">
     <title>Teacher Dashboard</title>
 
-<#include "*/commonHeader.ftl">
+    <#include "*/commonHeader.ftl">
 </head>
 <body>
-<div class="container">
-<#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
-    <div class="content row">
-        <div class="col-md-8 col-md-offset-2">
-            <div style="display: inherit">
-            <#list teachers as teacher>
-
-                <div class="course media">
-                    <#if teacher.photo??>
-                        <a class="media-left">
-                            <img class="img-circle" src="${teacher.photo}">
-                        </a>
-                    </#if>
-
-                    <div class="media-body">
-                        <#if teacher.lastName??>
-                            <h4>${teacher.firstName!} ${teacher.lastName!}</h4>
-                        <#else>
-                            <h4>${teacher.login}</h4>
+    <div class="container">
+        <div class="content row">
+            <div class="col-md-6 col-md-offset-3">
+                <#list teachers as teacher>
+                    <div class="teacher media">
+                        <#if teacher.photo??>
+                            <a class="media-left">
+                                <img class="img-circle" src="${teacher.photo}">
+                            </a>
                         </#if>
 
-                        <p>Academic status: ${teacher.academicStatus}</p>
+                        <div class="media-body">
+                            <#if teacher.lastName??>
+                                <h4>${teacher.firstName!} ${teacher.lastName!}</h4>
+                            <#else>
+                                <h4>${teacher.login}</h4>
+                            </#if>
 
-                        <p>Educational establishment: ${teacher.educationalEstablishment}</p>
+                            <p>${teacher.academicStatus}</p>
+                            <p>${teacher.educationalEstablishment}</p>
 
-                        <a class="edit" href="/teachers/viewProfile/${teacher.id?c}">View Profile</a>
-                        <input class="id" type="hidden" value="${teacher.id?c}">
+                            <a class="edit" href="/teachers/viewProfile/${teacher.id?c}">View Profile</a>
+                            <input class="id" type="hidden" value="${teacher.id?c}">
+                        </div>
                     </div>
-                </div>
-
-            </#list>
+                </#list>
             </div>
         </div>
     </div>
 
-<#include "*/footer.ftl">
-</div>
+    <#include "*/footer.ftl">
 </body>
 </html>

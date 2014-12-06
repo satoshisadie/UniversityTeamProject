@@ -7,13 +7,12 @@
     <#include "*/commonHeader.ftl" >
 
     <link type="text/css" rel="stylesheet" href="/css/teacher/courses.css">
-
     <script type="application/javascript" src="/js/teacher/courses.js"></script>
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
+    <div class="container">
         <div class="content row">
             <div class="col-md-6 col-md-offset-3">
                 <a class="btn btn-primary" href="/teacher/courses/new" style="margin-bottom: 30px;">New course</a>
@@ -39,7 +38,8 @@
                 </div>
             </div>
         </div>
-        <#include "*/footer.ftl">
     </div>
+
+    <#include "*/footer.ftl">
 </body>
 </html>

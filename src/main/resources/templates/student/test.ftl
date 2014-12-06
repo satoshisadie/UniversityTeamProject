@@ -8,9 +8,9 @@
     <script type="application/javascript" src="/js/student/test.js"></script>
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
+    <div class="container">
         <div class="content row">
             <div class="col-md-8 col-md-offset-2">
                 <#list test.questions as question>
@@ -33,10 +33,10 @@
             </div>
         </div>
 
-        <#include "*/footer.ftl">
+        <input class="lesson-id" type="hidden" value="${lesson.id?c}">
+        <input class="session-id" type="hidden" value="${lesson.sessionId?c}">
     </div>
 
-    <input class="lesson-id" type="hidden" value="${lesson.id?c}">
-    <input class="session-id" type="hidden" value="${lesson.sessionId?c}">
+    <#include "*/footer.ftl">
 </body>
 </html>

@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -109,18 +107,22 @@ public class UserController {
                                HttpServletRequest httpServletRequest) throws Exception {
         final ModelAndView modelAndView = new ModelAndView("/course");
 
-        final Course course = courseDao.getCourse(courseId);
-        modelAndView.addObject("course", course);
+        final Optional<Course> courseOptional = courseDao.getCourse(courseId);
+        if (courseOptional.isPresent()) {
+            final Course course = courseOptional.get();
+            modelAndView.addObject("course", course);
 
-        final List<CourseSession> sessions = courseDao.getCourseSessions(courseId);
-        modelAndView.addObject("sessions", sessions);
+            final List<CourseSession> sessions = courseDao.getCourseSessions(courseId);
+            modelAndView.addObject("sessions", sessions);
 
-        final Teacher teacher = userDao.getTeacherById(course.getTeacherId());
-        modelAndView.addObject("teacher", teacher);
+            final Teacher teacher = userDao.getTeacherById(course.getTeacherId());
+            modelAndView.addObject("teacher", teacher);
 
-        CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+            CommonUtils.addUserToModel(httpServletRequest, modelAndView);
 
-        return modelAndView;
+            return modelAndView;
+        }
+        throw new Exception("Resource not found");
     }
 
     @RequestMapping("/profile")
@@ -141,7 +143,9 @@ public class UserController {
     @RequestMapping("/profile/edit")
     public ModelAndView edit(HttpServletRequest httpServletRequest) {
         final ModelAndView modelAndView = new ModelAndView("/user/editProfile");
+
         CommonUtils.addUserToModel(httpServletRequest, modelAndView);
+
         User user = CommonUtils.getUserFromRequest(httpServletRequest);
         if(user.getType().equals("teacher"))
         {
@@ -157,12 +161,12 @@ public class UserController {
     {
         final ModelAndView modelAndView = new ModelAndView("/user/viewProfile");
 
-        User user = userDao.getFullUserById(userId);
+        final User user = userDao.getUserById(userId);
         modelAndView.addObject("u", user);
 
         if(user.getType().equals("teacher"))
         {
-            Teacher teacher = userDao.getTeacherById(user.getId());
+            final Teacher teacher = userDao.getTeacherById(user.getId());
             modelAndView.addObject("teacher", teacher);
         }
 
@@ -175,10 +179,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/profile/edit/save", method = RequestMethod.POST)
-    public String saveCourse(ProfileSaveForm profileSaveForm, HttpServletRequest httpServletRequest) {
+    public String saveCourse(ProfileSaveForm profileSaveForm,
+                             HttpServletRequest httpServletRequest)
+    {
         User user = CommonUtils.getUserFromRequest(httpServletRequest);
+
         userDao.saveProfile(user.getId(), profileSaveForm, user.getType());
-        user = userDao.getFullUserById(user.getId());
+
+        user = userDao.getUserById(user.getId());
         HttpSession httpSession = httpServletRequest.getSession();
         httpSession.setAttribute("user",user);
         return "redirect:../../profile/";

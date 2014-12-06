@@ -1,7 +1,19 @@
+body {
+    font: 16px Droid Sans;
+    height: 100%;
+}
+
+html,
+body {
+    height:100%;
+}
+
+.container {
+    height: 100%;
+}
+
 .content {
     margin-top: 100px;
-    margin-bottom: 50px;
-    min-height: 600px;
 }
 
 .validationMessage {

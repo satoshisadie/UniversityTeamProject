@@ -9,9 +9,9 @@
     <script type="application/javascript" src="/js/teacher/test.js"></script>
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
+    <div class="container">
         <div class="content row">
             <div class="col-md-2 col-md-offset-2">
                 <input class="add-question btn btn-primary" type="button" value="Add question"/>
@@ -44,11 +44,12 @@
             </div>
         </div>
 
-        <#include "*/footer.ftl" >
+        <input class="lesson-id" type="hidden" value="${lessonId?c}"/>
+        <#if test??>
+            <input class="test-id" type="hidden" value="${test.id?c}"/>
+        </#if>
     </div>
-    <input class="lesson-id" type="hidden" value="${lessonId?c}"/>
-    <#if test??>
-        <input class="test-id" type="hidden" value="${test.id?c}"/>
-    </#if>
+
+    <#include "*/footer.ftl" >
 </body>
 </html>

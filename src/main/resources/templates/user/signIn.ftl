@@ -2,15 +2,15 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Sign In</title>
 
     <#include "*/commonHeader.ftl">
     <script type="application/javascript" src="/js/signIn.js"></script>
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
+    <div class="container">
         <div class="content row">
             <div class="col-md-4 col-md-offset-4">
                 <span style="color: red; margin-bottom: 30px; display: block;" data-bind="visible: signInFailed">
@@ -30,8 +30,8 @@
                 <input class="btn btn-primary" value="Login" data-bind="click: signIn">
             </div>
         </div>
-
-        <#include "*/footer.ftl">
     </div>
+
+    <#include "*/footer.ftl">
 </body>
 </html>

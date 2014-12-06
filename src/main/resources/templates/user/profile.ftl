@@ -7,12 +7,11 @@
     <#include "*/commonHeader.ftl">
 
     <link type="text/css" rel="stylesheet" href="/css/user/profile.css">
-
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
+    <div class="container">
         <div class="content row">
             <div class="col-md-8 col-md-offset-2">
 
@@ -61,11 +60,10 @@
                         </#if>
                     </div>
                 </div>
-
             </div>
         </div>
-
-        <#include "*/footer.ftl">
     </div>
+
+    <#include "*/footer.ftl">
 </body>
 </html>

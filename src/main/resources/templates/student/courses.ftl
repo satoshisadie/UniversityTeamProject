@@ -5,12 +5,11 @@
     <title>Courses</title>
 
     <#include "*/commonHeader.ftl">
-    <link type="text/css" rel="stylesheet" href="/css/student/courses.css">
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
+    <div class="container">
         <div class="content row">
             <div class="col-md-8 col-md-offset-2">
                 <blockquote>
@@ -38,7 +37,7 @@
                 <div class="student-courses tab-content">
                     <div id="current-courses" class="current-courses tab-pane active" role="tabpanel">
                         <#list sessions as session>
-                            <#if session.status == 1>
+                            <#if session.startDate lte .now?date && session.endDate gte .now?date>
                                 <#include "studentCourse.ftl">
                             </#if>
                         </#list>
@@ -46,7 +45,7 @@
 
                     <div id="past-courses" class="past-courses tab-pane" role="tabpanel">
                         <#list sessions as session>
-                            <#if session.status == 2>
+                            <#if session.endDate lt .now?date>
                                 <#include "studentCourse.ftl">
                             </#if>
                         </#list>
@@ -54,7 +53,7 @@
 
                     <div id="upcoming-courses" class="upcoming-courses tab-pane" role="tabpanel">
                         <#list sessions as session>
-                            <#if session.status == 3>
+                            <#if session.startDate gt .now?date>
                                 <#include "studentCourse.ftl">
                             </#if>
                         </#list>
@@ -62,8 +61,8 @@
                 </div>
             </div>
         </div>
-
-        <#include "*/footer.ftl">
     </div>
+
+    <#include "*/footer.ftl">
 </body>
 </html>

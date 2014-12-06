@@ -15,9 +15,9 @@
     <script type="application/javascript" src="/js/teacher/course.js"></script>
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
+    <div class="container">
         <div class="content row">
             <div class="col-md-6 col-md-offset-3">
                 <form action="${course.id?c}/save" method="post">
@@ -46,7 +46,7 @@
                     <div class="sessions">
                         <#if sessions??>
                             <#list sessions as session>
-                                <div class="session">
+                                <div class="session" style="margin-top: 10px;">
                                     <span>${session.startDate?string("MM/dd/yyyy")} - ${session.endDate?string("MM/dd/yyyy")}</span>
 
                                     <a class="btn btn-default" href="/teacher/lessons/?sessionId=${session.id?c}">Lessons</a>
@@ -62,7 +62,8 @@
                 </form>
             </div>
         </div>
-        <#include "*/footer.ftl">
     </div>
+
+    <#include "*/footer.ftl">
 </body>
 </html>

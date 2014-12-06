@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Sign Up</title>
 
     <#include "*/commonHeader.ftl">
 
@@ -10,9 +10,9 @@
     <script type="application/javascript" src="/js/signUp.js"></script>
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
+    <div class="container">
         <div class="content row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="btn-group" data-toggle="buttons">
@@ -85,8 +85,8 @@
                 </form>
             </div>
         </div>
-
-        <#include "*/footer.ftl">
     </div>
+
+    <#include "*/footer.ftl">
 </body>
 </html>

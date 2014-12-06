@@ -43,7 +43,7 @@ public class TeacherController {
     {
         final ModelAndView modelAndView = new ModelAndView("/teacher/course");
 
-        final Course course = courseDao.getCourse(courseId);
+        final Course course = getCourse(courseId);
         modelAndView.addObject("course", course);
 
         final List<CourseSession> sessions = courseDao.getCourseSessions(courseId);
@@ -127,13 +127,13 @@ public class TeacherController {
         return "success";
     }
 
-    private CourseSession getSession(long id) {
-        final Optional<CourseSession> sessionOptional = courseDao.getSession(id);
+    private Course getCourse(long courseId) {
+        final Optional<Course> courseOptional = courseDao.getCourse(courseId);
 
-        return sessionOptional.orElseGet(() -> {
-            final CourseSession session = new CourseSession();
-            session.setId(id);
-            return session;
+        return courseOptional.orElseGet(() -> {
+            final Course course = new Course();
+            course.setId(courseId);
+            return course;
         });
     }
 }

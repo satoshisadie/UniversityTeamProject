@@ -9,6 +9,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -64,15 +65,6 @@ public class UserDao {
         return (long) keyHolder.getKey();
     }
 
-    public Optional<User> getUserById(long id) {
-        final String sql =
-                "SELECT " +
-                "FROM user " +
-                "WHERE userId = ?";
-
-        return CommonUtils.selectOne(jdbcTemplate, sql, new UserRowMapper(), id);
-    }
-
     public List<CourseSession> getUserCoursesSessions(long userId) {
         final String sql =
                 "SELECT * " +
@@ -92,17 +84,7 @@ public class UserDao {
         return CommonUtils.selectOne(jdbcTemplate, sql, new UserRowMapper(), login, password);
     }
 
-    public Optional<User> getUserByLogin(String login) {
-        final String sql =
-                "SELECT " + getUserAttributesString() +
-                "FROM user u " +
-                "WHERE u.login = ?;";
-
-        return CommonUtils.selectOne(jdbcTemplate, sql, new UserRowMapper(), login);
-    }
-
-
-    public User getFullUserById(long id){
+    public User getUserById(long id){
         final String sql =
                 "SELECT " + getUserAttributesString() +
                 "FROM user u " +
@@ -142,6 +124,8 @@ public class UserDao {
     }
 
     public List<Teacher> getTeachersByIds(List<Integer> teachersIds) {
+        if (teachersIds.isEmpty()) return Collections.emptyList();
+
         final String concatenatedTeacherIds = teachersIds.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(","));

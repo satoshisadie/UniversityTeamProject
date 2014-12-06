@@ -2,18 +2,16 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Teacher Dashboard</title>
+    <title>Admin Dashboard</title>
 
-    <link type="text/css" rel="stylesheet" href="/css/libs/bootstrap.css">
-
-    <script type="application/javascript" src="/js/libs/jquery-2.1.1.js"></script>
-    <script type="application/javascript" src="/js/libs/bootstrap.js"></script>
+    <#include "*/commonHeader.ftl">
 </head>
 <body>
-    <div class="container">
-        <#include "*/menu.ftl">
+    <#include "*/menu.ftl">
 
-        <#include "*/footer.ftl">
+    <div class="container">
     </div>
+
+    <#include "*/footer.ftl">
 </body>
 </html>

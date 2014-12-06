@@ -14,13 +14,16 @@
 
         <div class="buttons-container" style="margin-top: 15px;">
             <a class="course-info" href="../course/${course.id?c}">course info</a>
-            <#if session.status == 1 || session.status == 3>
+            <#if session.endDate gte .now?date>
                 <span>|</span>
                 <a class="un-enroll" href="/student/courses/${session.id?c}">un-enroll</a>
             </#if>
         </div>
     </div>
-    <a class="go-to-class btn btn-success" style="float: right; margin-top: -50px;" href="/student/lessons/?sessionId=${session.id?c}">Go to class</a>
+
+    <#if session.startDate lte .now?date>
+        <a class="go-to-class btn btn-success" style="float: right; margin-top: -50px;" href="/student/lessons/?sessionId=${session.id?c}">Go to class</a>
+    </#if>
 
     <input class="id" type="hidden" value="${session.id?c}">
 </div>
